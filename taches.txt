@@ -1,0 +1,51 @@
+Guillaume
+
+
+
+
+donc constater que, plus la solution d'une fourmi est longue, moins elle déposera de phéromones sur
+
+les arcs de sa solution. Notez que les phéromones sont déposés sur l'arc i.e. dans le sens du chemin pris par la
+
+fourmi, et non dans les deux sens.
+
+
+sommet,arc,arete, fourmi, file, FileArc...
+
+int nbdevilles(fichier txt) 
+    lit le nombre de villes et le renvoit
+
+int nbarcs(fichier txt)
+           lit le nombre darcs et le renvoit
+
+creer_n_sommets(txt,nville(optionel), narcs(optionel)) 
+    lit le fichier txt et renvoit une liste de sommets ajoutés dans l’ordre croissant (ajout ville dans l’ordre decroissant) de 1 à n 
+avec ses respectifs arcs
+
+depot de pheromones(tabu, Liste villes,Longueur du parcours)
+               elle parcourt villes en déposant  la valeur des pheromones sur 
+les bons arcs +evaporation 
+
+
+Luis
+
+ListeSommet creer_liste(void)
+
+ Liste depart(Liste villes, int n) 
+    elle cree tabu avec une ville au hasard comme premier element ou renvoit NULL si l’allocation a échoué
+
+ Liste ajout_ville(tabu,s)
+     elle rajoute une ville a tabu ou NULL si l’allocation a echoué
+
+double* proba(Sommet s, Liste tabu, int n)    
+    renvoit l’adresse d’un tableau contenant les probas (t[N-1]=p(N)) et NULL si l’allocation a échoué
+      
+
+int ville_next (tabu,n)
+      renvoit le numéro de la prochaine ville 
+
+
+int ville_parcourue(tabu,N)
+            renvoit 1 si la fourmie est passée par une ville, 0 si elle est pasee par toutes les villes et 2 
+si elle n’est pas encore passée
+
