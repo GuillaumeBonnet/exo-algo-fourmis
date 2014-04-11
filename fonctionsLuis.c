@@ -178,7 +178,7 @@ t[i]=0;
 
 int ville_next (ListeSommet tabu,int n, Sommet s)                    /*non testée*/
     {double* t=proba(Sommet s, tabu, n);
-int i=0; int N=0; double p=0; 
+int i=0; int N=0; double p=0;
     if (t==NULL) return (0);
     if (t[0]==2) return (s.num);
 
@@ -197,7 +197,7 @@ int i=0; int N=0; double p=0;
 
 
 
-______________________________________________________________________________
+/*______________________________________________________________________________
 
 test:
 
@@ -319,3 +319,4 @@ printf("tabu villes %d tabu2 %d tabu3 %d tabu4 %d tabu5 %d\n", (tabu->val).num, 
 
 }
 
+*/
