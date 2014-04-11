@@ -97,10 +97,10 @@ void afficheListeSommet(ListeSommet tabu)
 double* initialisation(int n)
 {double* t; int i=0;
 
-    t=calloc(n, sizeof(*t));        /*on crée le tableau et on l’initialise à 2*/
+    t=calloc(n, sizeof(*t));        /*on crée le tableau et on l’initialise à -1*/
     if (t==NULL) return (NULL);
     for (i=0; i<n; i++)
-t[i]=2;
+t[i]=-1;
 return(t);
 }
 
@@ -130,11 +130,11 @@ double* proba(Sommet s, ListeSommet tabu, ListeSommet villes, int n)            
 ListeArcVoisin q=creer_ListeArcVoisin();
 int a=1; int b=1; double somme=0;
 
-    t=initialisation(n);        /*on crée le tableau et on l’initialise à 2*/
+    t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
 
 
     i=ville_parcourue( tabu,villes,s.num,n) ;     /*si toutes les villes sont parcourues renvoit t initialisé
-                                                    à 2*/
+                                                    à -1*/
 if(i==0) return (t);
 
 i=0;
@@ -142,7 +142,7 @@ i=0;
 t=probatabu(t,tabu); /*si la ville est dans tabu proba =0*/
 
 
-  /*si elle es dans les arcs voisins et*/
+  /*si elle est dans les arcs voisins et*/
 /*pas dans tabu on place la
 pondération correspondante et on fait la somme terme a terme*/
 
@@ -156,7 +156,7 @@ somme=1;
 while (!est_videListeArcVoisin(q))
 {
 
-    if(t[ (q->val).sarr-1]==2)
+    if(t[ (q->val).sarr-1]<0)
         {t[ (q->val).sarr-1]= pow((q->val).to,a)/pow( (q->val).d ,b);
         somme=somme + t[(q->val).sarr-1];
         }
