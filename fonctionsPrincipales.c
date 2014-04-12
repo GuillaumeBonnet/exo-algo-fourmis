@@ -1,3 +1,8 @@
+/*toutes les fonctions marchent sauf proba (j'ai pas pu la tester encore*/
+
+
+
+
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -40,7 +45,7 @@ ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L)
 
 
 
- ListeSommet ajout_ville(ListeSommet tabu,ListeSommet villes, int N )                    /*non testée*/
+ ListeSommet ajout_ville(ListeSommet tabu,ListeSommet villes, int N )
     {ListeSommet q=villes; ListeSommet p=creer_liste();Sommet s;int j=0;
 
     for (j=1; j<N; j++ ) q=q->suiv;
@@ -55,7 +60,7 @@ ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L)
     return(p);
 }
 
-int ville_parcourue(ListeSommet tabu,ListeSommet villes, int N,int n)                                    /*non testée*/
+int ville_parcourue(ListeSommet tabu,ListeSommet villes, int N,int n)
 {int i=0; int j=0; ListeSommet p=creer_liste();
 
 if (est_vide(tabu))
@@ -75,7 +80,7 @@ if (j==1) return (1);
 return (2);
 }
 
- ListeSommet depart(ListeSommet villes, int n)                                        /*non testée*/
+ ListeSommet depart(ListeSommet villes, int n)
     { int i=0;
     ListeSommet p=creer_liste();
 
