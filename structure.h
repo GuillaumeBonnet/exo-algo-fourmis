@@ -1,3 +1,7 @@
+#ifndef STRUCTURE_H
+#define STRUCTURE_H
+
+
 /*=========constantes=======*/
 
 /*=========constantes - fin====*/
@@ -11,7 +15,7 @@ int sarr;                                                     /*sommet d’arriv
 double d;                                                             /*distance entre les deux villes*/
 double to;                                                            /*quantité de phéromones*/
 
-} Arc;
+}Arc;
 
 struct ArcVoisin
 {
@@ -33,16 +37,23 @@ typedef struct Fourmi
 
 typedef struct Sommet
 {
-int num;
-char* nom;
-int x;
-int y;
-ListeArcVoisin ListeVoisin;
+	int num;
+	char* nom;
+	double x;
+	double y;
+//ListeArcVoisin ListeVoisin;
 }Sommet;
 
 typedef Sommet Ville;
 
+typedef struct MaillonSommet
+{
+	Sommet val;
+	struct MaillonSommet * suiv;
 
+} MaillonSommet;
+
+typedef MaillonSommet* ListeSommet;
 typedef
      struct Arete
 {
@@ -50,14 +61,7 @@ Arc arc12;                                          /*arc dans un sens*/
 Arc arc21;                                          /*arc dans l’autre sens*/
 } Arete;
 
-typedef struct MaillonSommet
-{
-Sommet val;
-struct MaillonSommet * suiv;
 
-} MaillonSommet;
-
-typedef MaillonSommet* ListeSommet;
 
 
 
@@ -100,4 +104,4 @@ ListeSommet depart(ListeSommet villes, int n);   /*Validée!*/
 
 
 
-
+#endif
