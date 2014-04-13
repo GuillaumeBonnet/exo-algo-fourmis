@@ -61,6 +61,10 @@ ListeSommet creer_n_sommets(char nomFichier[])
 	return liste;	
 }
 
+Arc** creer_table_arc(char nomFichier[])
+{
+	
+}
 
 
 
