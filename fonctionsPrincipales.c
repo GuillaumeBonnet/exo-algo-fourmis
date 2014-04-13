@@ -133,7 +133,7 @@ p=tabu;
 double* proba(Sommet s, ListeSommet tabu, ListeSommet villes, int n)                    /*non testée*/
     {double* t;int i=0;
 ListeArcVoisin q=creer_ListeArcVoisin();
-int a=1; int b=1; double somme=0;
+double somme=0;
 
     t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
 
@@ -162,7 +162,7 @@ while (!est_videListeArcVoisin(q))
 {
 
     if(t[ (q->val).sarr-1]<0)
-        {t[ (q->val).sarr-1]= pow((q->val).to,a)/pow( (q->val).d ,b);
+        {t[ (q->val).sarr-1]= pow((q->val).to,alpha)/pow( (q->val).d ,beta);
         somme=somme + t[(q->val).sarr-1];
         }
 
