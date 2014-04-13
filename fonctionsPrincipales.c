@@ -41,7 +41,25 @@ ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L)
 }
 
 
+double Lchemin(ListeSommet tabu, Arc** table)
+{
+	ListeSommet iL=NULL; double somme=0;
+	for(iL=tabu;iL->suiv!=NULL;iL=iL->suiv)
+	{
+		somme+=table[iL->val.num][iL->suiv->val.num].d;
+	}
+	
+}
 
+void depotPheromone(ListeSommet tabu, Arc** table)
+{
+	double dTo = Q/Lchemin(tabu, table);
+	ListeSommet iL=NULL;
+	for(iL=tabu;iL->suiv!=NULL;iL=iL->suiv)
+	{
+		table[iL->val.num][iL->suiv->val.num].to=RHO * table[iL->val.num][iL->suiv->val.num].to + dTo ;
+	}
+}
 
 
 
@@ -162,7 +180,7 @@ while (!est_videListeArcVoisin(q))
 {
 
     if(t[ (q->val).sarr-1]<0)
-        {t[ (q->val).sarr-1]= pow((q->val).to,alpha)/pow( (q->val).d ,beta);
+        {t[ (q->val).sarr-1]= pow((q->val).to,ALPHA)/pow( (q->val).d ,BETA);
         somme=somme + t[(q->val).sarr-1];
         }
 

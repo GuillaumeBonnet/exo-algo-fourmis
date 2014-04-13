@@ -9,6 +9,10 @@ int est_vide(ListeSommet L);                 /*Validée!*/
 ListeSommet ajout_tete(Sommet e, ListeSommet L);       /*Validée!*/
 ListeArcVoisin creer_ListeArcVoisin(void);                          /*Validée!*/
 int est_videListeArcVoisin(ListeArcVoisin);                           /*Validée!*/
+
+double Lchemin(ListeSommet tabu, Arc** table);
+void depotPheromone(ListeSommet tabu, Arc** table);
+
 ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L);            /*Validée!*/
 
 void affichedouble(double* t,int n);/*affiche un tableau de doubles*/     /*Validée!*/
