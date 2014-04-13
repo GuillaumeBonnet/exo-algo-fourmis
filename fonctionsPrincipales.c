@@ -185,7 +185,7 @@ int ville_next (ListeSommet tabu,int n, Sommet s)                    /*non test√
     {double* t=proba(Sommet s, tabu, n);
 int i=0; int N=0; double p=0;
     if (t==NULL) return (0);
-    if (t[0]==2) return (s.num);
+    if (t[0]==-1) return (s.num);
 
     for (i=0; i<n; i++)
         {if (t[i]>p)
