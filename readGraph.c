@@ -3,6 +3,7 @@
 #include "readGraph.h"
 #include "structure.h"
 #include "string.h"
+#include "listeArc.h"
 
 int nbDeVilles(char nomFichier[]) //donner l'extension avec le nom
 {
@@ -60,15 +61,46 @@ ListeSommet creer_n_sommets(char nomFichier[])
 	fclose(fichier);
 	return liste;	
 }
-
 Arc** creer_table_arc(char nomFichier[])
 {
-	
+	FILE *fichier=NULL;
+	if((fichier=fopen(nomFichier,"r"))==NULL)
+	{
+		printf("Erreur ouverture fichier %s\n", nomFichier);
+		return NULL;
+	}
+
+	int nbVille=0, i=0; char tmpChaine[100];
+	fscanf(fichier,"%d",&nbVille);
+	fgets(tmpChaine, 100, fichier);
+	fgets(tmpChaine, 100, fichier);
+	for(i=0;i<=nbVille;i++)
+		fgets(tmpChaine, 100, fichier);
+	fgets(tmpChaine, 100, fichier);
+
+	Arc** table=NULL;
+	/*table = calloc(nbVille+10, sizeof(*table));
+	*table = calloc((nbVille+10)*(nbVille+10), sizeof(**table));*/
+	table = calloc(nbVille, sizeof(Arc*));
+	*table = calloc(nbVille*nbVille, sizeof(Arc));
+	int sdep=0, sarr=0; double d=0;
+	(*(table+1)+3)->sdep=1;
+	table[1][9].sdep=9;
+	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != 0)
+	{			
+		table[sdep][sarr].sdep=sdep;
+		table[sdep][sarr].sarr=sarr;
+		table[sdep][sarr].d=d;
+		table[sdep][sarr].to=EPS;
+	/* 
+		table[sarr][sdep].sdep=sdep;
+		table[sarr][sdep].sarr=sarr;
+		table[sarr][sdep].d=d;
+		table[sarr][sdep].to=EPS;*/
+	}// si table[i][j].d==0 il n'y a pas d'arc entre les villes i et j(sens i vers j)
+
+	return table;
 }
-
-
-
-
 
 
 

@@ -8,12 +8,12 @@ fonctionsPrincipales_test : fonctionsPrincipales_test.o fonctionsPrincipales.o
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-readGraph_test : readGraph_test.o readGraph.o
+readGraph_test : readGraph_test.o readGraph.o listeArc.o
 	gcc -o $@  $^
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-liste_test : liste_test.o liste.o
+listeArc_test : listeArc_test.o listeArc.o
 	gcc -o $@  $^
 %.o: %.c
 	gcc $(CFLAGS) $<

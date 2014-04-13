@@ -29,7 +29,7 @@ int main()
 }
 */
 
-
+/*
 int main()
 {
 	// fonction creer_n_sommets(); testée le 12/04 avec ddd sur un seul fichier texte
@@ -39,3 +39,15 @@ int main()
 
 	return 1;
 }
+*/
+
+int main()
+{
+	// fonction creer_table_arc();
+	char nomFichier[100]="graphe12.txt";
+	
+	ListeArc* table = creer_table_arc(nomFichier);
+
+	return 1;
+}
+
