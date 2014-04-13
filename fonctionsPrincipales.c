@@ -61,23 +61,23 @@ ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L)
 }
 
 int ville_parcourue(ListeSommet tabu,ListeSommet villes, int N,int n)
-{int i=0; int j=0; ListeSommet p=creer_liste();
+	{int i=0; int j=0; ListeSommet p=creer_liste();
 
-if (est_vide(tabu))
- return(2);
+	if (est_vide(tabu))
+		return(2);
 
-p=tabu;
- while (!est_vide(p)) {
- i=i+1;
- if((p->val).num==N) j=1;
- p=p->suiv;
- }
+	p=tabu;
+	 while (!est_vide(p)) {
+		 i=i+1;
+		 if((p->val).num==N) j=1;
+		 p=p->suiv;
+	 }
 
-if (i==n) return (0);
+	if (i==n) return (0);
 
-if (j==1) return (1);
+	if (j==1) return (1);
 
-return (2);
+	return (2);
 }
 
  ListeSommet depart(ListeSommet villes, int n)
