@@ -40,13 +40,13 @@ int main()
 	return 1;
 }
 */
-
+/*
 int main()
 {
-	// fonction creer_table_arc(); testée le 13/04
+	// fonction creer_tableau_arc(); testée le 13/04
 	char nomFichier[100]="graphe11.txt";
 	
-	Arc** table = creer_table_arc(nomFichier);
+	Arc** table = creer_tableau_arc(nomFichier);
 	int i=0, j=0;
 	while(i>=0 && j>=0)
 	{
@@ -59,9 +59,21 @@ int main()
 
 	return 1;
 }
+*/
 
+int main()
+{
+	// fonction creer_table_arc();
+	char nomFichier[100]="graphe11.txt";
 
+	Arc* arc=NULL;
+	arc = creerArc(1, 2 , 3.5);  //fonction creer_arc() testé le 13/04/14
+	affiche(arc);
+	
+	ListeArc* table = creer_table_arc(nomFichier);
 
+	return 1;
+}
 
 
 

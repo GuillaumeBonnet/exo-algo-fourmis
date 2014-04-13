@@ -61,7 +61,7 @@ ListeSommet creer_n_sommets(char nomFichier[])
 	fclose(fichier);
 	return liste;	
 }
-Arc** creer_table_arc(char nomFichier[])
+Arc** creer_tableau_arc(char nomFichier[])
 {
 	FILE *fichier=NULL;
 	if((fichier=fopen(nomFichier,"r"))==NULL)
@@ -101,8 +101,63 @@ Arc** creer_table_arc(char nomFichier[])
 
 	return table;
 }
+Arc* creerArc(int sdep, int sarr, double d)
+{
+	Arc* arc = NULL;
+	arc = malloc(sizeof(*arc));
+	arc->sdep=sdep;
+	arc->sarr=sarr;
+	arc->d=d;
+	arc->to=EPS;
 
+	return arc;
+}
+ListeArc* creer_table_arc(char nomFichier[])
+{
+	FILE *fichier=NULL;
+	if((fichier=fopen(nomFichier,"r"))==NULL)
+	{
+		printf("Erreur ouverture fichier %s\n", nomFichier);
+		return NULL;
+	}
 
+	int nbVille=0, i=0; char tmpChaine[100];
+	fscanf(fichier,"%d",&nbVille);
+	fgets(tmpChaine, 100, fichier);
+	fgets(tmpChaine, 100, fichier);
+	for(i=0;i<=nbVille;i++)
+		fgets(tmpChaine, 100, fichier);
+	fgets(tmpChaine, 100, fichier);
+
+	ListeArc* table=NULL;
+	table = calloc(nbVille, sizeof(*table));
+
+	int sdep=0, sarr=0; double d=0;
+	
+	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
+	{			
+		if(table[sdep]==NULL)
+		{		
+			Arc* arc=NULL;
+			arc = creerArc(sdep, sarr, d);
+			table[sdep]=ajout_tete(*arc, table[sdep]);
+		}
+		else
+		{
+			ListeArc* iL=NULL;
+			//for(iL=&(table[sdep]);*iL!=NULL;iL=&((*iL)->suiv) )	
+			//{
+				iL=&(table[sdep]);
+				Arc* arc=NULL;
+				arc = creerArc(sdep, sarr, d);
+				*iL=ajout_tete(*arc, *iL);
+				visualiser_liste(table[sdep]);
+			//}
+		}
+	}
+
+	return table;
+}
 
 
 
