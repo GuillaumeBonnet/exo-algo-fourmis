@@ -79,24 +79,24 @@ Arc** creer_table_arc(char nomFichier[])
 	fgets(tmpChaine, 100, fichier);
 
 	Arc** table=NULL;
-	/*table = calloc(nbVille+10, sizeof(*table));
-	*table = calloc((nbVille+10)*(nbVille+10), sizeof(**table));*/
-	table = calloc(nbVille, sizeof(Arc*));
-	*table = calloc(nbVille*nbVille, sizeof(Arc));
+	table = calloc(nbVille, sizeof(*table));
+	for(i=0;i<nbVille;i++)
+		*(table+i) = calloc(nbVille, sizeof(**table));
+	
+	
 	int sdep=0, sarr=0; double d=0;
-	(*(table+1)+3)->sdep=1;
-	table[1][9].sdep=9;
-	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != 0)
+	
+	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
 	{			
 		table[sdep][sarr].sdep=sdep;
 		table[sdep][sarr].sarr=sarr;
 		table[sdep][sarr].d=d;
 		table[sdep][sarr].to=EPS;
-	/* 
+	 
 		table[sarr][sdep].sdep=sdep;
 		table[sarr][sdep].sarr=sarr;
 		table[sarr][sdep].d=d;
-		table[sarr][sdep].to=EPS;*/
+		table[sarr][sdep].to=EPS;
 	}// si table[i][j].d==0 il n'y a pas d'arc entre les villes i et j(sens i vers j)
 
 	return table;

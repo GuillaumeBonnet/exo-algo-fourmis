@@ -43,11 +43,30 @@ int main()
 
 int main()
 {
-	// fonction creer_table_arc();
-	char nomFichier[100]="graphe12.txt";
+	// fonction creer_table_arc(); testée le 13/04
+	char nomFichier[100]="graphe11.txt";
 	
-	ListeArc* table = creer_table_arc(nomFichier);
+	Arc** table = creer_table_arc(nomFichier);
+	int i=0, j=0;
+	while(i>=0 && j>=0)
+	{
+		printf("i? :\n");
+		scanf("%d",&i);
+		printf("j? :\n");
+		scanf("%d",&j);
+		affiche(&table[i][j]);
+	}
 
 	return 1;
 }
+
+
+
+
+
+
+
+
+
+
 
