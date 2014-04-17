@@ -29,17 +29,7 @@ int main()
 }
 */
 
-/*
-int main()
-{
-	// fonction creer_n_sommets(); testée le 12/04 avec ddd sur un seul fichier texte
-	char nomFichier[100]="graphe12.txt";
-	ListeSommet liste=NULL;
-	liste = creer_n_sommets(nomFichier);
 
-	return 1;
-}
-*/
 /*
 int main()
 {
@@ -63,14 +53,20 @@ int main()
 
 int main()
 {
-	// fonction creer_table_arc();
+	//fonction remplirTable(); testée le 17/04/14 sur le fichier 11
 	char nomFichier[100]="graphe11.txt";
-
-	Arc* arc=NULL;
-	arc = creerArc(1, 2 , 3.5);  //fonction creer_arc() testé le 13/04/14
-	affiche(arc);
+	Sommet* table = NULL; int nbVille = 0;
 	
-	ListeArc* table = creer_table_arc(nomFichier);
+	remplirTable(nomFichier, &table, &nbVille);	
+	
+	int i=0;
+	for(i=0;i<nbVille;i++)
+	{
+		printf("i: %d, num: %d, x: %lf, y :%lf, nom: %s\n", i, table[i].num, table[i].x, table[i].y, table[i].nom);
+
+		visualiser_liste( (table+i)->ListeVoisin );
+	}
+
 
 	return 1;
 }

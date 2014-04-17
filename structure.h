@@ -53,7 +53,7 @@ typedef struct Sommet
 	char* nom;
 	double x;
 	double y;
-//ListeArcVoisin ListeVoisin;
+	ListeArc ListeVoisin;
 }Sommet;
 
 typedef Sommet Ville;

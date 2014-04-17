@@ -30,37 +30,7 @@ int nbArcs(char nomFichier[])
 	return nbArc;	
 }
 
-ListeSommet creer_n_sommets(char nomFichier[])
-{
-	ListeSommet liste = NULL;
-	liste = malloc(sizeof(*liste));
 
-	FILE *fichier=NULL;
-	if((fichier=fopen(nomFichier,"r"))==NULL)
-		printf("Erreur ouverture fichier %s\n", nomFichier);
-
-	int nbVille=0; char tmpChaine[100];
-	fscanf(fichier,"%d",&nbVille);
-	fgets(tmpChaine, 100, fichier);
-	fgets(tmpChaine, 100, fichier);
-	
-	int i=0; 
-	ListeSommet iListe=liste;
-	for(i=0;i<nbVille-1;i++)
-	{
-		iListe->val.nom = calloc(100, sizeof(*(iListe->val.nom)));
-		fscanf(fichier,"%d %lf %lf %s\n", &(iListe->val.num), &(iListe->val.x), &(iListe->val.y), iListe->val.nom);		
-		iListe->suiv = malloc(sizeof(*iListe));
-		iListe=iListe->suiv;
-	}
-
-		iListe->val.nom = calloc(100, sizeof(*(iListe->val.nom)));
-		fscanf(fichier,"%d %lf %lf %s\n", &(iListe->val.num), &(iListe->val.x), &(iListe->val.y), iListe->val.nom);
-		
-
-	fclose(fichier);
-	return liste;	
-}
 Arc** creer_tableau_arc(char nomFichier[])
 {
 	FILE *fichier=NULL;
@@ -112,60 +82,41 @@ Arc* creerArc(int sdep, int sarr, double d)
 
 	return arc;
 }
-ListeArc* creer_table_arc(char nomFichier[])
+
+void remplirTable(char nomFichier[], Sommet** table, int* nbVille)
 {
 	FILE *fichier=NULL;
 	if((fichier=fopen(nomFichier,"r"))==NULL)
-	{
 		printf("Erreur ouverture fichier %s\n", nomFichier);
-		return NULL;
+
+	char tmpChaine[100]; int nbArrete;
+	fscanf(fichier,"%d", nbVille);
+	fgets(tmpChaine, 100, fichier);
+	fgets(tmpChaine, 100, fichier);
+	//villes
+	*table = calloc(*nbVille, sizeof(**table));
+	int i=0; int num=0; double x=0,y=0; char nom[100] ="";
+	for(i=0;i<*nbVille;i++)
+	{
+		fscanf(fichier,"%d %lf %lf %s\n", &num, &x, &y, nom);
+		(*table)[i].num = num;	
+		(*table)[i].x = x;
+		(*table)[i].y = y;
+		(*table)[i].nom = calloc(100, sizeof(char));
+		strcpy((*table)[i].nom, nom);
 	}
-
-	int nbVille=0, i=0; char tmpChaine[100];
-	fscanf(fichier,"%d",&nbVille);
-	fgets(tmpChaine, 100, fichier);
-	fgets(tmpChaine, 100, fichier);
-	for(i=0;i<=nbVille;i++)
-		fgets(tmpChaine, 100, fichier);
-	fgets(tmpChaine, 100, fichier);
-
-	ListeArc* table=NULL;
-	table = calloc(nbVille, sizeof(*table));
-
-	int sdep=0, sarr=0; double d=0;
 	
+	//Arcs
+	int sdep=0, sarr=0; double d=0;
+	fgets(tmpChaine, 100, fichier); Arc* arc= NULL;
 	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
-	{			
-		if(table[sdep]==NULL)
-		{		
-			Arc* arc=NULL;
-			arc = creerArc(sdep, sarr, d);
-			table[sdep]=ajout_tete(*arc, table[sdep]);
-		}
-		else
-		{
-			ListeArc* iL=NULL;
-			//for(iL=&(table[sdep]);*iL!=NULL;iL=&((*iL)->suiv) )	
-			//{
-				iL=&(table[sdep]);
-				Arc* arc=NULL;
-				arc = creerArc(sdep, sarr, d);
-				*iL=ajout_tete(*arc, *iL);
-				visualiser_liste(table[sdep]);
-			//}
-		}
-	}
+	{
+		arc = creerArc(sdep, sarr, d);
+		((*table)+sdep)->ListeVoisin=ajout_tete(*arc, ((*table)+sdep)->ListeVoisin);
 
-	return table;
+		arc = creerArc(sarr, sdep, d);
+		((*table)+sarr)->ListeVoisin=ajout_tete(*arc, ((*table)+sarr)->ListeVoisin);
+	}	
+	close(fichier);
+	return;
 }
-
-
-
-
-
-
-
-
-
-
-
