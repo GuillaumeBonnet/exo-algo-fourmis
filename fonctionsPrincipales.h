@@ -23,7 +23,7 @@ double* probatabu(double* t,ListeSommet tabu); /*renvoit un tableau avec les pro
 void afficheListeSommet(ListeSommet tabu);         /*Validée!*/
 /*elle affiche les numeros des villes dans une ListeSommet*/
 
-int ville_next (ListeSommet tabu,int n, Sommet s);    /*renvoit le numéro de la prochaine ville */
+int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes);    /*renvoit le numéro de la prochaine ville */
 
     double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n);
 /*renvoit l’adresse d’un tableau contenant les probas si elles ne sont pas toutes parcourus (t[N-1]=p(N)),  NULL si l’allocation a échoué et un tableau avec que des 2 si toutes les villes sont parcourus*/

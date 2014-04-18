@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1397811273 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	"structure.h"
+
+1397769549 c:\users\wiche\documents\github\exo-algo-fourmis\structure.h
+
+1397811460 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales_test.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"structure.h"
+	"fonctionsPrincipales.h"
+
+1397808157 c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"structure.h"
+

@@ -7,6 +7,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include<string.h>
 #include "structure.h"
 
 
@@ -63,8 +64,15 @@ void depotPheromone(ListeSommet tabu, Arc** table)
 
 
 
- ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N )
-    {Sommet q=villes[N-1]; ListeSommet p=creer_liste();
+ ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
+    {Sommet q; ListeSommet p=creer_liste();
+
+     q.num=(villes[N-1]).num;
+strcpy (q.nom,(villes[N-1]).nom);
+     q.x=(villes[N-1]).x;
+     q.y=(villes[N-1]).y;
+     q.ListeVoisin=(villes[N-1]).ListeVoisin;
+
 
     p=ajout_tete(q,tabu);
     return(p);
@@ -191,8 +199,8 @@ t[i]=0;
 
 
 
-int ville_next (ListeSommet tabu,int n, Sommet s)                    /*non testée*/
-    {double* t=proba(Sommet s, tabu, n);
+int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)                    /*non testée*/
+    {double* t=proba(s, tabu,villes, n);
 int i=0; int N=0; double p=0;
     if (t==NULL) return (0);
     if (t[0]==-1) return (s.num);

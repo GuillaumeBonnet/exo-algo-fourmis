@@ -12,35 +12,35 @@
 
 /*main()
 {
-	Sommet* q=calloc(3,sizeof(*q)); ListeSommet q=creer_liste();
-	  Sommet s3;
-	 s3.num=3;
-	 s3.nom='a';
-	 s3.x=5;
-	 s3.y=3;
-	 s3.ListeVoisin=NULL;
-	 p[2]=s3;
-	  Sommet s2;
-	 s2.num=2;
-	 s2.nom='a';
-	 s2.x=5;
-	 s2.y=3;
-	 s2.ListeVoisin=NULL;
-	 p[1]=s2;
-	 Sommet s1;
-	 s1.num=1;
-	 s1.nom='a';
-	 s1.x=2;
-	 s1.y=1;
-	 s1.ListeVoisin=NULL;
-	 p[0]=s1;
+	Sommet* p=calloc(3,sizeof(*p)); ListeSommet q=creer_liste();
+if( p==NULL) printf("alloc");
+	 p[2].num=3;
+	 p[2].nom="a";
+	 p[2].x=5;
+	 p[2].y=3;
+	 p[2].ListeVoisin=NULL;
 
-	 q=ajout_ville(q,p,1);
-	  printf("ok2");
-	if(p==NULL||q==NULL)printf("allocation");
-	 printf("%d %d %d",(q->val).num,(q->val).x, (q->val).y);
-}*/
 
+	 p[1].num=2;
+	 p[1].nom="a";
+	 p[1].x=5;
+	 p[1].y=3;
+	 p[1].ListeVoisin=NULL;
+
+	 p[0].num=1;
+	 p[0].nom="a";
+	 p[0].x=2;
+	 p[0].y=1;
+	 p[0].ListeVoisin=NULL;
+
+
+	 q=ajout_ville(q,p,2);
+	  printf("ok2\n");
+	if(q==NULL)printf("allocation");
+	 printf("%d \n %lf\n %lf \n  %s",(q->val).num,(q->val).x, (q->val).y, (q->val).nom );
+	 if (est_vide((q->val).ListeVoisin)) printf("ok!");
+}
+*/
 
 
 /*
