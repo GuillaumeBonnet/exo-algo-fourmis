@@ -1,19 +1,6 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
-
-/*=========constantes=======*/
-#define M 10 //nombre total de fourmis de l'algorithme PS : faire en sort que m=2*n.
-#define RHO 0.5 //coef d'évaporation des phéromones
-#define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
-#define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
-#define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
-#define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
-#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
-/*=========constantes - fin====*/
-
-
-
 typedef struct Arc
 {
 int sdep;                                                    /*sommet de départ*/
