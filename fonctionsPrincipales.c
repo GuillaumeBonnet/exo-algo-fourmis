@@ -99,6 +99,19 @@ int ville_parcourue(ListeSommet tabu, int N,int n)
 return (p);
 }
 
+/*
+ ListeSommet init(ListeSommet* tabu, int nbVille)	//initailise *tabFourmi
+ {
+ 	int boolVille[nbVille]; //tableau statique local
+ 	int iF=0, numVille=0;
+ 	for(iF=0;i<M;i++)
+ 	{
+ 		 numVille =rand()%nbVille;
+ 		 
+ 	}
+ }
+*/
+
 void afficheListeSommet(ListeSommet tabu)
     {ListeSommet p=tabu;
      while (!est_vide(p))
