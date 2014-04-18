@@ -10,7 +10,7 @@
 
 //ajout_ville
 
-main()
+/*main()
 {
 	ListeSommet p=creer_liste(); ListeSommet q=creer_liste();
 	  Sommet s3;
@@ -39,7 +39,7 @@ main()
 	  printf("ok2");
 	if(p==NULL||q==NULL)printf("allocation");
 	 printf("%d %d %d",(q->val).num,(q->val).x, (q->val).y);
-}
+}*/
 
 
 

@@ -48,7 +48,7 @@ double Lchemin(ListeSommet tabu, Arc** table)
 	{
 		somme+=table[iL->val.num][iL->suiv->val.num].d;
 	}
-	
+
 }
 
 void depotPheromone(ListeSommet tabu, Arc** table)
@@ -63,22 +63,14 @@ void depotPheromone(ListeSommet tabu, Arc** table)
 
 
 
- ListeSommet ajout_ville(ListeSommet tabu,ListeSommet villes, int N )
-    {ListeSommet q=villes; ListeSommet p=creer_liste();Sommet s;int j=0;
+ ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N )
+    {Sommet q=villes[N-1]; ListeSommet p=creer_liste();
 
-    for (j=1; j<N; j++ ) q=q->suiv;
-
-    s.num=(q->val).num;
-    s.nom=(q->val).nom;
-    s.x=(q->val).x;
-    s.y=(q->val).y;
-    s.ListeVoisin=(q->val).ListeVoisin;
-
-    p=ajout_tete(s,tabu);
+    p=ajout_tete(q,tabu);
     return(p);
 }
 
-int ville_parcourue(ListeSommet tabu,ListeSommet villes, int N,int n)
+int ville_parcourue(ListeSommet tabu, int N,int n)
 	{int i=0; int j=0; ListeSommet p=creer_liste();
 
 	if (est_vide(tabu))
@@ -98,7 +90,7 @@ int ville_parcourue(ListeSommet tabu,ListeSommet villes, int N,int n)
 	return (2);
 }
 
- ListeSommet depart(ListeSommet villes, int n)
+ ListeSommet depart(Sommet* villes, int n)
     { int i=0;
     ListeSommet p=creer_liste();
 
@@ -148,7 +140,7 @@ p=tabu;
 
 
 
-double* proba(Sommet s, ListeSommet tabu, ListeSommet villes, int n)                    /*non testée*/
+double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                    /*non testée*/
     {double* t;int i=0;
 ListeArcVoisin q=creer_ListeArcVoisin();
 double somme=0;
@@ -156,7 +148,7 @@ double somme=0;
     t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
 
 
-    i=ville_parcourue( tabu,villes,s.num,n) ;     /*si toutes les villes sont parcourues renvoit t initialisé
+    i=ville_parcourue( tabu,s.num,n) ;     /*si toutes les villes sont parcourues renvoit t initialisé
                                                     à -1*/
 if(i==0) return (t);
 
