@@ -78,7 +78,7 @@ strcpy (q.nom,(villes[N-1]).nom);
     return(p);
 }
 
-int ville_parcourue(ListeSommet tabu, int N,int n)
+int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
 	{int i=0; int j=0; ListeSommet p=creer_liste();
 
 	if (est_vide(tabu))

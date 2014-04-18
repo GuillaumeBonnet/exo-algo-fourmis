@@ -83,8 +83,8 @@ printf("%d  %d",i,j);
 */
 
 //depart
-/*
-main()
+
+/*main()
 {ListeSommet villes=creer_liste(); ListeSommet tabu=creer_liste(); ListeSommet tabu2=creer_liste(); ListeSommet tabu3=creer_liste();
 ListeSommet tabu4=creer_liste(); ListeSommet tabu5=creer_liste();
   Sommet s4;
@@ -125,6 +125,6 @@ ListeSommet tabu4=creer_liste(); ListeSommet tabu5=creer_liste();
 if(villes==NULL||tabu==NULL)printf("allocation");
 printf("tabu villes %d tabu2 %d tabu3 %d tabu4 %d tabu5 %d\n", (tabu->val).num, (tabu2->val).num, (tabu3->val).num, (tabu4->val).num, (tabu5->val).num);
 
-}
+}*/
 
-*/
+
