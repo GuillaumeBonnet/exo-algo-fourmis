@@ -1,3 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "structure.h"
+#include ""
+
+
 fonction(k)  /*     k fourmies=parcours*/
 
 initialisation
