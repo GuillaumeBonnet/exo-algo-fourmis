@@ -28,7 +28,7 @@ typedef  ListeArcVoisin FileArcVoisin;
 
 typedef struct Fourmi
 {
-	FileArcVoisin FileVoisin;
+	ListeArc solution;
 	int iVilleDep;     // indice de la ville de départ de la fourmi
 	int iVilleCour;    // indice de la ville courrante de la fourmi
 }Fourmi;
