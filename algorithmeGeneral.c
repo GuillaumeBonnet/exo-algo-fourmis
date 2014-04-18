@@ -14,19 +14,22 @@
 #define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
 /*=========constantes - fin====*/
 
-fonction(k)  /*     k fourmies=parcours*/
+
 
 int iCycle=0, kFourmi=0;
 
-
 char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
 Sommet* table = NULL; int nbVille = 0;
-ListeSommet tabu=NULL;
+remplirTable(nomFichier, &table, &nbVille); //on remplit la table de tous les Sommets et Arcs depuis le fichier
 
-remplirTable(nomFichier, &table, &nbVille);	
+Fourmi* tabFourmi = NULL;
+tabFourmi = calloc(M, sizeof(*tabFourmi));
+
+ListeSommet tabu=NULL;
 
 for(iCycle = MAX_CYCLE-1;iCycle<MAX_CYCLE;iCycle++)
 {
+   //initialiser M fourmi sur les nbVille
    
    for (kFourmi=M-1;kFourmis<M; kFourmi++)   /*pour chaque fourmie*/
    {
@@ -34,7 +37,7 @@ for(iCycle = MAX_CYCLE-1;iCycle<MAX_CYCLE;iCycle++)
       tabu = depart(Sommet* villes, int n);
       //rajouter cette ville a tabu (depart fourmie) 
        
-      for (i=0;i<nbVille;i++) /*jusqu’a avoir parcouru toutes les villes*/
+      /*tant que toutes les villes ne sont pas parcourue*/
       {
          //choix prochaine ville  (ville_next) L=L+darc
          
@@ -48,5 +51,7 @@ for(iCycle = MAX_CYCLE-1;iCycle<MAX_CYCLE;iCycle++)
     
 }
 //renvoit p
+
+//penser à tout free
 
 
