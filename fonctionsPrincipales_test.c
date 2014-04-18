@@ -12,28 +12,28 @@
 
 /*main()
 {
-	ListeSommet p=creer_liste(); ListeSommet q=creer_liste();
+	Sommet* q=calloc(3,sizeof(*q)); ListeSommet q=creer_liste();
 	  Sommet s3;
 	 s3.num=3;
 	 s3.nom='a';
 	 s3.x=5;
 	 s3.y=3;
 	 s3.ListeVoisin=NULL;
-	 p=ajout_tete(s3,p);
+	 p[2]=s3;
 	  Sommet s2;
 	 s2.num=2;
 	 s2.nom='a';
 	 s2.x=5;
 	 s2.y=3;
 	 s2.ListeVoisin=NULL;
-	 p=ajout_tete(s2,p);
+	 p[1]=s2;
 	 Sommet s1;
 	 s1.num=1;
 	 s1.nom='a';
 	 s1.x=2;
 	 s1.y=1;
 	 s1.ListeVoisin=NULL;
-	 p=ajout_tete(s1,p);
+	 p[0]=s1;
 
 	 q=ajout_ville(q,p,1);
 	  printf("ok2");
