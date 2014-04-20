@@ -68,13 +68,13 @@ void depotPheromone(ListeSommet tabu, Arc** table)
     {Sommet q; ListeSommet p=creer_liste();
 
      q.num=(villes[N-1]).num;
-strcpy (q.nom,(villes[N-1]).nom);
      q.x=(villes[N-1]).x;
      q.y=(villes[N-1]).y;
      q.ListeVoisin=(villes[N-1]).ListeVoisin;
-
+     q.nom=(villes[N-1]).nom;
 
     p=ajout_tete(q,tabu);
+
     return(p);
 }
 
@@ -102,23 +102,25 @@ int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
     { int i=0;
     ListeSommet p=creer_liste();
 
-    i =rand() %(n+1);
+    i =1+rand() %(n);
+    printf("%d\n",i);
     p=ajout_ville(p,villes,i);
+
 return (p);
 }
 
-/*
+
  ListeSommet init(ListeSommet* tabu, int nbVille)	//initailise *tabFourmi
  {
  	int boolVille[nbVille]; //tableau statique local
- 	int iF=0, numVille=0;
- 	for(iF=0;i<M;i++)
+ 	int i=0, numVille=0;
+ 	for(i=0;i<M;i++)
  	{
  		 numVille =rand()%nbVille;
- 		 
+
  	}
  }
-*/
+
 
 void afficheListeSommet(ListeSommet tabu)
     {ListeSommet p=tabu;

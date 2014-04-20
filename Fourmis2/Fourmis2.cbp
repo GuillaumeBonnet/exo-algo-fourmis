@@ -31,6 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../fonctionsPrincipales.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fonctionsPrincipales.h" />
+		<Unit filename="../fonctionsPrincipales_test.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../structure.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
