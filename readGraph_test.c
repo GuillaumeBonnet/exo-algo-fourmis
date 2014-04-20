@@ -10,7 +10,7 @@ int main()
 	// fonction nbDeVille(); testée le 10/04
 
 	char nomFichier[100]="graphe12.txt";
-	printf("Il y a %d villes dans le fichier %s\n", nbDeVilles(nomFichier), nomFichier); 
+	printf("Il y a %d villes dans le fichier %s\n", nbDeVilles(nomFichier), nomFichier);
 
 
 	return 1;
@@ -23,7 +23,7 @@ int main()
 	// fonction nbArcs(); testée le 12/04
 
 	char nomFichier[100]="graphe12.txt";
-	printf("Il y a %d arcs dans le fichier %s\n", nbArcs(nomFichier), nomFichier); 
+	printf("Il y a %d arcs dans le fichier %s\n", nbArcs(nomFichier), nomFichier);
 
 	return 1;
 }
@@ -35,7 +35,7 @@ int main()
 {
 	// fonction creer_tableau_arc(); testée le 13/04
 	char nomFichier[100]="graphe11.txt";
-	
+
 	Arc** table = creer_tableau_arc(nomFichier);
 	int i=0, j=0;
 	while(i>=0 && j>=0)
@@ -56,9 +56,9 @@ int main()
 	//fonction remplirTable(); testée le 17/04/14 sur le fichier 11
 	char nomFichier[100]="graphe11.txt";
 	Sommet* table = NULL; int nbVille = 0;
-	
-	remplirTable(nomFichier, &table, &nbVille);	
-	
+
+	remplirTable(nomFichier, &table, &nbVille);
+
 	int i=0;
 	for(i=0;i<nbVille;i++)
 	{

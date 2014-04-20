@@ -142,3 +142,32 @@ printf("s1= %s s2=%s \n",s1,s2);
 
 }
 */
+//proba
+
+main()
+{char nom_fichier[100]="graphe11.txt";
+int nbvilles=0;
+Sommet* t=NULL;
+remplirTable(nom_fichier,&t,&nbvilles);
+
+printf("%d",nbvilles);
+ListeSommet tabu=creer_liste();
+tabu=ajout_ville(tabu,t,5);
+tabu=ajout_ville(tabu,t,3);
+tabu=ajout_ville(tabu,t,2);
+tabu=ajout_ville(tabu,t,1);
+tabu=ajout_ville(tabu,t,0);
+tabu=ajout_ville(tabu,t,4);
+double* pro=proba(tabu->val,tabu,t,nbvilles);
+affichedouble(pro,nbvilles);
+ListeArc q=(tabu->val).ListeVoisin;
+
+while (!est_videListeArc(q))
+    {printf("\t sarr %d\n",(q->val).sarr);
+    q=q->suiv;
+
+    }
+
+int i=ville_next(tabu,nbvilles,t[4],t);
+printf("prochaine ville: %d", i);
+}

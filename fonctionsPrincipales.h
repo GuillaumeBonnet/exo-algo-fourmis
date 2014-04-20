@@ -4,16 +4,17 @@
 #include "structure.h"
 
 
-ListeSommet creer_liste(void);             /*Validée!*/
-int est_vide(ListeSommet L);                 /*Validée!*/
-ListeSommet ajout_tete(Sommet e, ListeSommet L);       /*Validée!*/
-ListeArcVoisin creer_ListeArcVoisin(void);                          /*Validée!*/
-int est_videListeArcVoisin(ListeArcVoisin);                           /*Validée!*/
-
+ListeSommet creer_liste(void);
+int est_vide(ListeSommet L);
+ListeSommet ajout_tete(Sommet e, ListeSommet L);
+ListeArcVoisin creer_ListeArcVoisin(void);
+int est_videListeArcVoisin(ListeArcVoisin);
+ListeArc creer_ListeArc(void);
+int est_videListeArc(ListeArc L);
 double Lchemin(ListeSommet tabu, Arc** table);
 void depotPheromone(ListeSommet tabu, Arc** table);
 
-ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L);            /*Validée!*/
+ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L);
 
 void affichedouble(double* t,int n);/*affiche un tableau de doubles*/     /*Validée!*/
 double* initialisation(int n); /*renvoit un tableau de doubles initialisé a 2*/     /*Validée!*/
@@ -23,10 +24,15 @@ double* probatabu(double* t,ListeSommet tabu); /*renvoit un tableau avec les pro
 void afficheListeSommet(ListeSommet tabu);         /*Validée!*/
 /*elle affiche les numeros des villes dans une ListeSommet*/
 
-int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes);    /*renvoit le numéro de la prochaine ville */
+int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes);
+  /*renvoit le numéro de la prochaine ville (si toutes les villes sont parcourues elle renvoit le numéro de la ville de départ)
+  elle renvoit -1 si il y a un problème d'allocation */
+
+
+
 
     double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n);
-/*renvoit l’adresse d’un tableau contenant les probas si elles ne sont pas toutes parcourus (t[N-1]=p(N)),  NULL si l’allocation a échoué et un tableau avec que des 2 si toutes les villes sont parcourus*/
+/*renvoit l’adresse d’un tableau contenant les probas si elles ne sont pas toutes parcourus (t[N-1]=p(N)),  NULL si l’allocation a échoué et un tableau avec que des -1 si toutes les villes sont parcourus*/
 
      int ville_parcourue(ListeSommet tabu,int N,int n); /*Validée!*/
  /* renvoie 1 si la fourmi est passée par une ville, 0 si elle est pasee

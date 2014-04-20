@@ -1,4 +1,4 @@
-/*toutes les fonctions marchent sauf proba (j'ai pas pu la tester encore*/
+/*toutes les fonctions marchent*/
 
 
 
@@ -21,6 +21,13 @@ int est_vide(ListeSommet L)
 
 ListeArcVoisin creer_ListeArcVoisin(void)
 {return(NULL);}
+
+ListeArc creer_ListeArc(void)
+{return(NULL);}
+
+int est_videListeArc(ListeArc L)
+{ return !L; /* la liste vide est representée par NULL */
+}
 
 int est_videListeArcVoisin(ListeArcVoisin L)
 { return !L; /* la liste vide est representée par NULL */
@@ -67,11 +74,11 @@ void depotPheromone(ListeSommet tabu, Arc** table)
  ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
     {Sommet q; ListeSommet p=creer_liste();
 
-     q.num=(villes[N-1]).num;
-     q.x=(villes[N-1]).x;
-     q.y=(villes[N-1]).y;
-     q.ListeVoisin=(villes[N-1]).ListeVoisin;
-     q.nom=(villes[N-1]).nom;
+     q.num=(villes[N]).num;
+     q.x=(villes[N]).x;
+     q.y=(villes[N]).y;
+     q.ListeVoisin=(villes[N]).ListeVoisin;
+     q.nom=(villes[N]).nom;
 
     p=ajout_tete(q,tabu);
 
@@ -98,11 +105,11 @@ int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
 	return (2);
 }
 
- ListeSommet depart(Sommet* villes, int n)
+ ListeSommet depart(Sommet* villes, int n)//ok
     { int i=0;
     ListeSommet p=creer_liste();
 
-    i =1+rand() %(n);
+    i =rand() %(n);
     printf("%d\n",i);
     p=ajout_ville(p,villes,i);
 
@@ -153,7 +160,7 @@ double* probatabu(double* t,ListeSommet tabu)
 {ListeSommet p=creer_liste();
 p=tabu;
  while (!est_vide(p)) /*si la ville est dans tabu proba=0*/
- {t[((p->val).num)-1]=0;
+ {t[((p->val).num)]=0;
 
   p=p->suiv;
  }
@@ -165,7 +172,7 @@ p=tabu;
 
 double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                    /*non testée*/
     {double* t;int i=0;
-ListeArcVoisin q=creer_ListeArcVoisin();
+ListeArcVoisin q=creer_ListeArc();
 double somme=0;
 
     t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
@@ -173,7 +180,7 @@ double somme=0;
 
     i=ville_parcourue( tabu,s.num,n) ;     /*si toutes les villes sont parcourues renvoit t initialisé
                                                     à -1*/
-if(i==0) return (t);
+if(i==0)return (t);
 
 i=0;
 
@@ -186,24 +193,24 @@ pondération correspondante et on fait la somme terme a terme*/
 
 q=s.ListeVoisin;
 
-if(est_videListeArcVoisin(q))
+if(est_videListeArc(q))
 {printf("Pas de voisins! Le voyage est fini :/ \n");
 somme=1;
 }
 
-while (!est_videListeArcVoisin(q))
+while (!est_videListeArc(q))
 {
 
-    if(t[ (q->val).sarr-1]<0)
-        {t[ (q->val).sarr-1]= pow((q->val).to,ALPHA)/pow( (q->val).d ,BETA);
-        somme=somme + t[(q->val).sarr-1];
+    if(t[ (q->val).sarr]<0)
+        {t[ (q->val).sarr]= pow((q->val).to,ALPHA)/pow( (q->val).d ,BETA);
+        somme=somme + t[(q->val).sarr];
         }
 
 q=q->suiv;
  }
     i=0;
     for(i=0;i<n;i++)
-{if(t[i]==2) /*pour les villes non voisines et non parcourrues
+{if(t[i]<0) /*pour les villes non voisines et non parcourrues
 p=0 aussi*/
 t[i]=0;
         t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondérations*/
@@ -214,15 +221,26 @@ t[i]=0;
 
 
 
-int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)                    /*non testée*/
+int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)                    //ok
     {double* t=proba(s, tabu,villes, n);
 int i=0; int N=0; double p=0;
-    if (t==NULL) return (0);
-    if (t[0]==-1) return (s.num);
+    if (t==NULL) return (-1);
+    if (t[0]==-1)
+    {int j=0;
+     ListeSommet q=tabu;
+         while(!est_vide(q))
+         {j=(q->val).num;
 
+            q=q->suiv;
+         }
+
+
+
+        return (j);
+    }
     for (i=0; i<n; i++)
         {if (t[i]>p)
-            {p=t[i]; N=i+1;
+            {p=t[i]; N=i;
 }
 }
     return(N);
