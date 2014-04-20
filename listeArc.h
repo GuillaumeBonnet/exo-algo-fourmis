@@ -3,28 +3,20 @@
 
 #include "structure.h"
 
-typedef Arc ELEMENT;
-
-struct Cellule
-{
-	ELEMENT val;
-	struct Cellule* suiv;
-};
-typedef struct Cellule Maillon;
-typedef Maillon* Liste;
 
 
-void affiche(ELEMENT* elem);
-Liste creer_liste(void);
-int est_vide(Liste );
-void visualiser_liste(Liste );
-Liste ajout_tete(ELEMENT , Liste );
-Liste supprimer_tete(Liste ) ;
-Liste ajout_queue(ELEMENT , Liste );
-ELEMENT supprimer_queue(Liste L);
-Liste supprimen(int n, Liste l);
-Liste concat(Liste l1, Liste l2);
-Liste copie(Liste l);
+
+void affiche(Arc* elem);
+ListeArc creer_liste(void);
+int est_vide(ListeArc );
+void visualiser_liste(ListeArc );
+ListeArc ajout_tete(Arc , ListeArc );
+ListeArc supprimer_tete(ListeArc ) ;
+ListeArc ajout_queue(Arc , ListeArc );
+Arc supprimer_queue(ListeArc L);
+ListeArc supprimen(int n, ListeArc l);
+ListeArc concat(ListeArc l1, ListeArc l2);
+ListeArc copie(ListeArc l);
 
 
 

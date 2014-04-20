@@ -22,14 +22,14 @@ char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
 Sommet* table = NULL; int nbVille = 0;
 remplirTable(nomFichier, &table, &nbVille); //on remplit la table de tous les Sommets et Arcs depuis le fichier
 
-Fourmi* tabFourmi = NULL;
-tabFourmi = calloc(M, sizeof(*tabFourmi));
+
 
 ListeSommet tabu=NULL;
 
 for(iCycle = MAX_CYCLE-1;iCycle<MAX_CYCLE;iCycle++)
 {
-   //initialiser M fourmi sur les nbVille
+   //initialiser M fourmi sur les nbVille : Fourmi* initFourmi(int nbFourmi); dans readGraph
+
    
    for (kFourmi=M-1;kFourmis<M; kFourmi++)   /*pour chaque fourmie*/
    {

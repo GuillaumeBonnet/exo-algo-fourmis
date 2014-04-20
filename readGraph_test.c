@@ -50,7 +50,7 @@ int main()
 	return 1;
 }
 */
-
+/*
 int main()
 {
 	//fonction remplirTable(); testée le 17/04/14 sur le fichier 11
@@ -67,6 +67,24 @@ int main()
 		visualiser_liste( (table+i)->ListeVoisin );
 	}
 
+
+	return 1;
+}
+*/
+
+int main()
+{
+	//fonction initFourmi(int nbFourmi, int nbVille);
+	Fourmi* tab = NULL;
+	int nbFourmi=10, i=0, nbVille=3;
+	while(nbFourmi>=0 && nbVille>=0)
+	{
+		fflush(stdin);	scanf("%d",&nbFourmi);
+		fflush(stdin);  scanf("%d",&nbVille);
+		tab = initFourmi(nbFourmi,nbVille);
+		for(i=0;i<nbFourmi;i++)
+			printf("i:%d, VilleDep:%d, VilleCour:%d\n", i, tab[i].iVilleDep, tab[i].iVilleCour);
+	}
 
 	return 1;
 }

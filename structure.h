@@ -1,6 +1,7 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
+
 /*=========constantes=======*/
 #define M 10 //nombre total de fourmis de l'algorithme PS : faire en sort que m=2*n.
 #define RHO 0.5 //coef d'évaporation des phéromones
@@ -13,28 +14,21 @@
 
 typedef struct Arc
 {
-int sdep;                                                    /*sommet de départ*/
-int sarr;                                                     /*sommet d’arrivée*/
-double d;                                                             /*distance entre les deux villes*/
-double to;                                                            /*quantité de phéromones*/
+	int sdep;                             /*sommet de départ*/
+	int sarr;                             /*sommet d’arrivée*/
+	double d;                             /*distance entre les deux villes*/
+	double to;                            /*quantité de phéromones*/
 
 }Arc;
 
-struct MaillonArc
+struct CelluleArc
 {
-    Arc val;
-    struct MaillonArc *suiv;
+	Arc val;
+	struct CelluleArc* suiv;
 };
-typedef struct MaillonArc* ListeArc;
+typedef struct CelluleArc MaillonArc;
+typedef MaillonArc* ListeArc;
 
-struct ArcVoisin
-{
-    Arc val;
-    struct ArcVoisin * suiv;
-};
-typedef struct ArcVoisin ArcVoisin;
-typedef ArcVoisin* ListeArcVoisin;
-typedef  ListeArcVoisin FileArcVoisin;
 
 typedef struct Fourmi
 {

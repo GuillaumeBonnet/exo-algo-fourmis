@@ -120,3 +120,50 @@ void remplirTable(char nomFichier[], Sommet** table, int* nbVille)
 	close(fichier);
 	return;
 }
+
+
+Fourmi* initFourmi(int nbFourmi, int nbVille)
+{
+	Fourmi* tab = NULL;
+	tab = calloc(nbFourmi, sizeof(*tab));
+	int i=0;
+	int fin=nbFourmi- nbFourmi%nbVille;
+	for(i=0;i<fin;i++)
+	{
+		tab[i].iVilleDep=i%nbVille;
+		tab[i].iVilleCour=i%nbVille;
+		//rentrer la première ville dans la file ListeSommet solution si on l'utilise
+	}
+
+	// initialisation de rand : srand(time(NULL)); 
+
+	for(i=fin;i<nbFourmi;i++)
+	{
+		tab[i].iVilleDep = rand()%nbVille;
+		tab[i].iVilleCour = tab[i].iVilleDep;
+		int j=0;
+		for(j=fin;j<i;j++)
+			if(tab[i].iVilleDep==tab[j].iVilleDep)
+				i--;
+	}
+	return tab;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
