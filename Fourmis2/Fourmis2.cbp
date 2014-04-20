@@ -38,6 +38,11 @@
 		<Unit filename="../fonctionsPrincipales_test.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../graphe11.txt" />
+		<Unit filename="../readGraph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../readGraph.h" />
 		<Unit filename="../structure.h" />
 		<Extensions>
 			<code_completion />
