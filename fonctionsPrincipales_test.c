@@ -143,7 +143,7 @@ printf("s1= %s s2=%s \n",s1,s2);
 }
 */
 //proba
-
+/*
 main()
 {char nom_fichier[100]="graphe11.txt";
 int nbvilles=0;
@@ -170,4 +170,40 @@ while (!est_videListeArc(q))
 
 int i=ville_next(tabu,nbvilles,t[4],t);
 printf("prochaine ville: %d", i);
+}
+*/
+
+
+//parcours fourmi
+
+main()
+{char nom_fichier[100]="graphe11.txt";
+int nbvilles=0;
+Sommet* t=NULL;
+remplirTable(nom_fichier,&t,&nbvilles);
+Fourmi f;
+
+f.solution=NULL;
+
+
+
+
+ListeSommet tabu=creer_liste();
+tabu=ajout_ville(tabu,t,5);
+tabu=ajout_ville(tabu,t,3);
+tabu=ajout_ville(tabu,t,2);
+tabu=ajout_ville(tabu,t,1);
+tabu=ajout_ville(tabu,t,0);
+tabu=ajout_ville(tabu,t,4);
+
+
+
+
+f.solution=parcours_fourmi(f,tabu);
+
+ListeArc q=f.solution;
+while (!est_videListeArc(q))
+    {printf("\t %d -> %d\n",(q->val).sdep,(q->val).sarr);
+    q=q->suiv;
+    }
 }

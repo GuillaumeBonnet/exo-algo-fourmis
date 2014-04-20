@@ -40,7 +40,16 @@ ListeSommet ajout_tete(Sommet e, ListeSommet L)
  p->suiv=L;
  return p;
 }
-ListeArcVoisin ajout_teteArc(Arc e, ListeArcVoisin L)
+
+ListeArc ajout_teteArc(Arc e, ListeArc L)
+{ ListeArc p=calloc(1,sizeof(*p));
+ if (p==NULL) return NULL;
+ p->val=e;
+ p->suiv=L;
+ return p;
+}
+
+ListeArcVoisin ajout_teteArcVoisin(Arc e, ListeArcVoisin L)
 {ListeArcVoisin p=calloc(1,sizeof(*p));
  if (p==NULL) return NULL;
  p->val=e;
@@ -244,4 +253,31 @@ int i=0; int N=0; double p=0;
 }
 }
     return(N);
+}
+
+
+
+
+
+ListeArc parcours_fourmi(Fourmi f, ListeSommet tabu)
+{ListeArc q=creer_ListeArc;   int Narr=0;
+
+    if (est_vide(tabu)) return(f.solution);
+    if (est_vide (tabu->suiv))return(f.solution);
+
+    Narr=(tabu->val).num;
+    q=(((tabu->suiv)->val).ListeVoisin);
+
+    while(!est_vide(q))
+    {
+        if((q->val).sarr==Narr)
+        { f.solution=ajout_teteArc(q->val,f.solution);
+
+        }
+       q=q->suiv;
+    }
+
+    f.solution=parcours_fourmi(f,tabu->suiv);
+
+
 }
