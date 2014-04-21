@@ -39,6 +39,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../graphe11.txt" />
+		<Unit filename="../listeArc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeArc.h" />
+		<Unit filename="../listeSommet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeSommet.h" />
 		<Unit filename="../readGraph.c">
 			<Option compilerVar="CC" />
 		</Unit>

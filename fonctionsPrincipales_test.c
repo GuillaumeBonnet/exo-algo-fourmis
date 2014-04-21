@@ -143,7 +143,7 @@ printf("s1= %s s2=%s \n",s1,s2);
 }
 */
 //proba
-/*
+
 main()
 {char nom_fichier[100]="graphe11.txt";
 int nbvilles=0;
@@ -171,12 +171,12 @@ while (!est_videArc(q))
 int i=ville_next(tabu,nbvilles,t[4],t);
 printf("prochaine ville: %d", i);
 }
-*/
+
 
 
 //parcours fourmi
 
-main()
+/*main()
 {char nom_fichier[100]="graphe11.txt";
 int nbvilles=0;
 Sommet* t=NULL;
@@ -207,3 +207,4 @@ while (!est_videArc(q))
     q=q->suiv;
     }
 }
+*/
