@@ -22,12 +22,12 @@ int nbArcs(char nomFichier[])
 	FILE *fichier=NULL;
 	if((fichier=fopen(nomFichier,"r"))==NULL)
 		printf("Erreur ouverture fichier %s\n", nomFichier);
-	
+
 	int nbArrete=0, nbArc=0;
 	fscanf(fichier,"%d %d",&nbArc, &nbArrete);
 	fclose(fichier);
 	nbArc = 2*nbArrete;
-	return nbArc;	
+	return nbArc;
 }
 
 
@@ -52,17 +52,17 @@ Arc** creer_tableau_arc(char nomFichier[])
 	table = calloc(nbVille, sizeof(*table));
 	for(i=0;i<nbVille;i++)
 		*(table+i) = calloc(nbVille, sizeof(**table));
-	
-	
+
+
 	int sdep=0, sarr=0; double d=0;
-	
+
 	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
-	{			
+	{
 		table[sdep][sarr].sdep=sdep;
 		table[sdep][sarr].sarr=sarr;
 		table[sdep][sarr].d=d;
 		table[sdep][sarr].to=EPS;
-	 
+
 		table[sarr][sdep].sdep=sdep;
 		table[sarr][sdep].sarr=sarr;
 		table[sarr][sdep].d=d;
@@ -99,24 +99,24 @@ void remplirTable(char nomFichier[], Sommet** table, int* nbVille)
 	for(i=0;i<*nbVille;i++)
 	{
 		fscanf(fichier,"%d %lf %lf %s\n", &num, &x, &y, nom);
-		(*table)[i].num = num;	
+		(*table)[i].num = num;
 		(*table)[i].x = x;
 		(*table)[i].y = y;
 		(*table)[i].nom = calloc(100, sizeof(char));
 		strcpy((*table)[i].nom, nom);
 	}
-	
+
 	//Arcs
 	int sdep=0, sarr=0; double d=0;
 	fgets(tmpChaine, 100, fichier); Arc* arc= NULL;
 	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
 	{
 		arc = creerArc(sdep, sarr, d);
-		((*table)+sdep)->ListeVoisin=ajout_tete(*arc, ((*table)+sdep)->ListeVoisin);
+		((*table)+sdep)->ListeVoisin=ajout_teteArc(*arc, ((*table)+sdep)->ListeVoisin);
 
 		arc = creerArc(sarr, sdep, d);
-		((*table)+sarr)->ListeVoisin=ajout_tete(*arc, ((*table)+sarr)->ListeVoisin);
-	}	
+		((*table)+sarr)->ListeVoisin=ajout_teteArc(*arc, ((*table)+sarr)->ListeVoisin);
+	}
 	close(fichier);
 	return;
 }
@@ -135,7 +135,7 @@ Fourmi* initFourmi(int nbFourmi, int nbVille)
 		//rentrer la première ville dans la file ListeSommet solution si on l'utilise
 	}
 
-	// initialisation de rand : srand(time(NULL)); 
+	// initialisation de rand : srand(time(NULL));
 
 	for(i=fin;i<nbFourmi;i++)
 	{

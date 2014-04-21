@@ -4,21 +4,11 @@
 #include "structure.h"
 
 
-ListeSommet creer_liste(void);
-int est_vide(ListeSommet L);
-ListeSommet ajout_tete(Sommet e, ListeSommet L);
 
-ListeArcVoisin creer_ListeArcVoisin(void);
-int est_videListeArcVoisin(ListeArcVoisin);
-
-ListeArc creer_ListeArc(void);
-int est_videListeArc(ListeArc L);
-ListeArc ajout_teteArc(Arc e, ListeArc L);
 
 double Lchemin(ListeSommet tabu, Arc** table);
 void depotPheromone(ListeSommet tabu, Arc** table);
 
-ListeArcVoisin ajout_teteArcVoiisin(Arc e, ListeArcVoisin L);
 
 void affichedouble(double* t,int n);/*affiche un tableau de doubles*/     /*Validée!*/
 double* initialisation(int n); /*renvoit un tableau de doubles initialisé a 2*/     /*Validée!*/

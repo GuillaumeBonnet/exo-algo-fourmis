@@ -12,7 +12,7 @@
 /*
 main()
 {
-	Sommet* p=calloc(4,sizeof(*p)); ListeSommet q=creer_liste();
+	Sommet* p=calloc(4,sizeof(*p)); ListeSommet q=creer_listeSommet();
 if( p==NULL) printf("alloc");
 
 	(p[3]).num=4;
@@ -45,7 +45,7 @@ if( p==NULL) printf("alloc");
 	  printf("ok2\n");
 	if(q==NULL)printf("allocation");
 	 printf("%d \n %lf\n %lf \n  %s",(q->val).num,(q->val).x, (q->val).y, (q->val).nom );
-	 if (est_vide((q->val).ListeVoisin)) printf("ok!");
+	 if (est_videSommet((q->val).ListeVoisin)) printf("ok!");
 }
 */
 
@@ -54,7 +54,7 @@ if( p==NULL) printf("alloc");
 ville parcourue
 
 main()
-{ListeSommet villes=creer_liste(); ListeSommet tabu=creer_liste(); int i=0; int j=0;
+{ListeSommet villes=creer_listeSommet(); ListeSommet tabu=creer_listeSommet(); int i=0; int j=0;
   Sommet s3;
  s3.num=3;
  s3.nom='a';
@@ -91,8 +91,8 @@ printf("%d  %d",i,j);
 //depart
 
 /*main()
-{Sommet* p=calloc(4,sizeof(*p)); ListeSommet tabu=creer_liste(); ListeSommet tabu2=creer_liste(); ListeSommet tabu3=creer_liste();
-ListeSommet tabu4=creer_liste(); ListeSommet tabu5=creer_liste();
+{Sommet* p=calloc(4,sizeof(*p)); ListeSommet tabu=creer_listeSommet(); ListeSommet tabu2=creer_listeSommet(); ListeSommet tabu3=creer_listeSommet();
+ListeSommet tabu4=creer_listeSommet(); ListeSommet tabu5=creer_listeSommet();
 if(p==NULL)printf("allocation");
  (p[3]).num=4;
  (p[3]).nom="asdffg";
@@ -151,7 +151,7 @@ Sommet* t=NULL;
 remplirTable(nom_fichier,&t,&nbvilles);
 
 printf("%d",nbvilles);
-ListeSommet tabu=creer_liste();
+ListeSommet tabu=creer_listeSommet();
 tabu=ajout_ville(tabu,t,5);
 tabu=ajout_ville(tabu,t,3);
 tabu=ajout_ville(tabu,t,2);
@@ -162,7 +162,7 @@ double* pro=proba(tabu->val,tabu,t,nbvilles);
 affichedouble(pro,nbvilles);
 ListeArc q=(tabu->val).ListeVoisin;
 
-while (!est_videListeArc(q))
+while (!est_videArc(q))
     {printf("\t sarr %d\n",(q->val).sarr);
     q=q->suiv;
 
@@ -188,7 +188,7 @@ f.solution=NULL;
 
 
 
-ListeSommet tabu=creer_liste();
+ListeSommet tabu=creer_listeSommet();
 tabu=ajout_ville(tabu,t,5);
 tabu=ajout_ville(tabu,t,3);
 tabu=ajout_ville(tabu,t,2);
@@ -202,7 +202,7 @@ tabu=ajout_ville(tabu,t,4);
 f.solution=parcours_fourmi(f,tabu);
 
 ListeArc q=f.solution;
-while (!est_videListeArc(q))
+while (!est_videArc(q))
     {printf("\t %d -> %d\n",(q->val).sdep,(q->val).sarr);
     q=q->suiv;
     }

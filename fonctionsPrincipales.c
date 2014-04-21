@@ -9,54 +9,8 @@
 #include<math.h>
 #include<string.h>
 #include "structure.h"
-
-
-ListeSommet creer_liste()
-{return(NULL);
-
-}
-int est_vide(ListeSommet L)
-{ return !L; /* la liste vide est representée par NULL */
-}
-
-ListeArcVoisin creer_ListeArcVoisin(void)
-{return(NULL);}
-
-ListeArc creer_ListeArc(void)
-{return(NULL);}
-
-int est_videListeArc(ListeArc L)
-{ return !L; /* la liste vide est representée par NULL */
-}
-
-int est_videListeArcVoisin(ListeArcVoisin L)
-{ return !L; /* la liste vide est representée par NULL */
-}
-
-ListeSommet ajout_tete(Sommet e, ListeSommet L)
-{ ListeSommet p=calloc(1,sizeof(*p));
- if (p==NULL) return NULL;
- p->val=e;
- p->suiv=L;
- return p;
-}
-
-ListeArc ajout_teteArc(Arc e, ListeArc L)
-{ ListeArc p=calloc(1,sizeof(*p));
- if (p==NULL) return NULL;
- p->val=e;
- p->suiv=L;
- return p;
-}
-
-ListeArcVoisin ajout_teteArcVoisin(Arc e, ListeArcVoisin L)
-{ListeArcVoisin p=calloc(1,sizeof(*p));
- if (p==NULL) return NULL;
- p->val=e;
- p->suiv=L;
- return p;
-}
-
+#include "listeSommet.h"
+#include "listeArc.h"
 
 double Lchemin(ListeSommet tabu, Arc** table)
 {
@@ -81,7 +35,7 @@ void depotPheromone(ListeSommet tabu, Arc** table)
 
 
  ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
-    {Sommet q; ListeSommet p=creer_liste();
+    {Sommet q; ListeSommet p=creer_listeSommet();
 
      q.num=(villes[N]).num;
      q.x=(villes[N]).x;
@@ -89,19 +43,19 @@ void depotPheromone(ListeSommet tabu, Arc** table)
      q.ListeVoisin=(villes[N]).ListeVoisin;
      q.nom=(villes[N]).nom;
 
-    p=ajout_tete(q,tabu);
+    p=ajout_teteSommet(q,tabu);
 
     return(p);
 }
 
 int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
-	{int i=0; int j=0; ListeSommet p=creer_liste();
+	{int i=0; int j=0; ListeSommet p=creer_listeSommet();
 
-	if (est_vide(tabu))
+	if (est_videSommet(tabu))
 		return(2);
 
 	p=tabu;
-	 while (!est_vide(p)) {
+	 while (!est_videSommet(p)) {
 		 i=i+1;
 		 if((p->val).num==N) j=1;
 		 p=p->suiv;
@@ -116,7 +70,7 @@ int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
 
  ListeSommet depart(Sommet* villes, int n)//ok
     { int i=0;
-    ListeSommet p=creer_liste();
+    ListeSommet p=creer_listeSommet();
 
     i =rand() %(n);
     printf("%d\n",i);
@@ -140,7 +94,7 @@ return (p);
 
 void afficheListeSommet(ListeSommet tabu)
     {ListeSommet p=tabu;
-     while (!est_vide(p))
+     while (!est_videSommet(p))
 {
  printf("\t tabu %d \n",(p->val).num);
      p=p->suiv;
@@ -166,9 +120,9 @@ for(i=0;i<n;i++)
 
 
 double* probatabu(double* t,ListeSommet tabu)
-{ListeSommet p=creer_liste();
+{ListeSommet p=creer_listeSommet();
 p=tabu;
- while (!est_vide(p)) /*si la ville est dans tabu proba=0*/
+ while (!est_videSommet(p)) /*si la ville est dans tabu proba=0*/
  {t[((p->val).num)]=0;
 
   p=p->suiv;
@@ -181,7 +135,7 @@ p=tabu;
 
 double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                    /*non testée*/
     {double* t;int i=0;
-ListeArcVoisin q=creer_ListeArc();
+ListeArc q=creer_listeArc();
 double somme=0;
 
     t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
@@ -202,12 +156,12 @@ pondération correspondante et on fait la somme terme a terme*/
 
 q=s.ListeVoisin;
 
-if(est_videListeArc(q))
+if(est_videArc(q))
 {printf("Pas de voisins! Le voyage est fini :/ \n");
 somme=1;
 }
 
-while (!est_videListeArc(q))
+while (!est_videArc(q))
 {
 
     if(t[ (q->val).sarr]<0)
@@ -237,7 +191,7 @@ int i=0; int N=0; double p=0;
     if (t[0]==-1)
     {int j=0;
      ListeSommet q=tabu;
-         while(!est_vide(q))
+         while(!est_videSommet(q))
          {j=(q->val).num;
 
             q=q->suiv;
@@ -260,15 +214,15 @@ int i=0; int N=0; double p=0;
 
 
 ListeArc parcours_fourmi(Fourmi f, ListeSommet tabu)
-{ListeArc q=creer_ListeArc;   int Narr=0;
+{ListeArc q=creer_listeArc();   int Narr=0;
 
-    if (est_vide(tabu)) return(f.solution);
-    if (est_vide (tabu->suiv))return(f.solution);
+    if (est_videSommet(tabu)) return(f.solution);
+    if (est_videSommet (tabu->suiv))return(f.solution);
 
     Narr=(tabu->val).num;
     q=(((tabu->suiv)->val).ListeVoisin);
 
-    while(!est_vide(q))
+    while(!est_videArc(q))
     {
         if((q->val).sarr==Narr)
         { f.solution=ajout_teteArc(q->val,f.solution);
