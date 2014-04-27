@@ -9,27 +9,6 @@
 #include "listeArc.h"
 
 
-/* //à refaire avec tabFourmi en argument
-double Lchemin(ListeSommet tabu, Arc** table)//TO DO : maj new table
-{
-	ListeSommet iL=NULL; double somme=0;
-	for(iL=tabu;iL->suiv!=NULL;iL=iL->suiv)
-	{
-		somme+=table[iL->val.num][iL->suiv->val.num].d;
-	}
-
-}
-
-void depotPheromone(ListeSommet tabu, Arc** table)//TO DO : maj new table
-{
-	double dTo = Q/Lchemin(tabu, table);
-	ListeSommet iL=NULL;
-	for(iL=tabu;iL->suiv!=NULL;iL=iL->suiv)
-	{
-		table[iL->val.num][iL->suiv->val.num].to=RHO * table[iL->val.num][iL->suiv->val.num].to + dTo ;
-	}
-}//g : vérifier portée des constantes
-*/
 
 ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
 {
@@ -245,3 +224,25 @@ ListeArc parcours_fourmi(Fourmi f, ListeSommet tabu)
 
 	f.solution=parcours_fourmi(f,tabu->suiv);
 }
+
+double Lchemin(ListeArc tabuArc)
+{
+	ListeArc iL=NULL; double somme=0;
+	for(iL=tabuArc;iL!=NULL;iL=iL->suiv)
+	{
+		somme+=iL->val.d;
+	}
+	return somme;
+
+}
+/*
+void depotPheromone(ListeSommet tabu, Arc** table)//TO DO : maj new table
+{
+	double dTo = Q/Lchemin(tabu, table);
+	ListeSommet iL=NULL;
+	for(iL=tabu;iL->suiv!=NULL;iL=iL->suiv)
+	{
+		table[iL->val.num][iL->suiv->val.num].to=RHO * table[iL->val.num][iL->suiv->val.num].to + dTo ;
+	}
+}//g : vérifier portée des constantes
+*/

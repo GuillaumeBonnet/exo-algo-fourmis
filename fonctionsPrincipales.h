@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<math.h>
 #include "structure.h"
+#include "listeSommet.h"
+#include "listeArc.h"
 
 
 void affichedouble(double* t,int n);/*affiche un tableau de doubles*/     /*Validée!*/
@@ -16,8 +18,7 @@ int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes);
   /*renvoit le numéro de la prochaine ville (si toutes les villes sont parcourues elle renvoit le numéro de la ville de départ)
   elle renvoit -1 si il y a un problème d'allocation */
 
-double Lchemin(ListeSommet tabu, Arc** table);
-void depotPheromone(ListeSommet tabu, Arc** table);
+
 
 
 double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n);
@@ -28,6 +29,8 @@ int ville_parcourue(ListeSommet tabu,int N,int n);
  /* renvoie 1 si la fourmi est passée par une ville (de numéro N), 0 si elle est passée
 par toutes les villes et 2 si elle n’est pas encore passée*/
 
+double Lchemin(ListeArc tabuArc);
+void depotPheromone(ListeSommet tabu, Arc** table);
 
 ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N );
       /*elle rajoute une ville a tabu*/

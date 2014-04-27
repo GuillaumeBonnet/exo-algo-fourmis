@@ -5,6 +5,9 @@
 #include "structure.h"
 #include "fonctionsPrincipales.h"
 #include "readGraph.h"
+#include "listeArc.h"
+#include "listeSommet.h"
+
 
 ///test:
 
@@ -143,7 +146,7 @@ printf("s1= %s s2=%s \n",s1,s2);
 }
 */
 //proba
-
+/*
 main()
 {char nom_fichier[100]="graphe11.txt";
 int nbvilles=0;
@@ -208,3 +211,45 @@ while (!est_videArc(q))
     }
 }
 */
+
+
+int main()
+{
+	char nomFichier[100]="graphe11.txt";
+	Sommet* table = NULL; int nbVille = 0;
+
+	remplirTable(nomFichier, &table, &nbVille);
+
+	int i=0;
+	for(i=0;i<nbVille;i++)
+	{
+		printf("i: %d, num: %d, x: %lf, y :%lf, nom: %s\n", i, table[i].num, table[i].x, table[i].y, table[i].nom);
+
+		visualiser_listeArc( (table+i)->ListeVoisin );
+		printf("L = %lf\n", Lchemin((table+i)->ListeVoisin) );
+	}
+	return 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
