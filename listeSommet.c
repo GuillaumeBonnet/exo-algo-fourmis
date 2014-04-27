@@ -5,15 +5,15 @@
 //partie qui dépend du du fait que ELEM est un Arc
 
 void afficheSommet(Sommet* elem)
-{ListeArc q=elem->ListeVoisin;
+{
+	ListeArc q=elem->ListeVoisin;
 	printf("num:%d nom:%s x:%lf y:%lf \n",elem->num, elem->nom, elem->x,elem->y);
 	printf("Liste des arcs voisins: \n");
 
 	while(est_videArc(q))
-    {
-        afficheArc(&(q->val));
-    }
-
+	{
+		afficheArc(&(q->val));
+	}
 }
 //partie qui dépend du type du champ val - fin
 
@@ -31,7 +31,7 @@ void visualiser_listeSommet(ListeSommet L)
 {
 	ListeSommet Li=NULL;
 	for(Li=L;Li!=NULL;Li=Li->suiv)
-		afficheArc(&Li->val);
+		afficheSommet(&Li->val);
 }
 
 ListeSommet ajout_teteSommet(Sommet elem, ListeSommet L)

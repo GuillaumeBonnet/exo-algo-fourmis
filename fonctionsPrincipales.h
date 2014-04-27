@@ -4,12 +4,6 @@
 #include "structure.h"
 
 
-
-
-double Lchemin(ListeSommet tabu, Arc** table);
-void depotPheromone(ListeSommet tabu, Arc** table);
-
-
 void affichedouble(double* t,int n);/*affiche un tableau de doubles*/     /*Validée!*/
 double* initialisation(int n); /*renvoit un tableau de doubles initialisé a 2*/     /*Validée!*/
 double* probatabu(double* t,ListeSommet tabu); /*renvoit un tableau avec les probas des villes dans tabu a 0*/     /*Validée!*/
@@ -22,14 +16,16 @@ int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes);
   /*renvoit le numéro de la prochaine ville (si toutes les villes sont parcourues elle renvoit le numéro de la ville de départ)
   elle renvoit -1 si il y a un problème d'allocation */
 
+double Lchemin(ListeSommet tabu, Arc** table);
+void depotPheromone(ListeSommet tabu, Arc** table);
 
 
-
-    double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n);
+double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n);
 /*renvoit l’adresse d’un tableau contenant les probas si elles ne sont pas toutes parcourus (t[N-1]=p(N)),  NULL si l’allocation a échoué et un tableau avec que des -1 si toutes les villes sont parcourus*/
 
-     int ville_parcourue(ListeSommet tabu,int N,int n);
- /* renvoie 1 si la fourmi est passée par une ville, 0 si elle est pasee
+int ville_parcourue(ListeSommet tabu,int N,int n);
+//n est le nombre total de ville (=nbVille dans le main)
+ /* renvoie 1 si la fourmi est passée par une ville (de numéro N), 0 si elle est passée
 par toutes les villes et 2 si elle n’est pas encore passée*/
 
 
