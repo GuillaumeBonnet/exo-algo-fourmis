@@ -131,7 +131,7 @@ Fourmi* initFourmi(int nbFourmi, int nbVille)
 	for(i=0;i<fin;i++)
 	{
 		tab[i].iVilleDep=i%nbVille;
-		tab[i].iVilleCour=-1;
+		tab[i].iVilleCour=tab[i].iVilleDep;
 		//rentrer la première ville dans la file ListeSommet solution si on l'utilise
 	}
 

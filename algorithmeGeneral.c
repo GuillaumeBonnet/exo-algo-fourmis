@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
 	{
 		Fourmi* tabFourmi=NULL;
 		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
-                                            //L: ce n'est pas juste "init"? que fait elle plus precisement? vaut mieux pas qu¿'elle initiallise une seule fourmi et on le fasse pour chaque fourmi pour ne pas trainer avec un tableau de fourmis?
 
 	   	int iFourmi=0;
 		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
@@ -48,7 +47,9 @@ int main(int argc, char *argv[])
 			while(tabFourmi[iFourmi].iVilleDep !=	tabFourmi[iFourmi].iVilleCour)
 			{
 				int villeSuiv=-1;
-				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi].iVilleCour) ],tabVille);
+				printf("%d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);
+				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
+				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_ville(tabu, tabVille, villeSuiv);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
 			}

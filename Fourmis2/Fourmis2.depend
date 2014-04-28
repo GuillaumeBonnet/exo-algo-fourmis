@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1398666871 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.c
+1398669083 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -10,7 +10,7 @@
 
 1398066360 c:\users\wiche\documents\github\exo-algo-fourmis\structure.h
 
-1398667027 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales_test.c
+1398667730 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales_test.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -62,4 +62,11 @@
 	<stdlib.h>
 	"structure.h"
 	"listeArc.h"
+
+1398669831 source:c:\users\wiche\documents\github\exo-algo-fourmis\algorithmegeneral.c
+	<stdio.h>
+	<stdlib.h>
+	"structure.h"
+	"readGraph.h"
+	"fonctionsPrincipales.h"
 
