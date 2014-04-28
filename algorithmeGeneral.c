@@ -44,15 +44,17 @@ int main(int argc, char *argv[])
 			tabu = ajout_ville(tabu,tabVille,tabFourmi[iFourmi].iVilleDep);
 
 			//tant que le circuit n'est pas bouclé
-			while(tabFourmi[iFourmi].iVilleDep !=	tabFourmi[iFourmi].iVilleCour)
+			do  //j'ai changé parce qu'au début la ville courante et la ville de départ sont les memes
 			{
 				int villeSuiv=-1;
-				printf("%d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);
+				printf(" ville courante %d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_ville(tabu, tabVille, villeSuiv);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-			}
+				printf(" ville suivante %d \n", villeSuiv);
+			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
+
 			visualiser_listeSommet(tabu); //test
 /*			tabuArc = parcours_fourmi(tabFourmi[iFourmi], tabu);
 			visualiser_listeArc(tabuArc); //test
