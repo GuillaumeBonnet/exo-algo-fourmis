@@ -174,7 +174,7 @@ double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                
 
 
 
-int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)                    //ok
+int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)   //n est le nombre de villes total
 {
 	double* t=proba(s, tabu,villes, n);
 	int i=0; int N=0; double p=0;

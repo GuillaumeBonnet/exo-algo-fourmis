@@ -20,29 +20,32 @@
 int main(int argc, char *argv[])
 {
 
-	
+
 
 	char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0;
-	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier	
+	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArc cheminMin=NULL; //Le chemin le plus court
-	ListeSommet tabu=NULL; //liste de ville parcourue par la fourmi courrante
-	ListeSommet tabuArc=NULL; //idem mais avec les arc qui sont entre les villes
+
 
 	int iCycle=0;
 	for(iCycle = MAX_CYCLE-1;iCycle<MAX_CYCLE;iCycle++)
 	{
 		Fourmi* tabFourmi=NULL;
 		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
+                                            //L: ce n'est pas juste "init"? que fait elle plus precisement? vaut mieux pas qu¿'elle initiallise une seule fourmi et on le fasse pour chaque fourmi pour ne pas trainer avec un tableau de fourmis?
 
 	   	int iFourmi=0;
-		for(iFourmi=0;iFourmi<1; iFourmi++)   /*pour chaque fourmi*/
-		{		
+		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
+		{
+		    ListeSommet tabu=NULL; //liste de ville parcourue par la fourmi courrante
+            ListeSommet tabuArc=NULL; //idem mais avec les arc qui sont entre les villes
+                                        //L:comme ca depend de l fourmi courante il faut les initialiser pour chaque fourmi
 			//rajouter la ville de départ de la fourmi tabu
 			tabu = ajout_ville(tabu,tabVille,tabFourmi[iFourmi].iVilleDep);
-			
+
 			//tant que le circuit n'est pas bouclé
-			while(tabFourmi[iFourmi].iVilleDep !=	tabFourmi[iFourmi].iVilleCour)			
+			while(tabFourmi[iFourmi].iVilleDep !=	tabFourmi[iFourmi].iVilleCour)
 			{
 				int villeSuiv=-1;
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi].iVilleCour) ],tabVille);
@@ -52,7 +55,7 @@ int main(int argc, char *argv[])
 			visualiser_listeSommet(tabu); //test
 /*			tabuArc = parcours_fourmi(tabFourmi[iFourmi], tabu);
 			visualiser_listeArc(tabuArc); //test
-			
+
 			if(Lchemin(tabuArc)<Lchemin(cheminMin))
 			{
 				lib_fileArc(cheminMin);
@@ -62,10 +65,10 @@ int main(int argc, char *argv[])
 			if(Lchemin(tabuArc)-Lchemin(cheminMin)<0.00000001)
 				printf("Il y a au moins deux solutions possibles");
 */
-		}	   
+		}
 	   //dépot des pheromones
-	   
-	   	    
+
+
 	}
 	//penser à tout free
 }
