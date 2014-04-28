@@ -140,7 +140,7 @@ Fourmi* initFourmi(int nbFourmi, int nbVille)
 	for(i=fin;i<nbFourmi;i++)
 	{
 		tab[i].iVilleDep = rand()%nbVille;
-		tab[i].iVilleCour = -1;
+		tab[i].iVilleCour =tab[i].iVilleDep ;
 		int j=0;
 		for(j=fin;j<i;j++)
 			if(tab[i].iVilleDep==tab[j].iVilleDep)
