@@ -55,7 +55,8 @@ int main(int argc, char *argv[])
 				//printf(" ville suivante %d \n", villeSuiv);//test
 			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
 
-			//visualiser_listeSommet(tabu); //test
+			visualiser_listeSommet(tabu); //test
+			//penser a faire free(tabu)
 /*			tabuArc = parcours_fourmi(tabFourmi[iFourmi], tabu);
 			visualiser_listeArc(tabuArc); //test
 
