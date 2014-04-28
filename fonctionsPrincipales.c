@@ -27,7 +27,7 @@ ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
 
 //n est le nombre total de ville (=nbVille dans le main)
  /* renvoie 1 si la fourmi est passée par la ville de numéro N, 0 si elle est passée
-par toutes les villes et 2 si elle n’est pas encore passée*/   
+par toutes les villes et 2 si elle n’est pas encore passée*/
 int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
 {
 	int i=0; int j=0; ListeSommet p=creer_listeSommet();
@@ -68,8 +68,9 @@ ListeSommet init(ListeSommet* tabu, int nbVille)	//initailise *tabFourmi
 	int boolVille[nbVille]; //tableau statique local
 	int i=0, numVille=0;
 	for(i=0;i<M;i++) //g : est-ce que la constante M est définie à l'intérieur de cette fonction
+                        // L:bah elle ne m'a pas l'air d'etre déclarée ca m'etonne qu elle marche
 	{
-		numVille =rand()%nbVille; 
+		numVille =rand()%nbVille;
 	}
 }
 
@@ -128,7 +129,7 @@ double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                
 	t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
 
 
-	i=ville_parcourue( tabu,s.num,n) ;     
+	i=ville_parcourue( tabu,s.num,n) ;
 	if(i==0) return (t);				/*si toutes les villes sont parcourues renvoit t initialisé à -1*/
 
 	i=0;

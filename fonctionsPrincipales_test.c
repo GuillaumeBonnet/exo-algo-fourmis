@@ -146,9 +146,9 @@ printf("s1= %s s2=%s \n",s1,s2);
 }
 */
 //proba
-/*
-main()
-{char nom_fichier[100]="graphe11.txt";
+
+/*main()
+{char nom_fichier[100]="kroA100.txt";
 int nbvilles=0;
 Sommet* t=NULL;
 remplirTable(nom_fichier,&t,&nbvilles);
@@ -161,6 +161,11 @@ tabu=ajout_ville(tabu,t,2);
 tabu=ajout_ville(tabu,t,1);
 tabu=ajout_ville(tabu,t,0);
 tabu=ajout_ville(tabu,t,4);
+tabu=ajout_ville(tabu,t,49);
+tabu=ajout_ville(tabu,t,48);
+tabu=ajout_ville(tabu,t,45);
+tabu=ajout_ville(tabu,t,23);
+
 double* pro=proba(tabu->val,tabu,t,nbvilles);
 affichedouble(pro,nbvilles);
 ListeArc q=(tabu->val).ListeVoisin;
@@ -172,10 +177,10 @@ while (!est_videArc(q))
     }
 
 int i=ville_next(tabu,nbvilles,t[4],t);
-printf("prochaine ville: %d", i);
+printf("prochaine ville: %d %s %d", (t[i]).num,(t[i]).nom ,i);
 }
 
-
+*/
 
 //parcours fourmi
 
@@ -213,7 +218,7 @@ while (!est_videArc(q))
 */
 
 
-int main()
+/*int main()
 {
 	char nomFichier[100]="graphe11.txt";
 	Sommet* table = NULL; int nbVille = 0;
@@ -230,7 +235,7 @@ int main()
 	}
 	return 1;
 }
-
+*/
 
 
 
