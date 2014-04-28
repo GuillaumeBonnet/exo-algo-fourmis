@@ -218,7 +218,7 @@ while (!est_videArc(q))
 */
 
 
-/*int main()
+/*int main() //test de Lchemin(), comparaisons numériques
 {
 	char nomFichier[100]="graphe11.txt";
 	Sommet* table = NULL; int nbVille = 0;
@@ -236,8 +236,6 @@ while (!est_videArc(q))
 	return 1;
 }
 */
-
-
 
 
 

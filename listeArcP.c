@@ -1,41 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listeArc.h"
+#include "listeArcP.h"
 #include "structure.h"
-//partie qui dépend du du fait que ELEM est un Arc
+//partie qui dépend du du fait que ELEM est un ArcP
 
-void afficheArc(Arc* elem)
+void afficheArcP(Arc* elem)
 {
 	printf("sdep:%d sarr:%d d:%lf to: %lf\n",elem->sdep, elem->sarr, elem->d, elem->to);
 }
 //partie qui dépend du type du champ val - fin
 
-void free_fileArc(ListeArc L)
+void free_fileArcP(ListeArcP L)
 {
-	while(!est_videArc(L))
-		L= supprimer_teteArc(L);		
+	while(!est_videArcP(L))
+		L= supprimer_teteArcP(L);		
 }
 
-ListeArc creer_listeArc(void)
+ListeArcP creer_listeArcP(void)
 {
 	return NULL;
 }
 
-int est_videArc(ListeArc L)
+int est_videArcP(ListeArcP L)
 {
 	return !L; //!pointeurDiffDeNULL = 0 et !NULL=1
 }
 
-void visualiser_listeArc(ListeArc L)
+void visualiser_listeArcP(ListeArcP L)
 {
-	ListeArc Li=NULL;
+	ListeArcP Li=NULL;
 	for(Li=L;Li!=NULL;Li=Li->suiv)
-		afficheArc(&Li->val);
+		afficheArcP(Li->val);
 }
 
-ListeArc ajout_teteArc(Arc elem, ListeArc L)
+ListeArcP ajout_teteArcP(Arc* elem, ListeArcP L)
 {
-	MaillonArc* pc=NULL;
+	MaillonArcP* pc=NULL;
 	pc = calloc(1, sizeof(*pc));
 	if(pc==NULL) return NULL;
 
@@ -46,30 +46,30 @@ ListeArc ajout_teteArc(Arc elem, ListeArc L)
 	return pc;
 }
 
-ListeArc supprimer_teteArc(ListeArc L)
+ListeArcP supprimer_teteArcP(ListeArcP L)
 {
-	if(!est_videArc(L))
+	if(!est_videArcP(L))
 	{
-		ListeArc tmpL = L;
+		ListeArcP tmpL = L;
 		L=L->suiv;
-		free(tmpL);
+		free(tmpL); // to free or not to free?
 		return L;
 	}
 	else
 		return NULL;
 }
 
-ListeArc ajout_queueArc(Arc elem, ListeArc L)
+ListeArcP ajout_queueArcP(Arc* elem, ListeArcP L)
 {
-	MaillonArc* pc=NULL;
+	MaillonArcP* pc=NULL;
 	pc = calloc(1, sizeof(*pc));
 	if(pc==NULL) return NULL;
 
 	pc->val=elem;
 	pc->suiv=NULL;
 
-	MaillonArc* ic=NULL;
-	if(!est_videArc(L))
+	MaillonArcP* ic=NULL;
+	if(!est_videArcP(L))
 	{
 		for(ic=L;ic->suiv!=NULL;ic=ic->suiv){}
 		ic->suiv=pc;
@@ -79,13 +79,13 @@ ListeArc ajout_queueArc(Arc elem, ListeArc L)
 		return pc;
 }
 
-Arc supprimer_queueArc(ListeArc L)
+Arc* supprimer_queueArcP(ListeArcP L)
 {
-	ListeArc ic=NULL;
-	if(!est_videArc(L))
+	ListeArcP ic=NULL;
+	if(!est_videArcP(L))
 	{int i=0;
 		for(ic=L;ic->suiv->suiv!=NULL;ic=ic->suiv){i++;}
-		Arc elem=ic->suiv->val;
+		Arc* elem=ic->suiv->val;
 		free(ic->suiv);
 		ic->suiv=NULL;
 		return elem;
@@ -93,19 +93,19 @@ Arc supprimer_queueArc(ListeArc L)
 }
 
 
-ListeArc supprimenArc(int n, ListeArc L)
+ListeArcP supprimenArcP(int n, ListeArcP L)
 {
 	int i=0;
-	MaillonArc* ipc=L;
+	MaillonArcP* ipc=L;
 	if(n==1)
-		L=supprimer_teteArc(L);
+		L=supprimer_teteArcP(L);
 	else
 	{
 		for(i=1;i<n-1;i++)
 		{
 			ipc=ipc->suiv;
 		}
-		MaillonArc* pcn=ipc->suiv;
+		MaillonArcP* pcn=ipc->suiv;
 		ipc->suiv=ipc->suiv->suiv;
 		free(pcn);
 
@@ -113,23 +113,23 @@ ListeArc supprimenArc(int n, ListeArc L)
 	return L;
 }
 
-ListeArc concatArc(ListeArc l1, ListeArc l2)
+ListeArcP concatArcP(ListeArcP l1, ListeArcP l2)
 {
-	MaillonArc* ic=NULL;
-	ic=copieArc(l1);
-	MaillonArc* retour=ic;
+	MaillonArcP* ic=NULL;
+	ic=copieArcP(l1);
+	MaillonArcP* retour=ic;
 	for(ic;ic->suiv!=NULL;ic=ic->suiv){}
-	ic->suiv=copieArc(l2);
+	ic->suiv=copieArcP(l2);
 
 	return retour;
 }
 
-ListeArc copieArc(ListeArc l)
+ListeArcP copieArcP(ListeArcP l)
 {
-	MaillonArc* im=NULL;
-	MaillonArc* ip=NULL;
-	ListeArc retour=NULL;
-	if(!est_videArc(l))
+	MaillonArcP* im=NULL;
+	MaillonArcP* ip=NULL;
+	ListeArcP retour=NULL;
+	if(!est_videArcP(l))
 	{
 		retour=calloc(1,sizeof(*retour));
 		ip=retour;

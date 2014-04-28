@@ -4,36 +4,35 @@
 #include "listeArc.h"
 //partie qui dépend du du fait que ELEM est un Arc
 
-void afficheSommet(Sommet* elem)
+void afficheSommetP(Sommet* elem)
 {
 	ListeArc q=elem->ListeVoisin;
 	printf("num:%d nom:%s x:%lf y:%lf \n",elem->num, elem->nom, elem->x,elem->y);
 	printf("Liste des arcs voisins: \n{\n"); visualiser_listeArc(elem->ListeVoisin); printf("}\n");
 	
 }
-
 //partie qui dépend du type du champ val - fin
 
-ListeSommet creer_listeSommet(void)
+ListeSommetP creer_listeSommetP(void)
 {
 	return NULL;
 }
 
-int est_videSommet(ListeSommet L)
+int est_videSommetP(ListeSommetP L)
 {
 	return !L; //!pointeurDiffDeNULL = 0 et !NULL=1
 }
 
-void visualiser_listeSommet(ListeSommet L)
+void visualiser_listeSommetP(ListeSommetP L)
 {
-	ListeSommet Li=NULL;
+	ListeSommetP Li=NULL;
 	for(Li=L;Li!=NULL;Li=Li->suiv)
-		afficheSommet(&Li->val);
+		afficheSommetP(Li->val);
 }
 
-ListeSommet ajout_teteSommet(Sommet elem, ListeSommet L)
+ListeSommetP ajout_teteSommetP(Sommet* elem, ListeSommetP L)
 {
-	MaillonSommet* pc=NULL;
+	MaillonSommetP* pc=NULL;
 	pc = calloc(1, sizeof(*pc));
 	if(pc==NULL) return NULL;
 
@@ -44,11 +43,11 @@ ListeSommet ajout_teteSommet(Sommet elem, ListeSommet L)
 	return pc;
 }
 
-ListeSommet supprimer_teteSommet(ListeSommet L)
+ListeSommetP supprimer_teteSommetP(ListeSommetP L)
 {
-	if(!est_videSommet(L))
+	if(!est_videSommetP(L))
 	{
-		ListeSommet tmpL = L;
+		ListeSommetP tmpL = L;
 		L=L->suiv;
 		free(tmpL); // to free or not to free?
 		return L;
@@ -57,17 +56,17 @@ ListeSommet supprimer_teteSommet(ListeSommet L)
 		return NULL;
 }
 
-ListeSommet ajout_queueSommet(Sommet elem, ListeSommet L)
+ListeSommetP ajout_queueSommetP(Sommet* elem, ListeSommetP L)
 {
-	MaillonSommet* pc=NULL;
+	MaillonSommetP* pc=NULL;
 	pc = calloc(1, sizeof(*pc));
 	if(pc==NULL) return NULL;
 
 	pc->val=elem;
 	pc->suiv=NULL;
 
-	MaillonSommet* ic=NULL;
-	if(!est_videSommet(L))
+	MaillonSommetP* ic=NULL;
+	if(!est_videSommetP(L))
 	{
 		for(ic=L;ic->suiv!=NULL;ic=ic->suiv){}
 		ic->suiv=pc;
@@ -77,13 +76,13 @@ ListeSommet ajout_queueSommet(Sommet elem, ListeSommet L)
 		return pc;
 }
 
-Sommet supprimer_queueSommet(ListeSommet L)
+Sommet* supprimer_queueSommetP(ListeSommetP L)
 {
-	ListeSommet ic=NULL;
-	if(!est_videSommet(L))
+	ListeSommetP ic=NULL;
+	if(!est_videSommetP(L))
 	{int i=0;
 		for(ic=L;ic->suiv->suiv!=NULL;ic=ic->suiv){i++;}
-		Sommet elem=ic->suiv->val;
+		Sommet* elem=ic->suiv->val;
 		free(ic->suiv);
 		ic->suiv=NULL;
 		return elem;
@@ -91,19 +90,19 @@ Sommet supprimer_queueSommet(ListeSommet L)
 }
 
 
-ListeSommet supprimenSommet(int n, ListeSommet L)
+ListeSommetP supprimenSommetP(int n, ListeSommetP L)
 {
 	int i=0;
-	MaillonSommet* ipc=L;
+	MaillonSommetP* ipc=L;
 	if(n==1)
-		L=supprimer_teteSommet(L);
+		L=supprimer_teteSommetP(L);
 	else
 	{
 		for(i=1;i<n-1;i++)
 		{
 			ipc=ipc->suiv;
 		}
-		MaillonSommet* pcn=ipc->suiv;
+		MaillonSommetP* pcn=ipc->suiv;
 		ipc->suiv=ipc->suiv->suiv;
 		free(pcn);
 
@@ -113,12 +112,12 @@ ListeSommet supprimenSommet(int n, ListeSommet L)
 
 
 
-ListeSommet copieSommet(ListeSommet l)
+ListeSommetP copieSommetP(ListeSommetP l)
 {
-	MaillonSommet* im=NULL;
-	MaillonSommet* ip=NULL;
-	ListeSommet retour=NULL;
-	if(!est_videSommet(l))
+	MaillonSommetP* im=NULL;
+	MaillonSommetP* ip=NULL;
+	ListeSommetP retour=NULL;
+	if(!est_videSommetP(l))
 	{
 		retour=calloc(1,sizeof(*retour));
 		ip=retour;
@@ -137,19 +136,18 @@ ListeSommet copieSommet(ListeSommet l)
 	}
 }
 
-ListeSommet concatSommet(ListeSommet l1, ListeSommet l2)
+ListeSommetP concatSommetP(ListeSommetP l1, ListeSommetP l2)
 {
-	MaillonSommet* ic=NULL;
-	ic=copieSommet(l1);
-	MaillonSommet* retour=ic;
+	MaillonSommetP* ic=NULL;
+	ic=copieSommetP(l1);
+	MaillonSommetP* retour=ic;
 	for(ic;ic->suiv!=NULL;ic=ic->suiv){}
-	ic->suiv=copieSommet(l2);
+	ic->suiv=copieSommetP(l2);
 
 	return retour;
 }
-
-void free_fileSommet(ListeSommet L)
+void free_fileSommetP(ListeSommetP L)
 {
-	while(!est_videSommet(L))
-		L= supprimer_teteSommet(L);		
+	while(!est_videSommetP(L))
+		L = supprimer_teteSommetP(L);		
 }

@@ -3,9 +3,6 @@
 
 #include "structure.h"
 
-
-
-
 void afficheSommet(Sommet* elem);
 ListeSommet creer_listeSommet(void);
 int est_videSommet(ListeSommet L);
@@ -17,7 +14,7 @@ Sommet supprimer_queueSommet(ListeSommet L);
 ListeSommet supprimenSommet(int n, ListeSommet l);
 ListeSommet concatSommet(ListeSommet l1, ListeSommet l2);
 ListeSommet copieSommet(ListeSommet l);
-
+void free_fileSommet(ListeSommet L);
 
 
 

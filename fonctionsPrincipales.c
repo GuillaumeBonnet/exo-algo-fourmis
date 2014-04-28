@@ -7,6 +7,8 @@
 #include "structure.h"
 #include "listeSommet.h"
 #include "listeArc.h"
+#include "listeSommetP.h"
+#include "listeArcP.h"
 
 
 
@@ -28,18 +30,18 @@ ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
 //n est le nombre total de ville (=nbVille dans le main)
  /* renvoie 1 si la fourmi est passée par la ville de numéro N, 0 si elle est passée
 par toutes les villes et 2 si elle n’est pas encore passée*/
-int ville_parcourue(ListeSommet tabu, int N,int n)  //ok
+int ville_parcourue(ListeSommetP tabu, int N,int n)  //ok
 {
-	int i=0; int j=0; ListeSommet p=creer_listeSommet();
+	int i=0; int j=0; ListeSommetP p=NULL;
 
-	if (est_videSommet(tabu))
+	if (est_videSommetP(tabu))
 		return(2);
 
 	p=tabu;
-	while (!est_videSommet(p))
+	while (!est_videSommetP(p))
 	{
 		 i=i+1;
-		 if((p->val).num==N) j=1;
+		 if(p->val->num==N) j=1;
 		 p=p->suiv;
 	}
 
@@ -105,13 +107,13 @@ void affichedouble(double* t,int n)
 }
 
 
-double* probatabu(double* t,ListeSommet tabu)
+double* probatabu(double* t,ListeSommetP tabu)
 {
-	ListeSommet p=creer_listeSommet();
+	ListeSommetP p=NULL;
 	p=tabu;
-	while (!est_videSommet(p)) /*si la ville est dans tabu proba=0*/
+	while (!est_videSommetP(p)) /*si la ville est dans tabu proba=0*/
 	{
-		t[((p->val).num)]=0;
+		t[(p->val->num)]=0;
 		p=p->suiv;
 	}
 
@@ -120,7 +122,7 @@ double* probatabu(double* t,ListeSommet tabu)
 
 
 
-double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                    /*non testée*/
+double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)                    /*non testée*/
 {
 	double* t;int i=0;
 	ListeArc q=creer_listeArc();
@@ -174,7 +176,7 @@ double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n)                
 
 
 
-int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)   //n est le nombre de villes total
+int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes)   //n est le nombre de villes total
 {
 	double* t=proba(s, tabu,villes, n);
 	int i=0; int N=0; double p=0;
@@ -182,10 +184,10 @@ int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)   //n est le n
 	if (t[0]==-1)
 	{
 		int j=0;
-		ListeSommet q=tabu;
-		while(!est_videSommet(q))
+		ListeSommetP q=tabu;
+		while(!est_videSommetP(q))
 		{
-			j=(q->val).num;
+			j=q->val->num;
 			q=q->suiv;
 		}
 		return (j);
@@ -204,21 +206,21 @@ int ville_next (ListeSommet tabu,int n, Sommet s, Sommet* villes)   //n est le n
 
 
 
-ListeArc parcours_fourmi(Fourmi f, ListeSommet tabu)
+ListeArcP parcours_fourmi(Fourmi f, ListeSommetP tabu)
 {
 	ListeArc q=creer_listeArc();   int Narr=0;
 
-	if (est_videSommet(tabu)) return(f.solution);
-	if (est_videSommet (tabu->suiv))return(f.solution);
+	if (est_videSommetP(tabu)) return(f.solution);
+	if (est_videSommetP (tabu->suiv))return(f.solution);
 
-	Narr=(tabu->val).num;
-	q=(((tabu->suiv)->val).ListeVoisin);
+	Narr=tabu->val->num;
+	q=((tabu->suiv)->val->ListeVoisin);
 
 	while(!est_videArc(q))
 	{
-		if((q->val).sarr==Narr)
+		if(q->val.sarr==Narr)
 		{
-			f.solution=ajout_teteArc(q->val,f.solution);
+			f.solution=ajout_teteArcP(&(q->val),f.solution);
 		}
 		q=q->suiv;
 	}
@@ -226,28 +228,36 @@ ListeArc parcours_fourmi(Fourmi f, ListeSommet tabu)
 	f.solution=parcours_fourmi(f,tabu->suiv);
 }
 
-double Lchemin(ListeArc tabuArc)//testé numériquement 28/04
+double Lchemin(ListeArcP tabuArc)//testé numériquement 28/04
 {
-	ListeArc iL=NULL; double somme=0;
+	if(est_videArcP(tabuArc)) return 1000000000000000000;	//utile au début quand cheminMin est vide
+	ListeArcP iL=NULL; double somme=0;
 	for(iL=tabuArc;iL!=NULL;iL=iL->suiv)
 	{
-		somme+=iL->val.d;
+		somme+=iL->val->d;
 	}
 	return somme;
-
+}
+void evapPheromone(Sommet* tabVille, int nbVille) //testée numériquement le 28/02
+{
+	int i=0; ListeArc iL=NULL;
+	for(i=0;i<nbVille;i++)
+	{
+		for(iL=tabVille[i].ListeVoisin;iL!=NULL;iL=iL->suiv)
+			iL->val.to*=RHO;
+	}
 }
 
 void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 {
 	int i=0;	
-	double dTo = Q/Lchemin(tabFourmi[i].solution);
-	ListeArc iL=NULL;
+	ListeArcP iL=NULL;
 	for(i=0;i<nbFourmi;i++)
 	{	
-		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)//idéalement : chaque liste solution ne contient que des pointeurs qui pointent vers les listes contenues dans tabVille. Donc les changements seffectuent dans tabVille.
+		double dTo = Q/Lchemin(tabFourmi[i].solution);
+		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)
 		{
-			iL->val.to = RHO * iL->val.to + dTo ;//pas bon je pense.
+			iL->val->to += dTo;
 		}
 	}
-}//g : vérifier portée des constantes
-
+}

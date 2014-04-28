@@ -7,6 +7,7 @@
 
 
 void afficheArc(Arc* elem);
+void free_fileArc(ListeArc L);
 ListeArc creer_listeArc(void);
 int est_videArc(ListeArc L );
 void visualiser_listeArc(ListeArc L );

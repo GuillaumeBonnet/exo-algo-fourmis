@@ -1,14 +1,14 @@
 CFLAGS=-c -g
 LFLAGS= -lm -lSDL
 
-all : algorithmeGeneral fonctionPrincipale_test readGraph_test listeArc_test
+all : algorithmeGeneral fonctionsPrincipales_test readGraph_test listeArc_test
 
-algorithmeGeneral : algorithmeGeneral.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
+algorithmeGeneral : algorithmeGeneral.o listeSommetP.o listeArcP.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-fonctionsPrincipales_test : fonctionsPrincipales_test.o fonctionsPrincipales.o listeArc.o listeSommet.o
+fonctionsPrincipales_test : fonctionsPrincipales_test.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
