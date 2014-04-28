@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 		{
 		    ListeSommet tabu=NULL; //liste de ville parcourue par la fourmi courrante
             ListeSommet tabuArc=NULL; //idem mais avec les arc qui sont entre les villes
-                                        //L:comme ca depend de l fourmi courante il faut les initialiser pour chaque fourmi
+                                        //L:comme ca depend de la fourmi courante il faut les initialiser pour chaque fourmi
 			//rajouter la ville de départ de la fourmi tabu
 			tabu = ajout_ville(tabu,tabVille,tabFourmi[iFourmi].iVilleDep);
 
@@ -47,15 +47,15 @@ int main(int argc, char *argv[])
 			do  //j'ai changé parce qu'au début la ville courante et la ville de départ sont les memes
 			{
 				int villeSuiv=-1;
-				printf(" ville courante %d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);
+				//printf(" ville courante %d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);//test
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_ville(tabu, tabVille, villeSuiv);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-				printf(" ville suivante %d \n", villeSuiv);
+				//printf(" ville suivante %d \n", villeSuiv);//test
 			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
 
-			visualiser_listeSommet(tabu); //test
+			//visualiser_listeSommet(tabu); //test
 /*			tabuArc = parcours_fourmi(tabFourmi[iFourmi], tabu);
 			visualiser_listeArc(tabuArc); //test
 
