@@ -47,12 +47,12 @@ int main(int argc, char *argv[])
 			do  //j'ai changé parce qu'au début la ville courante et la ville de départ sont les memes
 			{
 				int villeSuiv=-1;
-				//printf(" ville courante %d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);//test
+				printf(" ville courante %d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);//test
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_ville(tabu, tabVille, villeSuiv);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-				//printf(" ville suivante %d \n", villeSuiv);//test
+				printf(" ville suivante %d \n", villeSuiv);//test
 			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
 
 			visualiser_listeSommet(tabu); //test
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 				tabuArc=NULL;
 			}
 			if(Lchemin(tabuArc)-Lchemin(cheminMin)<0.00000001)
-				printf("Il y a au moins deux solutions possibles");
+				printf("Il y a au moins deux solutions possibles"); L:pourquoi?
 */
 		}
 	   //dépot des pheromones
