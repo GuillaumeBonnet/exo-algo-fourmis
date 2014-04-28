@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1398067859 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.c
+1398669083 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -10,19 +10,23 @@
 
 1398066360 c:\users\wiche\documents\github\exo-algo-fourmis\structure.h
 
-1398069038 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales_test.c
+1398667730 source:c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales_test.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	"structure.h"
 	"fonctionsPrincipales.h"
 	"readGraph.h"
+	"listeArc.h"
+	"listeSommet.h"
 
-1398067943 c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.h
+1398665648 c:\users\wiche\documents\github\exo-algo-fourmis\fonctionsprincipales.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	"structure.h"
+	"listeSommet.h"
+	"listeArc.h"
 
 1398066360 c:\users\wiche\documents\github\exo-algo-fourmis\readgraph.h
 	"structure.h"
@@ -33,7 +37,7 @@
 	"readGraph.h"
 	"structure.h"
 
-1398069954 source:c:\users\wiche\documents\github\exo-algo-fourmis\readgraph.c
+1398671765 source:c:\users\wiche\documents\github\exo-algo-fourmis\readgraph.c
 	<stdio.h>
 	<stdlib.h>
 	"readGraph.h"
@@ -53,9 +57,16 @@
 	"listeArc.h"
 	"structure.h"
 
-1398069904 source:c:\users\wiche\documents\github\exo-algo-fourmis\listesommet.c
+1398665648 source:c:\users\wiche\documents\github\exo-algo-fourmis\listesommet.c
 	<stdio.h>
 	<stdlib.h>
 	"structure.h"
 	"listeArc.h"
+
+1398672784 source:c:\users\wiche\documents\github\exo-algo-fourmis\algorithmegeneral.c
+	<stdio.h>
+	<stdlib.h>
+	"structure.h"
+	"readGraph.h"
+	"fonctionsPrincipales.h"
 

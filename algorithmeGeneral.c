@@ -20,14 +20,13 @@
 int main(int argc, char *argv[])
 {
 
-	
+
 
 	char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0;
-	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier	
+	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArc cheminMin=NULL; //Le chemin le plus court
-	ListeSommet tabu=NULL; //liste de ville parcourue par la fourmi courrante
-	ListeSommet tabuArc=NULL; //idem mais avec les arc qui sont entre les villes
+
 
 	int iCycle=0;
 	for(iCycle = MAX_CYCLE-1;iCycle<MAX_CYCLE;iCycle++)
@@ -36,23 +35,31 @@ int main(int argc, char *argv[])
 		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
 
 	   	int iFourmi=0;
-		for(iFourmi=0;iFourmi<1; iFourmi++)   /*pour chaque fourmi*/
-		{		
+		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
+		{
+		    ListeSommet tabu=NULL; //liste de ville parcourue par la fourmi courrante
+            ListeSommet tabuArc=NULL; //idem mais avec les arc qui sont entre les villes
+                                        //L:comme ca depend de la fourmi courante il faut les initialiser pour chaque fourmi
 			//rajouter la ville de départ de la fourmi tabu
 			tabu = ajout_ville(tabu,tabVille,tabFourmi[iFourmi].iVilleDep);
-			
+
 			//tant que le circuit n'est pas bouclé
-			while(tabFourmi[iFourmi].iVilleDep !=	tabFourmi[iFourmi].iVilleCour)			
+			do  //j'ai changé parce qu'au début la ville courante et la ville de départ sont les memes
 			{
 				int villeSuiv=-1;
-				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi].iVilleCour) ],tabVille);
+				printf(" ville courante %d \n", tabVille[ (tabFourmi[iFourmi]).iVilleCour ]);//test
+				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
+				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_ville(tabu, tabVille, villeSuiv);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-			}
+				printf(" ville suivante %d \n", villeSuiv);//test
+			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
+
 			visualiser_listeSommet(tabu); //test
+			//penser a faire free(tabu)
 /*			tabuArc = parcours_fourmi(tabFourmi[iFourmi], tabu);
 			visualiser_listeArc(tabuArc); //test
-			
+
 			if(Lchemin(tabuArc)<Lchemin(cheminMin))
 			{
 				lib_fileArc(cheminMin);
@@ -60,12 +67,12 @@ int main(int argc, char *argv[])
 				tabuArc=NULL;
 			}
 			if(Lchemin(tabuArc)-Lchemin(cheminMin)<0.00000001)
-				printf("Il y a au moins deux solutions possibles");
+				printf("Il y a au moins deux solutions possibles"); L:pourquoi?
 */
-		}	   
+		}
 	   //dépot des pheromones
-	   
-	   	    
+
+
 	}
 	//penser à tout free
 }
