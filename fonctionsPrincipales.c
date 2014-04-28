@@ -225,7 +225,7 @@ ListeArc parcours_fourmi(Fourmi f, ListeSommet tabu)
 	f.solution=parcours_fourmi(f,tabu->suiv);
 }
 
-double Lchemin(ListeArc tabuArc)
+double Lchemin(ListeArc tabuArc)//testé numériquement 28/04
 {
 	ListeArc iL=NULL; double somme=0;
 	for(iL=tabuArc;iL!=NULL;iL=iL->suiv)
@@ -235,14 +235,18 @@ double Lchemin(ListeArc tabuArc)
 	return somme;
 
 }
-/*
-void depotPheromone(ListeSommet tabu, Arc** table)//TO DO : maj new table
+
+void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 {
-	double dTo = Q/Lchemin(tabu, table);
-	ListeSommet iL=NULL;
-	for(iL=tabu;iL->suiv!=NULL;iL=iL->suiv)
-	{
-		table[iL->val.num][iL->suiv->val.num].to=RHO * table[iL->val.num][iL->suiv->val.num].to + dTo ;
+	int i=0;	
+	double dTo = Q/Lchemin(tabFourmi[i].solution);
+	ListeArc iL=NULL;
+	for(i=0;i<nbFourmi;i++)
+	{	
+		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)//idéalement : chaque liste solution ne contient que des pointeurs qui pointent vers les listes contenues dans tabVille. Donc les changements seffectuent dans tabVille.
+		{
+			iL->val.to = RHO * iL->val.to + dTo ;//pas bon je pense.
+		}
 	}
 }//g : vérifier portée des constantes
-*/
+
