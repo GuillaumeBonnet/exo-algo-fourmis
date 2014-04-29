@@ -64,17 +64,6 @@ int ville_parcourue(ListeSommetP tabu, int N,int n)  //ok
 	return (p);
 }
 
-//g  : j'ai écrit cette fonction dans readGraph.c
-ListeSommet init(ListeSommet* tabu, int nbVille)	//initailise *tabFourmi
-{
-	int boolVille[nbVille]; //tableau statique local
-	int i=0, numVille=0;
-	for(i=0;i<M;i++) //g : est-ce que la constante M est définie à l'intérieur de cette fonction
-                        // L:bah elle ne m'a pas l'air d'etre déclarée ca m'etonne qu elle marche
-	{
-		numVille =rand()%nbVille;
-	}
-}
 
 
 void afficheListeSommet(ListeSommet tabu)
@@ -210,6 +199,7 @@ ListeArcP parcours_fourmi(Fourmi f, ListeSommetP tabu)
 {
 	ListeArc q=creer_listeArc();   int Narr=0;
 
+
 	if (est_videSommetP(tabu)) return(f.solution);
 	if (est_videSommetP (tabu->suiv))return(f.solution);
 
@@ -226,6 +216,8 @@ ListeArcP parcours_fourmi(Fourmi f, ListeSommetP tabu)
 	}
 
 	f.solution=parcours_fourmi(f,tabu->suiv);
+
+return(f.solution);
 }
 
 double Lchemin(ListeArcP tabuArc)//testé numériquement 28/04
@@ -250,10 +242,10 @@ void evapPheromone(Sommet* tabVille, int nbVille) //testée numériquement le 28
 
 void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 {
-	int i=0;	
+	int i=0;
 	ListeArcP iL=NULL;
 	for(i=0;i<nbFourmi;i++)
-	{	
+	{
 		double dTo = Q/Lchemin(tabFourmi[i].solution);
 		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)
 		{

@@ -31,51 +31,57 @@ int main(int argc, char *argv[])
 
 
 	int iCycle=0;
-	for(iCycle = MAX_CYCLE-2;iCycle<MAX_CYCLE;iCycle++)
-	{
+	for(iCycle = 0;iCycle<MAX_CYCLE;iCycle++)
+	{printf("Cycle: %d \n",iCycle);
 		Fourmi* tabFourmi=NULL;
 		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
 
 	   	int iFourmi=0;
 		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
 		{
-			ListeSommetP tabu=NULL; //liste de pointeurs sur  des villes parcourues par la fourmi courrante	
+			ListeSommetP tabu=NULL; //liste de pointeurs sur  des villes parcourues par la fourmi courrante
                                         //L:comme ca depend de la fourmi courante il faut les initialiser pour chaque fourmi
 			//rajouter la ville de départ de la fourmi tabu
 			tabu = ajout_teteSommetP(&tabVille[ (tabFourmi[iFourmi].iVilleDep) ], tabu);
 			//tant que le circuit n'est pas bouclé
-			do  
-			{
-				int villeSuiv=-1;				
+			printf("Fourmi %d \n", iFourmi);
+			do
+			{printf("ville courante %d \n",tabFourmi[iFourmi].iVilleCour);
+				int villeSuiv=-1;
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
+				printf("ville suivante %d \n",villeSuiv);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-				
+
 			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
+
+               tabu=ajout_teteSommetP(&(tabVille[(tabFourmi[iFourmi]).iVilleDep]), tabu);//On rajoute la ville de départ pour faire un parcours fermé
+
 			tabFourmi[iFourmi].solution = parcours_fourmi(tabFourmi[iFourmi], tabu);
+
 			if(Lchemin(tabFourmi[iFourmi].solution)<Lchemin(cheminMin))
 			{
 				free_fileArcP(cheminMin);
 				cheminMin=tabFourmi[iFourmi].solution;
-			}			
-			
+			}
+
 		}//boucle fourmis
-		visualiser_listeArcP(cheminMin);			
+		visualiser_listeArcP(cheminMin);
 		printf("====================================\n");
 		evapPheromone(tabVille, nbVille);
 		depotPheromone(tabFourmi, M);
-		
-		//phéromones : 
-		
+
+		//phéromones :
+
 /*		int i=0;
 		for(i=0;i<nbVille;i++)
 		{
 			afficheSommet(&tabVille[i]);
 			printf("\n");
 		}
-*/	
-	
+*/
+
 	}//boucle cycles
 
 	//penser à tout free
