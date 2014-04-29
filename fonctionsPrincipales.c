@@ -249,7 +249,7 @@ void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 		double dTo = Q/Lchemin(tabFourmi[i].solution);
 		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)
 		{
-			iL->val->to += dTo;
+			iL->val->to = iL->val->to + dTo;
 		}
 	}
 }
