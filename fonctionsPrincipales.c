@@ -225,10 +225,10 @@ double Lchemin(ListeArcP tabuArc)//testé numériquement 28/04
 	if(est_videArcP(tabuArc)) return 1000000000000000000;	//utile au début quand cheminMin est vide
 	ListeArcP iL=NULL; double somme=0;
 	iL=tabuArc;
-	for(iL=tabuArc;iL!=NULL;iL=iL->suiv)
+	while(!est_videArcP(iL))
 	{
 		somme= somme +(iL->val)->d;
-
+       iL=iL->suiv;
 	}
 	return somme;
 }
@@ -236,9 +236,11 @@ void evapPheromone(Sommet* tabVille, int nbVille) //testée numériquement le 28
 {
 	int i=0; ListeArc iL=NULL;
 	for(i=0;i<nbVille;i++)
-	{
-		for(iL=tabVille[i].ListeVoisin;iL!=NULL;iL=iL->suiv)
-			iL->val.to*=RHO;
+	{iL=tabVille[i].ListeVoisin;
+		while(!est_videArc(iL))
+			{iL->val.to*=RHO;
+			iL=iL->suiv;
+			}
 	}
 }
 
@@ -249,11 +251,11 @@ void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 
 	for(i=0;i<nbFourmi;i++)
 	{
-		double dTo = Q/Lchemin(tabFourmi[i].solution);
-		printf("ok");
+		double dTo = Q/Lchemin((tabFourmi[i]).solution);
+
 		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)
 		{
-			iL->val->to = iL->val->to + dTo;
+			iL->val->to +=  dTo;
 		}
 	}
 }

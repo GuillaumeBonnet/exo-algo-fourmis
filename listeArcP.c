@@ -10,11 +10,7 @@ void afficheArcP(Arc* elem)
 }
 //partie qui dépend du type du champ val - fin
 
-void free_fileArcP(ListeArcP L)
-{
-	while(!est_videArcP(L))
-		L= supprimer_teteArcP(L);		
-}
+
 
 ListeArcP creer_listeArcP(void)
 {
@@ -146,7 +142,12 @@ ListeArcP copieArcP(ListeArcP l)
 			ip->suiv=NULL;
 		return retour;
 	}
+	return retour;
 }
 
 
-
+void free_listeArcP(ListeArcP L)
+{
+	while(!est_videArcP(L))
+		L= supprimer_teteArcP(L);
+}

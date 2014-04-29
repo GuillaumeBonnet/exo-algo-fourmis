@@ -10,13 +10,13 @@
 
 
 /*=========constantes=======*/
-#define M 6 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
+#define M 10 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
 #define RHO 0.5 //coef d'évaporation des phéromones
 #define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
-#define MAX_CYCLE 1 //Constante, nombre maximum de cycles autorisés.
+#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
 /*=========constantes - fin====*/
 
 int main(int argc, char *argv[])
@@ -24,15 +24,15 @@ int main(int argc, char *argv[])
 
 
 
-	char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
-	Sommet* tabVille = NULL; int nbVille = 0;
+	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
+	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0;
 	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
 
 
 	int iCycle=0;
 	for(iCycle = 0;iCycle<MAX_CYCLE;iCycle++)
-	{printf("Cycle: %d \n",iCycle);
+	{
 		Fourmi* tabFourmi=NULL;
 		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
 
@@ -40,11 +40,11 @@ int main(int argc, char *argv[])
 		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
 		{
 			ListeSommetP tabu=NULL; //liste de pointeurs sur  des villes parcourues par la fourmi courrante
-                                        //L:comme ca depend de la fourmi courante il faut les initialiser pour chaque fourmi
+
 			//rajouter la ville de départ de la fourmi tabu
 			tabu = ajout_teteSommetP(&tabVille[ (tabFourmi[iFourmi].iVilleDep) ], tabu);
 			//tant que le circuit n'est pas bouclé
-			printf("Fourmi %d \n", iFourmi);
+
 			do
 			{
 				int villeSuiv=-1;
@@ -59,32 +59,35 @@ int main(int argc, char *argv[])
 
 			tabFourmi[iFourmi].solution = parcours_fourmi(tabFourmi[iFourmi], tabu);
 
+            free_listeSommetP(tabu);
+
 			if(Lchemin(tabFourmi[iFourmi].solution)<Lchemin(cheminMin))
 			{
-				free_fileArcP(cheminMin);
-				cheminMin=tabFourmi[iFourmi].solution;
+
+				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
 			}
 
 		}//boucle fourmis
-		visualiser_listeArcP(cheminMin);
-		printf("====================================\n");
+
 		evapPheromone(tabVille, nbVille);
 		depotPheromone(tabFourmi, M);
 
-		//phéromones :
-
-/*		int i=0;
-		for(i=0;i<nbVille;i++)
-		{
-			afficheSommet(&tabVille[i]);
-			printf("\n");
-		}
-*/
+        for(iFourmi=0;iFourmi<M;iFourmi++)
+        {free_listeArcP(tabFourmi[iFourmi].solution);
+        }
+        free(tabFourmi);
 
 	}//boucle cycles
 
-	//penser à tout free
 
+visualiser_listeArcP(cheminMin);
+printf("chemin le plus court: %lf", Lchemin(cheminMin));
 
+//penser à tout free
+
+for(iVille=0;iVille<nbVille;iVille++)
+{free_listeArc(tabVille[iVille].ListeVoisin);
+}
+free(tabVille);
 }
 

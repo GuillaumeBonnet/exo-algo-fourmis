@@ -9,7 +9,7 @@ void afficheSommetP(Sommet* elem)
 	ListeArc q=elem->ListeVoisin;
 	printf("num:%d nom:%s x:%lf y:%lf \n",elem->num, elem->nom, elem->x,elem->y);
 	printf("Liste des arcs voisins: \n{\n"); visualiser_listeArc(elem->ListeVoisin); printf("}\n");
-	
+
 }
 //partie qui dépend du type du champ val - fin
 
@@ -146,8 +146,8 @@ ListeSommetP concatSommetP(ListeSommetP l1, ListeSommetP l2)
 
 	return retour;
 }
-void free_fileSommetP(ListeSommetP L)
+void free_listeSommetP(ListeSommetP L)
 {
 	while(!est_videSommetP(L))
-		L = supprimer_teteSommetP(L);		
+		L = supprimer_teteSommetP(L);
 }

@@ -10,10 +10,10 @@ void afficheArc(Arc* elem)
 }
 //partie qui dépend du type du champ val - fin
 
-void free_fileArc(ListeArc L)
+void free_listeArc(ListeArc L)
 {
 	while(!est_videArc(L))
-		L= supprimer_teteArc(L);		
+		L= supprimer_teteArc(L);
 }
 
 ListeArc creer_listeArc(void)

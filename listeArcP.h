@@ -7,7 +7,7 @@
 
 
 void afficheArcP(Arc* elem);
-void free_fileArcP(ListeArcP L);
+void free_listeArcP(ListeArcP L);
 ListeArcP creer_listeArcP(void);
 int est_videArcP(ListeArcP L );
 void visualiser_listeArcP(ListeArcP L );

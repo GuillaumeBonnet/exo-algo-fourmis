@@ -17,7 +17,7 @@ Sommet* supprimer_queueSommetP(ListeSommetP L);
 ListeSommetP supprimenSommetP(int n, ListeSommetP l);
 ListeSommetP concatSommetP(ListeSommetP l1, ListeSommetP l2);
 ListeSommetP copieSommetP(ListeSommetP l);
-void free_fileSommetP(ListeSommetP L);
+void free_listeSommetP(ListeSommetP L);
 
 
 
