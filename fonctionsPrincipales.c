@@ -28,8 +28,8 @@ ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
 }
 
 //n est le nombre total de ville (=nbVille dans le main)
- /* renvoie 1 si la fourmi est passÃ©e par la ville de numÃ©ro N, 0 si elle est passÃ©e
-par toutes les villes et 2 si elle nâ€™est pas encore passÃ©e*/
+ /* renvoie 1 si la fourmi est passée par la ville de numéro N, 0 si elle est passée
+par toutes les villes et 2 si elle n’est pas encore passée*/
 int ville_parcourue(ListeSommetP tabu, int N,int n)  //ok
 {
 	int i=0; int j=0; ListeSommetP p=NULL;
@@ -81,7 +81,7 @@ double* initialisation(int n)
 {
 	double* t; int i=0;
 
-	t=calloc(n, sizeof(*t));        /*on crÃ©e le tableau et on lâ€™initialise Ã  -1*/
+	t=calloc(n, sizeof(*t));        /*on crée le tableau et on l’initialise à -1*/
 	if (t==NULL) return (NULL);
 	for (i=0; i<n; i++)
 		t[i]=-1;
@@ -111,17 +111,17 @@ double* probatabu(double* t,ListeSommetP tabu)
 
 
 
-double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)                    /*non testÃ©e*/
+double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)                    /*non testée*/
 {
 	double* t;int i=0;
 	ListeArc q=creer_listeArc();
 	double somme=0;
 
-	t=initialisation(n);        /*on crÃ©e le tableau et on lâ€™initialise Ã  -1*/
+	t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
 
 
 	i=ville_parcourue( tabu,s.num,n) ;
-	if(i==0) return (t);				/*si toutes les villes sont parcourues renvoit t initialisÃ© Ã  -1*/
+	if(i==0) return (t);				/*si toutes les villes sont parcourues renvoit t initialisé à -1*/
 
 	i=0;
 
@@ -130,7 +130,7 @@ double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)               
 
 	/*si elle est dans les arcs voisins et*/
 	/*pas dans tabu on place la
-	pondÃ©ration correspondante et on fait la somme terme a terme*/
+	pondération correspondante et on fait la somme terme a terme*/
 
 	q=s.ListeVoisin;
 
@@ -157,7 +157,7 @@ double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)               
 		if(t[i]<0) /*pour les villes non voisines et non parcourrues
 		p=0 aussi*/
 		t[i]=0;
-		t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondÃ©rations*/
+		t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondérations*/
 	}
 	return(t);
 }
@@ -170,6 +170,7 @@ int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes)   //n est le 
 	double* t=proba(s, tabu,villes, n);
 	int i=0; int N=0; double p=0;
 	if (t==NULL) return (-1);
+
 	if (t[0]==-1)
 	{
 		int j=0;
@@ -179,6 +180,7 @@ int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes)   //n est le 
 			j=q->val->num;
 			q=q->suiv;
 		}
+		free(t);
 		return (j);
 	}
 	for (i=0; i<n; i++)
@@ -188,6 +190,7 @@ int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes)   //n est le 
 			p=t[i]; N=i;
 		}
 	}
+	free(t);
     	return(N);
 }
 
@@ -220,9 +223,9 @@ ListeArcP parcours_fourmi(Fourmi f, ListeSommetP tabu)
 return(f.solution);
 }
 
-double Lchemin(ListeArcP tabuArc)//testÃ© numÃ©riquement 28/04
+double Lchemin(ListeArcP tabuArc)//testé numériquement 28/04
 {
-	if(est_videArcP(tabuArc)) return 1000000000000000000;	//utile au dÃ©but quand cheminMin est vide
+	if(est_videArcP(tabuArc)) return 1000000000000000000;	//utile au début quand cheminMin est vide
 	ListeArcP iL=NULL; double somme=0;
 	iL=tabuArc;
 	while(!est_videArcP(iL))
@@ -232,7 +235,7 @@ double Lchemin(ListeArcP tabuArc)//testÃ© numÃ©riquement 28/04
 	}
 	return somme;
 }
-void evapPheromone(Sommet* tabVille, int nbVille) //testÃ©e numÃ©riquement le 28/02
+void evapPheromone(Sommet* tabVille, int nbVille) //testée numériquement le 28/02
 {
 	int i=0; ListeArc iL=NULL;
 	for(i=0;i<nbVille;i++)
