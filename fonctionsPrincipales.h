@@ -42,3 +42,10 @@ ListeSommet depart(Sommet* villes, int n);   /*Validée!*/
 
 ListeArc parcours_fourmi(Fourmi f, ListeSommetP tabu);
 /*elle met le parcours de la fourmi dans l'ordre  (la tete de la liste est le premier arc parcouru)*/
+
+
+
+
+//Extension fourmis intelligentes=============================
+void depotPheromone_Fourmis_intelligentes(Fourmi* tabFourmi, int nbFourmi, int x);
+triFourmi(Fourmi* tabFourmi, int nbFourmi , double* Ltab);

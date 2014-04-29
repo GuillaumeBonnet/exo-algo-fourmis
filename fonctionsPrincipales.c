@@ -1,5 +1,3 @@
-/*toutes les fonctions marchent*/
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
@@ -12,7 +10,7 @@
 
 
 
-ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N ) /*ok*/
+ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N )
 {
 	Sommet q; ListeSommet p=creer_listeSommet();
 
@@ -262,3 +260,55 @@ void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 		}
 	}
 }
+
+void depotPheromone_Fourmis_intelligentes(Fourmi* tabFourmi, int nbFourmi, int x)
+{if (x>nbFourmi)
+    {
+        depotPheromone(tabFourmi, nbFourmi);
+    }
+  else
+	{int i=0;
+	ListeArcP iL=NULL;
+
+	for(i=0;i<x;i++)
+	  {
+		double dTo = Q/Lchemin((tabFourmi[i]).solution);
+
+		for(iL=tabFourmi[i].solution;iL!=NULL;iL=iL->suiv)
+		{
+			iL->val->to +=  dTo;
+		}
+	  }
+	}
+}
+
+
+triFourmi(Fourmi* tabFourmi, int nbFourmi , double* Ltab)
+{ int i=0; Fourmi f; double L;
+if(nbFourmi>1)
+   {
+
+    for(i=0;i<nbFourmi-1;i++)
+    {if(Ltab[i]>Ltab[i+1] )
+     {L=Ltab[i]; Ltab[i]=Ltab[i+1]; Ltab[i+1]=L;
+          f.iVilleCour=tabFourmi[i].iVilleCour;
+          f.iVilleDep=tabFourmi[i].iVilleDep;
+          f.solution=tabFourmi[i].solution;
+
+          tabFourmi[i].iVilleCour=tabFourmi[i+1].iVilleCour;
+          tabFourmi[i].iVilleDep=tabFourmi[i+1].iVilleDep;
+          tabFourmi[i].solution=tabFourmi[i+1].solution;
+
+          tabFourmi[i+1].iVilleCour=f.iVilleCour;
+          tabFourmi[i+1].iVilleDep=f.iVilleDep;
+          tabFourmi[i+1].solution=f.solution;
+
+     }
+    }
+    triFourmi(tabFourmi,nbFourmi-1,Ltab);
+   }
+}
+
+
+
+
