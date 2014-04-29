@@ -10,13 +10,13 @@
 
 
 /*=========constantes=======*/
-#define M 2 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
+#define M 6 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
 #define RHO 0.5 //coef d'évaporation des phéromones
 #define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
-#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
+#define MAX_CYCLE 1 //Constante, nombre maximum de cycles autorisés.
 /*=========constantes - fin====*/
 
 int main(int argc, char *argv[])
@@ -46,10 +46,9 @@ int main(int argc, char *argv[])
 			//tant que le circuit n'est pas bouclé
 			printf("Fourmi %d \n", iFourmi);
 			do
-			{printf("ville courante %d \n",tabFourmi[iFourmi].iVilleCour);
+			{
 				int villeSuiv=-1;
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
-				printf("ville suivante %d \n",villeSuiv);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;

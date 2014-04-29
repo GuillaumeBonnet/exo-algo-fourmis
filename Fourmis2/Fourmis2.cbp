@@ -47,10 +47,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../listeArc.h" />
+		<Unit filename="../listeArcP.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeArcP.h" />
 		<Unit filename="../listeSommet.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../listeSommet.h" />
+		<Unit filename="../listeSommetP.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeSommetP.h" />
 		<Unit filename="../readGraph.c">
 			<Option compilerVar="CC" />
 		</Unit>
