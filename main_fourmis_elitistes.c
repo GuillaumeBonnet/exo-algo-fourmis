@@ -7,14 +7,14 @@
 
 
 /*=========constantes=======*/
-#define M 8 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
+#define M 15 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
 #define RHO 0.5 //coef d'évaporation des phéromones
 #define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
 #define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
-#define X 7        // Nb de fourmis intelligentes a considérer
+#define X 4       // Nb de fourmis intelligentes a considérer
 /*=========constantes - fin====*/
 
 int main(int argc, char *argv[])
@@ -22,9 +22,9 @@ int main(int argc, char *argv[])
 
 
 
-	char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
+	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;
-	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
+	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
 	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
     double* Ltab=calloc(M,sizeof(*Ltab));//tableua contenant les parcours
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 			do
 			{
 				int villeSuiv=-1;
-				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
+				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille, ALPHA,BETA);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
@@ -75,8 +75,8 @@ int main(int argc, char *argv[])
 
         triFourmi(tabFourmi, M , Ltab);
 
-		evapPheromone(tabVille, nbVille);
-		depotPheromone_Fourmis_intelligentes(tabFourmi, M, X);
+		evapPheromone(tabVille, nbVille, RHO);
+		depotPheromone_Fourmis_intelligentes(tabFourmi, M, X,Q);
 
         for(iFourmi=0;iFourmi<M;iFourmi++)
         {free_listeArcP(tabFourmi[iFourmi].solution);

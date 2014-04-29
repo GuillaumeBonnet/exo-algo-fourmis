@@ -31,7 +31,7 @@ int nbArcs(char nomFichier[])
 }
 
 
-Arc** creer_tableau_arc(char nomFichier[])
+Arc** creer_tableau_arc(char nomFichier[],double EPS)
 {
 	FILE *fichier=NULL;
 	if((fichier=fopen(nomFichier,"r"))==NULL)
@@ -71,7 +71,7 @@ Arc** creer_tableau_arc(char nomFichier[])
 
 	return table;
 }
-Arc* creerArc(int sdep, int sarr, double d)
+Arc* creerArc(int sdep, int sarr, double d,double EPS)
 {
 	Arc* arc = NULL;
 	arc = malloc(sizeof(*arc));
@@ -83,7 +83,7 @@ Arc* creerArc(int sdep, int sarr, double d)
 	return arc;
 }
 
-void remplirTable(char nomFichier[], Sommet** table, int* nbVille)
+void remplirTable(char nomFichier[], Sommet** table, int* nbVille,double EPS)
 {
 	FILE *fichier=NULL;
 	if((fichier=fopen(nomFichier,"r"))==NULL)
@@ -111,10 +111,10 @@ void remplirTable(char nomFichier[], Sommet** table, int* nbVille)
 	fgets(tmpChaine, 100, fichier); Arc* arc= NULL;
 	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
 	{
-		arc = creerArc(sdep, sarr, d);
+		arc = creerArc(sdep, sarr, d,EPS);
 		((*table)+sdep)->ListeVoisin=ajout_teteArc(*arc, ((*table)+sdep)->ListeVoisin);
 
-		arc = creerArc(sarr, sdep, d);
+		arc = creerArc(sarr, sdep, d, EPS);
 		((*table)+sarr)->ListeVoisin=ajout_teteArc(*arc, ((*table)+sarr)->ListeVoisin);
 	}
 	close(fichier);
@@ -132,7 +132,7 @@ Fourmi* initFourmi(int nbFourmi, int nbVille)
 	{
 		tab[i].iVilleDep=i%nbVille;
 		tab[i].iVilleCour=tab[i].iVilleDep;
-		//rentrer la premiÃ¨re ville dans la file ListeSommet solution si on l'utilise
+		//rentrer la première ville dans la file ListeSommet solution si on l'utilise
 	}
 
 	// initialisation de rand : srand(time(NULL));

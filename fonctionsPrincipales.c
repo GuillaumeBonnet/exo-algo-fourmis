@@ -109,7 +109,7 @@ double* probatabu(double* t,ListeSommetP tabu)
 
 
 
-double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)                    /*non testée*/
+double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, double BETA)
 {
 	double* t;int i=0;
 	ListeArc q=creer_listeArc();
@@ -163,9 +163,9 @@ double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n)               
 
 
 
-int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes)   //n est le nombre de villes total
+int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes, double ALPHA,double BETA)   //n est le nombre de villes total
 {
-	double* t=proba(s, tabu,villes, n);
+	double* t=proba(s, tabu,villes, n,ALPHA,BETA);
 	int i=0; int N=0; double p=0;
 	if (t==NULL) return (-1);
 
@@ -233,7 +233,7 @@ double Lchemin(ListeArcP tabuArc)//testé numériquement 28/04
 	}
 	return somme;
 }
-void evapPheromone(Sommet* tabVille, int nbVille) //testée numériquement le 28/02
+void evapPheromone(Sommet* tabVille, int nbVille,double RHO) //testée numériquement le 28/02
 {
 	int i=0; ListeArc iL=NULL;
 	for(i=0;i<nbVille;i++)
@@ -245,7 +245,7 @@ void evapPheromone(Sommet* tabVille, int nbVille) //testée numériquement le 28/0
 	}
 }
 
-void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
+void depotPheromone(Fourmi* tabFourmi, int nbFourmi, double Q)
 {
 	int i=0;
 	ListeArcP iL=NULL;
@@ -261,10 +261,10 @@ void depotPheromone(Fourmi* tabFourmi, int nbFourmi)
 	}
 }
 
-void depotPheromone_Fourmis_intelligentes(Fourmi* tabFourmi, int nbFourmi, int x)
+void depotPheromone_Fourmis_intelligentes(Fourmi* tabFourmi, int nbFourmi, int x, double Q)
 {if (x>nbFourmi)
     {
-        depotPheromone(tabFourmi, nbFourmi);
+        depotPheromone(tabFourmi, nbFourmi,Q);
     }
   else
 	{int i=0;

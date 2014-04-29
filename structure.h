@@ -3,24 +3,24 @@
 
 
 /*=========constantes=======*/
-#define M 10 //nombre total de fourmis de l'algorithme PS : faire en sort que m=2*n.
-#define RHO 0.5 //coef d'√©vaporation des ph√©romones
-#define ALPHA 1 //Coefficient r√©gulant l'importance des ph√©romones pour le choix d'une ville
-#define BETA 2 //Coefficient r√©gulant l'importance de la visibilit√© pour le choix d'une ville
-#define EPS 0.00001 //Valeur initiale non nulle de ph√©romones sur les arcs
-#define Q 1 //Constante servant √† calculer la quantit√© de ph√©romones √† d√©poser pour chaque fourmi
-#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autoris√©s.
+
+
+
+
+
+
+
 /*=========constantes - fin====*/
 //====types relatifs aux Arcs
 	typedef struct Arc
 	{
-		int sdep;                             /*sommet de d√©part*/
-		int sarr;                             /*sommet d‚Äôarriv√©e*/
+		int sdep;                             /*sommet de dÈpart*/
+		int sarr;                             /*sommet díarrivÈe*/
 		double d;                             /*distance entre les deux villes*/
-		double to;                            /*quantit√© de ph√©romones*/
+		double to;                            /*quantitÈ de phÈromones*/
 
 	}Arc;
-	//liste avec √©l√©ments Arcs
+	//liste avec ÈlÈments Arcs
 	struct CelluleArc
 	{
 		Arc val;
@@ -28,7 +28,7 @@
 	};
 	typedef struct CelluleArc MaillonArc;
 	typedef MaillonArc* ListeArc;
-	//liste avec √©l√©ments pointeurs sur Arcs
+	//liste avec ÈlÈments pointeurs sur Arcs
 	struct CelluleArcP
 	{
 		Arc* val;
@@ -41,7 +41,7 @@
 	typedef struct Fourmi
 	{
 		ListeArcP solution;
-		int iVilleDep;     // indice de la ville de d√©part de la fourmi
+		int iVilleDep;     // indice de la ville de dÈpart de la fourmi
 		int iVilleCour;    // indice de la ville courrante de la fourmi
 	}Fourmi;
 
@@ -56,7 +56,7 @@
 	}Sommet;
 	typedef Sommet Ville;
 
-	//liste avec √©l√©ment Sommets
+	//liste avec ÈlÈment Sommets
 	typedef struct MaillonSommet
 	{
 		Sommet val;
@@ -65,7 +65,7 @@
 	} MaillonSommet;
 	typedef MaillonSommet* ListeSommet;
 
-	//liste avec √©l√©ment pointeurs sur Sommets
+	//liste avec ÈlÈment pointeurs sur Sommets
 	typedef struct MaillonSommetP
 	{
 		Sommet* val;

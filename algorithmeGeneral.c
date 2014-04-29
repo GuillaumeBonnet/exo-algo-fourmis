@@ -24,10 +24,14 @@ int main(int argc, char *argv[])
 
 
 
+
 	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
-	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0;
-	remplirTable(nomFichier, &tabVille, &nbVille); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
+	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;
+	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
+	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
+    double L=0;//Constante pour stocker le chemin de la fourmi courante (afin de ne pas le recalculer a chaque fois)
+
 
 
 	int iCycle=0;
@@ -48,7 +52,7 @@ int main(int argc, char *argv[])
 			do
 			{
 				int villeSuiv=-1;
-				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille);
+				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille,ALPHA,BETA);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
@@ -61,16 +65,17 @@ int main(int argc, char *argv[])
 
             free_listeSommetP(tabu);
 
-			if(Lchemin(tabFourmi[iFourmi].solution)<Lchemin(cheminMin))
+			 L=Lchemin(tabFourmi[iFourmi].solution);
+			if(L<Lmin)
 			{
-
 				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
+				Lmin=L;
 			}
 
 		}//boucle fourmis
 
-		evapPheromone(tabVille, nbVille);
-		depotPheromone(tabFourmi, M);
+		evapPheromone(tabVille, nbVille,RHO);
+		depotPheromone(tabFourmi, M, Q);
 
         for(iFourmi=0;iFourmi<M;iFourmi++)
         {free_listeArcP(tabFourmi[iFourmi].solution);
@@ -81,7 +86,7 @@ int main(int argc, char *argv[])
 
 
 visualiser_listeArcP(cheminMin);
-printf("chemin le plus court: %lf", Lchemin(cheminMin));
+printf("chemin le plus court: %lf", Lmin);
 
 //penser à tout free
 

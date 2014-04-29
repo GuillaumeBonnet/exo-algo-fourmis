@@ -14,14 +14,14 @@ double* probatabu(double* t,ListeSommet tabu); /*renvoit un tableau avec les pro
 void afficheListeSommet(ListeSommet tabu);         /*Validée!*/
 /*elle affiche les numeros des villes dans une ListeSommet*/
 
-int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes) ;
+int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes, double ALPHA,double BETA) ;
   /*renvoit le numéro de la prochaine ville (si toutes les villes sont parcourues elle renvoit le numéro de la ville de départ)
   elle renvoit -1 si il y a un problème d'allocation */
 
 
 
 
-double* proba(Sommet s, ListeSommet tabu, Sommet* villes, int n);
+double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, double BETA);
 /*renvoit l’adresse d’un tableau contenant les probas si elles ne sont pas toutes parcourus (t[N-1]=p(N)),  NULL si l’allocation a échoué et un tableau avec que des -1 si toutes les villes sont parcourus*/
 
 int ville_parcourue(ListeSommetP tabu,int N,int n);
@@ -30,8 +30,8 @@ int ville_parcourue(ListeSommetP tabu,int N,int n);
 par toutes les villes et 2 si elle n’est pas encore passée*/
 
 double Lchemin(ListeArcP tabuArc);
-void evapPheromone(Sommet* tabVille, int nbVille);//testée numériquement le 28/02
-void depotPheromone(Fourmi* tabFourmi, int nbFourmi);
+void evapPheromone(Sommet* tabVille, int nbVille,double RHO); //testée numériquement le 28/02
+void depotPheromone(Fourmi* tabFourmi, int nbFourmi, double Q);
 
 
 ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N );
@@ -47,5 +47,5 @@ ListeArc parcours_fourmi(Fourmi f, ListeSommetP tabu);
 
 
 //Extension fourmis intelligentes=============================
-void depotPheromone_Fourmis_intelligentes(Fourmi* tabFourmi, int nbFourmi, int x);
+void depotPheromone_Fourmis_intelligentes(Fourmi* tabFourmi, int nbFourmi, int x, double Q);
 triFourmi(Fourmi* tabFourmi, int nbFourmi , double* Ltab);
