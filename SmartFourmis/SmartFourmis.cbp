@@ -31,6 +31,39 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../fonctionsPrincipales.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fonctionsPrincipales.h" />
+		<Unit filename="../listeArc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeArc.h" />
+		<Unit filename="../listeArcP.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeArcP.h" />
+		<Unit filename="../listeSommet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeSommet.h" />
+		<Unit filename="../listeSommetP.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeSommetP.h" />
+		<Unit filename="../main_fourmis_elitistes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../readGraph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../readGraph.h" />
+		<Unit filename="../structure.h" />
+		<Unit filename="graphe11.txt" />
+		<Unit filename="graphe12.txt" />
+		<Unit filename="graphe13.txt" />
+		<Unit filename="graphe14.txt" />
+		<Unit filename="kroA100.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />
