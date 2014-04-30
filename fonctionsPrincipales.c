@@ -109,11 +109,11 @@ double* probatabu(double* t,ListeSommetP tabu)
 
 
 
-double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, double BETA)
+double* repartition(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, double BETA)
 {
 	double* t;int i=0;
 	ListeArc q=creer_listeArc();
-	double somme=0;
+	double somme=0; double cumul=0;
 
 	t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
 
@@ -143,56 +143,29 @@ double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, 
 
 		if(t[ (q->val).sarr]<0)
 		{
-			t[ (q->val).sarr]= pow((q->val).to,ALPHA)/pow( (q->val).d ,BETA);
-			somme=somme + t[(q->val).sarr];
-		}
+		    t[ (q->val).sarr]= pow((q->val).to,ALPHA)/pow( (q->val).d ,BETA);
+		    somme=somme+t[ (q->val).sarr];
+        }
 
 		q=q->suiv;
 	}
+
+
+
 	i=0;
 	for(i=0;i<n;i++)
 	{
-		if(t[i]<0) /*pour les villes non voisines et non parcourrues
+		if(t[i]<=0) /*pour les villes non voisines et non parcourrues
 		p=0 aussi*/
 		t[i]=0;
+		else
+        {cumul=cumul+t[i];
+         t[i]=cumul;
+        }
 		t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondérations*/
 	}
 	return(t);
 }
-
-
-
-
-int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes, double ALPHA,double BETA)   //n est le nombre de villes total
-{
-	double* t=proba(s, tabu,villes, n,ALPHA,BETA);
-	int i=0; int N=0; double p=0;
-	if (t==NULL) return (-1);
-
-	if (t[0]==-1)
-	{
-		int j=0;
-		ListeSommetP q=tabu;
-		while(!est_videSommetP(q))
-		{
-			j=q->val->num;
-			q=q->suiv;
-		}
-		free(t);
-		return (j);
-	}
-	for (i=0; i<n; i++)
-	{
-		if (t[i]>p)
-		{
-			p=t[i]; N=i;
-		}
-	}
-	free(t);
-    	return(N);
-}
-
-
 
 
 
@@ -310,5 +283,76 @@ if(nbFourmi>1)
 }
 
 
+int ville_next(ListeSommetP tabu,int n, Sommet s, Sommet* villes, double ALPHA,double BETA, int iVilleDep)
+{
+    	double* t;int i=0;
+	ListeArc q=creer_listeArc(); int ville_nonnulle=0;
+	double somme=0; double cumul=0;
+	int N=0; double a=rand(); double tirage=a/RAND_MAX; double diff=1;
 
+		i=ville_parcourue( tabu,s.num,n) ;
+	if(i==0)
+	{return (iVilleDep);/*si toutes les villes sont parcourues renvoit la ville de départ*/
+	}
+
+
+
+	t=initialisation(n);        /*on crée le tableau et on l’initialise à -1*/
+if (t==NULL) return (-1);
+
+
+	t=probatabu(t,tabu); /*si la ville est dans tabu proba =0*/
+	/*si elle est dans les arcs voisins et*/
+	/*pas dans tabu on place la
+	pondération correspondante et on fait la somme terme a terme*/
+
+	q=s.ListeVoisin;
+
+	if(est_videArc(q))
+	{
+		printf("Pas de voisins! Le voyage est fini :/ \n");
+		somme=1;
+	}
+
+	while (!est_videArc(q))
+	{
+
+		if(t[ (q->val).sarr]<0)
+		{
+		    t[ (q->val).sarr]= pow((q->val).to,ALPHA)/pow( (q->val).d ,BETA);
+		    somme=somme+t[ (q->val).sarr];
+        }
+
+		q=q->suiv;
+	}
+
+
+
+	i=0;
+	for(i=0;i<n;i++)
+	{
+		if(t[i]<=0) /*pour les villes non voisines et non parcourrues
+		p=0 aussi*/
+		t[i]=0;
+		else
+        {cumul=cumul+t[i];
+         t[i]=cumul;
+        }
+		t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondérations*/
+
+        if (i==n-1)return(i);
+        if (i==0 && t[i]==0) {ville_nonnulle=1; }
+		if (i>0 && t[i]!=0)
+		{if(tirage-t[i]<=0)
+           {N= ville_nonnulle; i=n;     //une fois f(Xi) calculée si elle est plus grande que tirage on arrete le calcul et on renvoit i
+           }
+		  else
+            ville_nonnulle=i;
+		}
+
+	}
+
+	free(t);
+    	return(N);
+}
 

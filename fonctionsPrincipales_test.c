@@ -146,38 +146,35 @@ printf("s1= %s s2=%s \n",s1,s2);
 }
 */
 //proba
-
-/*main()
+/*
+main()
 {char nom_fichier[100]="kroA100.txt";
-int nbvilles=0;
+int nbvilles=0; int i=0; int N;
 Sommet* t=NULL;
-remplirTable(nom_fichier,&t,&nbvilles);
+remplirTable(nom_fichier,&t,&nbvilles,0.00001);
 
 printf("%d",nbvilles);
-ListeSommet tabu=creer_listeSommet();
-tabu=ajout_ville(tabu,t,5);
-tabu=ajout_ville(tabu,t,3);
-tabu=ajout_ville(tabu,t,2);
-tabu=ajout_ville(tabu,t,1);
-tabu=ajout_ville(tabu,t,0);
-tabu=ajout_ville(tabu,t,4);
-tabu=ajout_ville(tabu,t,49);
-tabu=ajout_ville(tabu,t,48);
-tabu=ajout_ville(tabu,t,45);
-tabu=ajout_ville(tabu,t,23);
+ListeSommet tabu=creer_listeSommetP();
+tabu=ajout_teteSommetP(&t[5], tabu);
+tabu=ajout_teteSommetP(&t[6], tabu);
+tabu=ajout_teteSommetP(&t[8], tabu);
+tabu=ajout_teteSommetP(&t[4], tabu);
+tabu=ajout_teteSommetP(&t[10], tabu);
 
-double* pro=proba(tabu->val,tabu,t,nbvilles);
+double* pro=repartition(t[10],tabu,t,nbvilles,1,2);
 affichedouble(pro,nbvilles);
-ListeArc q=(tabu->val).ListeVoisin;
 
-while (!est_videArc(q))
-    {printf("\t sarr %d\n",(q->val).sarr);
-    q=q->suiv;
+for(i=0;i<10;i++)
+{
 
-    }
 
-int i=ville_next(tabu,nbvilles,t[4],t);
-printf("prochaine ville: %d %s %d", (t[i]).num,(t[i]).nom ,i);
+N=ville_next(tabu,nbvilles,t[10],t,1,2,5);
+
+printf("prochaine ville: %d \n",N);
+
+}
+
+
 }
 
 */

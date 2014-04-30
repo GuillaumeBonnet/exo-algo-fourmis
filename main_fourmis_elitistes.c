@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 			do
 			{
 				int villeSuiv=-1;
-				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille, ALPHA,BETA);
+				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille, ALPHA,BETA,tabFourmi[iFourmi].iVilleDep);
 				if (villeSuiv==-1)printf("allocation");
 				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;

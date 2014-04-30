@@ -14,14 +14,14 @@ double* probatabu(double* t,ListeSommet tabu); /*renvoit un tableau avec les pro
 void afficheListeSommet(ListeSommet tabu);         /*Validée!*/
 /*elle affiche les numeros des villes dans une ListeSommet*/
 
-int ville_next (ListeSommetP tabu,int n, Sommet s, Sommet* villes, double ALPHA,double BETA) ;
+int ville_next(ListeSommetP tabu,int n, Sommet s, Sommet* villes, double ALPHA,double BETA, int iVilleDep) ;
   /*renvoit le numéro de la prochaine ville (si toutes les villes sont parcourues elle renvoit le numéro de la ville de départ)
   elle renvoit -1 si il y a un problème d'allocation */
 
 
 
 
-double* proba(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, double BETA);
+double* repartition(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double ALPHA, double BETA);
 /*renvoit l’adresse d’un tableau contenant les probas si elles ne sont pas toutes parcourus (t[N-1]=p(N)),  NULL si l’allocation a échoué et un tableau avec que des -1 si toutes les villes sont parcourus*/
 
 int ville_parcourue(ListeSommetP tabu,int N,int n);
