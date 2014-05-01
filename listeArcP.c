@@ -140,6 +140,7 @@ ListeArcP copieArcP(ListeArcP l)
 			ip->suiv=calloc(1,sizeof(*ip));
 			ip->val=im->val;
 			ip->suiv=NULL;
+
 		return retour;
 	}
 	return retour;

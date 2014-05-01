@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 			 L=Lchemin(tabFourmi[iFourmi].solution);
 			if(L<Lmin)
 			{
-				free_listeArcP(cheminMin);	
+				free_listeArcP(cheminMin);
 				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
 				Lmin=L;
 			}
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 
 
 	visualiser_listeArcP(cheminMin);
-	printf("chemin le plus court: %lf", Lmin);
+	printf("\n\n\n\tchemin le plus court: %lf \n \n \n", Lmin);
 
 	//penser à tout free
 
@@ -99,5 +99,5 @@ int main(int argc, char *argv[])
 	free_listeArcP(cheminMin);
 }
 
-	
+
 
