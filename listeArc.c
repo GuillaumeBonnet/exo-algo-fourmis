@@ -13,7 +13,10 @@ void afficheArc(Arc* elem)
 void free_listeArc(ListeArc L)
 {
 	while(!est_videArc(L))
+	{		
 		L= supprimer_teteArc(L);
+	}
+		
 }
 
 ListeArc creer_listeArc(void)
@@ -50,9 +53,10 @@ ListeArc supprimer_teteArc(ListeArc L)
 {
 	if(!est_videArc(L))
 	{
-		ListeArc tmpL = L;
+		ListeArc tmpL = L;		
 		L=L->suiv;
 		free(tmpL);
+		tmpL=NULL;
 		return L;
 	}
 	else

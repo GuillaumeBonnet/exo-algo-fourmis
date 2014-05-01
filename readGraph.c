@@ -29,60 +29,6 @@ int nbArcs(char nomFichier[])
 	nbArc = 2*nbArrete;
 	return nbArc;
 }
-
-
-Arc** creer_tableau_arc(char nomFichier[],double EPS)
-{
-	FILE *fichier=NULL;
-	if((fichier=fopen(nomFichier,"r"))==NULL)
-	{
-		printf("Erreur ouverture fichier %s\n", nomFichier);
-		return NULL;
-	}
-
-	int nbVille=0, i=0; char tmpChaine[100];
-	fscanf(fichier,"%d",&nbVille);
-	fgets(tmpChaine, 100, fichier);
-	fgets(tmpChaine, 100, fichier);
-	for(i=0;i<=nbVille;i++)
-		fgets(tmpChaine, 100, fichier);
-	fgets(tmpChaine, 100, fichier);
-
-	Arc** table=NULL;
-	table = calloc(nbVille, sizeof(*table));
-	for(i=0;i<nbVille;i++)
-		*(table+i) = calloc(nbVille, sizeof(**table));
-
-
-	int sdep=0, sarr=0; double d=0;
-
-	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
-	{
-		table[sdep][sarr].sdep=sdep;
-		table[sdep][sarr].sarr=sarr;
-		table[sdep][sarr].d=d;
-		table[sdep][sarr].to=EPS;
-
-		table[sarr][sdep].sdep=sdep;
-		table[sarr][sdep].sarr=sarr;
-		table[sarr][sdep].d=d;
-		table[sarr][sdep].to=EPS;
-	}// si table[i][j].d==0 il n'y a pas d'arc entre les villes i et j(sens i vers j)
-
-	return table;
-}
-Arc* creerArc(int sdep, int sarr, double d,double EPS)
-{
-	Arc* arc = NULL;
-	arc = malloc(sizeof(*arc));
-	arc->sdep=sdep;
-	arc->sarr=sarr;
-	arc->d=d;
-	arc->to=EPS;
-
-	return arc;
-}
-
 void remplirTable(char nomFichier[], Sommet** table, int* nbVille,double EPS)
 {
 	FILE *fichier=NULL;
@@ -109,13 +55,14 @@ void remplirTable(char nomFichier[], Sommet** table, int* nbVille,double EPS)
 	//Arcs
 	int sdep=0, sarr=0; double d=0;
 	fgets(tmpChaine, 100, fichier); Arc* arc= NULL;
+	Arc tmpArc;
 	while(fscanf(fichier, "%d %d %lf\n", &sdep, &sarr, &d) != EOF)
 	{
-		arc = creerArc(sdep, sarr, d,EPS);
-		((*table)+sdep)->ListeVoisin=ajout_teteArc(*arc, ((*table)+sdep)->ListeVoisin);
+		tmpArc.sdep=sdep; tmpArc.sarr=sarr; tmpArc.d=d; tmpArc.to=EPS;
+		((*table)+sdep)->ListeVoisin=ajout_teteArc(tmpArc, ((*table)+sdep)->ListeVoisin);
 
-		arc = creerArc(sarr, sdep, d, EPS);
-		((*table)+sarr)->ListeVoisin=ajout_teteArc(*arc, ((*table)+sarr)->ListeVoisin);
+		tmpArc.sdep=sarr; tmpArc.sarr=sdep; tmpArc.d=d; tmpArc.to=EPS;
+		((*table)+sarr)->ListeVoisin=ajout_teteArc(tmpArc, ((*table)+sarr)->ListeVoisin);
 	}
 	close(fichier);
 	return;
@@ -148,20 +95,6 @@ Fourmi* initFourmi(int nbFourmi, int nbVille)
 	}
 	return tab;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

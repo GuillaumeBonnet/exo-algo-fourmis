@@ -68,6 +68,7 @@ int main(int argc, char *argv[])
 			 L=Lchemin(tabFourmi[iFourmi].solution);
 			if(L<Lmin)
 			{
+				free_listeArcP(cheminMin);	
 				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
 				Lmin=L;
 			}
@@ -85,14 +86,18 @@ int main(int argc, char *argv[])
 	}//boucle cycles
 
 
-visualiser_listeArcP(cheminMin);
-printf("chemin le plus court: %lf", Lmin);
+	visualiser_listeArcP(cheminMin);
+	printf("chemin le plus court: %lf", Lmin);
 
-//penser à tout free
+	//penser à tout free
 
-for(iVille=0;iVille<nbVille;iVille++)
-{free_listeArc(tabVille[iVille].ListeVoisin);
+	for(iVille=0;iVille<nbVille;iVille++)
+	{free_listeArc(tabVille[iVille].ListeVoisin);
+	 free(tabVille[iVille].nom);
+	}
+	free(tabVille);
+	free_listeArcP(cheminMin);
 }
-free(tabVille);
-}
+
+	
 

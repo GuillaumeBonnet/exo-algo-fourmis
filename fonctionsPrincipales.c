@@ -169,6 +169,7 @@ double* repartition(Sommet s, ListeSommetP tabu, Sommet* villes, int n, double A
 
 
 
+
 ListeArcP parcours_fourmi(Fourmi f, ListeSommetP tabu)
 {
 	ListeArc q=creer_listeArc();   int Narr=0;
@@ -340,7 +341,7 @@ if (t==NULL) return (-1);
         }
 		t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondérations*/
 
-        if (i==n-1)return(i);
+        if (i==n-1){free(t); return(i);}
         if (i==0 && t[i]==0) {ville_nonnulle=1; }
 		if (i>0 && t[i]!=0)
 		{if(tirage-t[i]<=0)
