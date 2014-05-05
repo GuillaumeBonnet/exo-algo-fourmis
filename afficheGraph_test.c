@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 //	nomFichier = argv[1];
 	Sommet* table = NULL; int nbVille = 0;
 
-	remplirTable(argv[1], &table, &nbVille);	
+	remplirTable(argv[1], &table, &nbVille, 0.15);	
 	afficheGraph(table, nbVille);
 	
 
