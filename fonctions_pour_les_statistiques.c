@@ -15,16 +15,16 @@
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
 #define Mmin 2
-#define Mmax 60
+#define Mmax 4
 #define Mpas 1
 #define MAX_CYCLEmin  10
-#define MAX_CYCLEmax  200
+#define MAX_CYCLEmax  11
 #define MAX_CYCLEpas  1
 #define Xmin 2
-#define Xmax 60
+#define Xmax 4
 #define Xpas 1
-#define MODE 1
-#define REPET 50
+#define MODE 2
+#define REPET 2
 
 /*=========constantes - fin====*/
 
@@ -81,7 +81,7 @@ double algo_general(int M, int MAX_CYCLE )
 			if(L<Lmin&&vp!=0)
 			{
 				free_listeArcP(cheminMin);
-				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
+				cheminMin=(ListeArcP)copieArcP(tabFourmi[iFourmi].solution);
 				Lmin=L;
 			}
 
@@ -165,7 +165,7 @@ double elitistes(int M, int MAX_CYCLE, int X)
 			if(Ltab[iFourmi]<Lmin&&vp!=0)
 			{
 			    free_listeArcP(cheminMin);
-				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
+				cheminMin=(ListeArcP)copieArcP(tabFourmi[iFourmi].solution);
 				Lmin=Ltab[iFourmi];
 			}
 
