@@ -1,6 +1,8 @@
 DIRSDL=/users/prog1a/C/librairie/2011
 CFLAGS=-c -g -I$(DIRSDL)/include/SDL -I$(DIRSDL)/include
-LFLAGS=-L$(DIRSDL)/lib -lSDLmain -lSDL -lSDL_ttf -lSDL_image -lSDL_phelma -lSDL_draw
+#LFLAGS=-L$(DIRSDL)/lib -lm -lSDLmain -lSDL -lSDL_ttf -lSDL_image -lSDL_draw #poste phelma#
+LFLAGS=-L$(DIRSDL)/lib -lm -lSDLmain -lSDL#poste guillaume#
+
 
 
 all : algorithmeGeneral afficheGraph creerGraphe fonctionsPrincipales_test readGraph_test listeArc_test

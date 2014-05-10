@@ -21,7 +21,7 @@
 
 int main(int argc, char *argv[])
 {
-
+	/* initialisation de rand : */srand(time(NULL));
 
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp;
 	remplirTable(argv[1], &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
