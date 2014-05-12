@@ -3,6 +3,7 @@
 #include "math.h"
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
+#include "SDL/SDL_draw.h"
 #include "structure.h"
 #include "listeSommet.h"
 
@@ -39,19 +40,9 @@ Sommet* creerTabSommet(int nbSommet, int wFenetre, int hFenetre)
     	}
 
 	SDL_WM_SetCaption("InterfaceGraphique de l'exo Voyageur de Commerce", NULL); //titre fenetre
-	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 210,180,140)); //colorer fond
+	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 122,153,253)); //colorer fond
 	SDL_Flip( screen );
-	//variables pour afficher disque
-	SDL_Surface* disque;
-	SDL_Rect posDisque;
-	disque = SDL_LoadBMP("ville.bmp"); // image de D=20px
-	if (disque == NULL)
-	    	{
-			fprintf(stderr, "Impossible de charger l'image disque : %s\n", SDL_GetError());
-			exit(EXIT_FAILURE);
-	    	}
-
-
+	
 	Sommet* tab = NULL;
 	tab = calloc(nbSommet, sizeof(*tab));
 	SDL_Event event; 
@@ -78,17 +69,15 @@ Sommet* creerTabSommet(int nbSommet, int wFenetre, int hFenetre)
 			case SDL_MOUSEBUTTONUP:
 				tab[i].x = (double)event.button.x/wFenetre;
 				tab[i].y = (double)event.button.y/hFenetre;
-				//affichage ville		
-				posDisque.x=event.button.x;
-				posDisque.y=event.button.y;
-				SDL_SetColorKey(disque, SDL_SRCCOLORKEY, SDL_MapRGB(disque->format, 255, 255, 255));//effacer le fond blanc de l'image
-				SDL_BlitSurface(disque, NULL, screen, &posDisque); //coller le disque sur le fond
+				//affichage ville	
+				Draw_FillCircle(screen, 6+tab[i].x*(wFenetre-12), 6+tab[i].y*(hFenetre-12), 3, SDL_MapRGB(screen->format, 255, 85,0));				
 				SDL_Flip( screen );
 				continuer=0;
 		    	break;
 			}
 		}
 	}
+	printf("Fermer la fenêtre SDL.\n");
 
 	return tab;
 }
@@ -106,6 +95,7 @@ int main()
 	table = creerTabSommet(nbVille, W_FENETRE, H_FENETRE);
 	pause(); // attente fermeture de fenêtre		
 	SDL_Quit();	//libère mémoire
+
 
 	printf("Taper le nom du ficher de sortie:\n");
 	char nomFichier[100] = "";  

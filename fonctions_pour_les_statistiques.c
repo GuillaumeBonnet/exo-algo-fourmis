@@ -14,6 +14,7 @@
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
+
 #define Mmin 2
 #define Mmax 30
 #define Mpas 2
@@ -25,6 +26,7 @@
 #define Xpas 2
 #define MODE 1
 #define REPET 50
+
 
 
 /*=========constantes - fin====*/

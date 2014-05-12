@@ -18,7 +18,7 @@
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
-#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
+#define MAX_CYCLE 20 //Constante, nombre maximum de cycles autorisés.
 /*=========constantes - fin====*/
 
 
@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
 	for(iCycle = 0;iCycle<MAX_CYCLE;iCycle++)
 	{
 		Fourmi* tabFourmi=NULL;
-		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
+		tabFourmi = initFourmi(2*nbVille, nbVille);//initialiser M fourmi sur les nbVille
 
 	   	int iFourmi=0;
-		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
+		for(iFourmi=0;iFourmi<nbVille; iFourmi++)   /*pour chaque fourmi*/
 		{
 			ListeSommetP tabu=NULL; //liste de pointeurs sur  des villes parcourues par la fourmi courrante
 
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 		evapPheromone(tabVille, nbVille,RHO);
 		depotPheromone(tabFourmi, M, Q);
 
-        for(iFourmi=0;iFourmi<M;iFourmi++)
+        for(iFourmi=0;iFourmi<2*nbVille;iFourmi++)
         {free_listeArcP(tabFourmi[iFourmi].solution);
         }
         free(tabFourmi);
@@ -109,6 +109,7 @@ int main(int argc, char *argv[])
 	//initalisation SDL:
 	SDL_Init( SDL_INIT_EVERYTHING ); 
 	SDL_Surface* screen = NULL;
+	SDL_Event event; 
 	screen = SDL_SetVideoMode( W_FENETRE, H_FENETRE, 32, SDL_SWSURFACE ); //init fenetre
 	if (screen == NULL)
     	{
@@ -118,16 +119,12 @@ int main(int argc, char *argv[])
 
 	SDL_WM_SetCaption("InterfaceGraphique de l'exo Voyageur de Commerce", NULL); //titre fenetre
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 122,153,253)); //colorer fond
-
-	
-
 	int i=0, j=0, k=0;
 	//affichage ville
 	for(i=0;i<nbVille;i++)
 	{		
 		Draw_FillCircle(screen, 6+tabVille[i].x*(W_FENETRE-12), 6+tabVille[i].y*(H_FENETRE-12), 3, SDL_MapRGB(screen->format, 255, 85, 0));				
 	}
-
 	//affichage arrete graph
 	for(j=0;j<nbVille;j++)
 		for(k=j;k<nbVille;k++)
@@ -136,12 +133,76 @@ int main(int argc, char *argv[])
 	//affichage arrete solution
 	ListeArcP tmpAp=NULL;
 	for(tmpAp=cheminMin;tmpAp!=NULL;tmpAp=tmpAp->suiv)		
+	{
+		Draw_Line(screen, 6 + tabVille[tmpAp->val->sdep].x*(W_FENETRE-12) -1, 6+tabVille[tmpAp->val->sdep].y*(H_FENETRE-12) -1, 6+tabVille[tmpAp->val->sarr].x*(W_FENETRE-12) -1, 6+tabVille[tmpAp->val->sarr].y*(H_FENETRE-12) -1, SDL_MapRGB(screen->format, 255, 0, 0));
 		Draw_Line(screen, 6 + tabVille[tmpAp->val->sdep].x*(W_FENETRE-12) , 6+tabVille[tmpAp->val->sdep].y*(H_FENETRE-12) , 6+tabVille[tmpAp->val->sarr].x*(W_FENETRE-12) , 6+tabVille[tmpAp->val->sarr].y*(H_FENETRE-12) , SDL_MapRGB(screen->format, 255, 0, 0));
-// printf("toto:%lf %lf\n",tabVille[tmpAp->val->sdep].x, tabVille[tmpAp->val->sdep].y);
-	
+		
+	}
+
+
 	SDL_Flip( screen );// maj de l'affichage sur écran
 	
-	pause(); // attente fermeture de fenêtre
+	int continuer=1, touteArrete=0;
+	while(continuer)
+		{
+			SDL_WaitEvent(&event);
+			switch(event.type)
+			{
+				case SDL_QUIT:							
+					continuer=0;				
+					break;
+				case SDL_MOUSEBUTTONUP:
+					if(touteArrete)
+					{
+						SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 122,153,253)); //colorer fond
+						i=0, j=0, k=0;
+						//affichage ville
+						for(i=0;i<nbVille;i++)
+						{		
+							Draw_FillCircle(screen, 6+tabVille[i].x*(W_FENETRE-12), 6+tabVille[i].y*(H_FENETRE-12), 3, SDL_MapRGB(screen->format, 255, 85, 0));				
+						}
+						//affichage arrete graph
+						for(j=0;j<nbVille;j++)
+							for(k=j;k<nbVille;k++)
+								Draw_Line(screen, 6+tabVille[j].x*(W_FENETRE-12) , 6+tabVille[j].y*(H_FENETRE-12) , 6+tabVille[k].x*(W_FENETRE-12) , 6+tabVille[k].y*(H_FENETRE-12) , SDL_MapRGB(screen->format, 253, 236, 122));
+
+						//affichage arrete solution
+						ListeArcP tmpAp=NULL;
+						for(tmpAp=cheminMin;tmpAp!=NULL;tmpAp=tmpAp->suiv)		
+							Draw_Line(screen, 6 + tabVille[tmpAp->val->sdep].x*(W_FENETRE-12) , 6+tabVille[tmpAp->val->sdep].y*(H_FENETRE-12) , 6+tabVille[tmpAp->val->sarr].x*(W_FENETRE-12) , 6+tabVille[tmpAp->val->sarr].y*(H_FENETRE-12) , SDL_MapRGB(screen->format, 255, 0, 0));
+
+
+						SDL_Flip( screen );// maj de l'affichage sur écran						
+					}
+
+					else
+					{
+						SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 122,153,253)); //colorer fond
+						i=0, j=0, k=0;
+						//affichage ville
+						for(i=0;i<nbVille;i++)
+						{		
+							Draw_FillCircle(screen, 6+tabVille[i].x*(W_FENETRE-12), 6+tabVille[i].y*(H_FENETRE-12), 3, SDL_MapRGB(screen->format, 255, 85, 0));				
+						}					
+
+						//affichage arrete solution
+						ListeArcP tmpAp=NULL;
+						for(tmpAp=cheminMin;tmpAp!=NULL;tmpAp=tmpAp->suiv)		
+							Draw_Line(screen, 6 + tabVille[tmpAp->val->sdep].x*(W_FENETRE-12) , 6+tabVille[tmpAp->val->sdep].y*(H_FENETRE-12) , 6+tabVille[tmpAp->val->sarr].x*(W_FENETRE-12) , 6+tabVille[tmpAp->val->sarr].y*(H_FENETRE-12) , SDL_MapRGB(screen->format, 255, 0, 0));
+
+
+						SDL_Flip( screen );// maj de l'affichage sur écran						
+					}
+					touteArrete = !touteArrete;					
+			    	break;
+			}
+		}
+
+
+///////
+	
+
+	
 	
 	SDL_Quit();	//libère mémoire
 

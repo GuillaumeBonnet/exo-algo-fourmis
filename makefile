@@ -22,7 +22,7 @@ creerGraphe : creerGraphe.o fonctionsPrincipales.o readGraph.o listeArc.o listeS
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-fonctions_pour_les_statistiques : fonctions_pour_les_statistiques.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o listeArcP.o listeSommetP.o
+fonctions_pour_les_statistiques : fonctions_pour_les_statistiques.o listeSommetP.o listeArcP.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
