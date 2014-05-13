@@ -4,7 +4,7 @@
 #include<math.h>
 #include "structure.h"
 #include "fonctionsPrincipales.h"
-#include "readGraph.h"
+#include "initialisation.h"
 #include "listeArc.h"
 #include "listeSommet.h"
 

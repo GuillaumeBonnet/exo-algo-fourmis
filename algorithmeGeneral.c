@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "structure.h"
-#include "readGraph.h"
+#include "initialisation.h"
 #include "fonctionsPrincipales.h"
 #include "listeSommetP.h"
 #include "math.h"
