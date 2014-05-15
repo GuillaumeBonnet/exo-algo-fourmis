@@ -91,7 +91,8 @@ int main()
 {
 	int nbVille =0; Sommet *table = NULL;
 	printf("Entrer le nombre de ville du graphe\n");
-	scanf("%3d",&nbVille);
+	fflush(stdin);
+	scanf("%5d",&nbVille);
 	table = creerTabSommet(nbVille, W_FENETRE, H_FENETRE);
 	pause(); // attente fermeture de fenêtre		
 	SDL_Quit();	//libère mémoire
@@ -99,7 +100,8 @@ int main()
 
 	printf("Taper le nom du ficher de sortie:\n");
 	char nomFichier[100] = "";  
-	scanf("%s", nomFichier);
+	fflush(stdin);
+	scanf("%100s", nomFichier);
 	FILE *fichier = NULL;
 	if( (fichier = fopen(nomFichier, "w")) ==NULL) { printf("Erreur ouv fichier\n"); return; }
 	int i=0;
