@@ -13,7 +13,7 @@ fonctionsPrincipales_test : fonctionsPrincipales_test.o fonctionsPrincipales.o r
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-afficheGraph_test : afficheGraph_test.o afficheGraph.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
+afficheGraph_test : afficheGraph_test.o afficheGraph.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o listeArcP.o listeSommetP.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
