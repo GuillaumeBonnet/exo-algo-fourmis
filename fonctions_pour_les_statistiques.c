@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "structure.h"
 #include "readGraph.h"
 #include "fonctionsPrincipales.h"
@@ -13,6 +14,16 @@
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
+#define Mmin 2
+#define Mmax 10
+#define Mpas 1
+#define MAX_CYCLEmin  10
+#define MAX_CYCLEmax  20
+#define MAX_CYCLEpas  2
+#define Xmin 2
+#define Xmax 10
+#define Xpas 1
+#define MODE 1
 
 /*=========constantes - fin====*/
 
@@ -21,7 +32,7 @@
 
 
 
-double algo_general(int argc, char *argv[],int M, int MAX_CYCLE )
+double algo_general(int M, int MAX_CYCLE )
 {
 
 	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
@@ -85,7 +96,7 @@ double algo_general(int argc, char *argv[],int M, int MAX_CYCLE )
 	}//boucle cycles
 
 
-	visualiser_listeArcP(cheminMin);
+
 	return(Lmin);
 
 	//penser à tout free
@@ -100,7 +111,7 @@ double algo_general(int argc, char *argv[],int M, int MAX_CYCLE )
 
 
 
-double elitistes(int argc, char *argv[], int M, int MAX_CYCLE, int X)
+double elitistes(int M, int MAX_CYCLE, int X)
 {
 
 
@@ -170,7 +181,7 @@ double elitistes(int argc, char *argv[], int M, int MAX_CYCLE, int X)
 	}//boucle cycles
 
 
-visualiser_listeArcP(cheminMin);
+
 return(Lmin);
 
 //penser à tout free
@@ -182,7 +193,58 @@ free(tabVille);
 free_listeArcP(cheminMin);
 }
 
-Test* tab_donees(int Mmin,int Mmax,int Mpas,int MAX_CYCLEmin,int MAX_CYCLEmax,int MAX_CYCLEpas,int Xmax,int Xmin,int Xpas, int argc, char *argv[])
-{
+main()
+{int i,j; int k=Xmin; double l=1000; int m,mc; int x=0;
+double L;
 
+clock_t debutchargement, finchargement ;
+
+
+if(MODE==1)
+{
+for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
+{printf("\n\nMAX_CYCLE: %d \n\n",i);
+    for(j=Mmin;j<=Mmax;j=j+Mpas)
+    {printf("\nM: %d\n\n",j);
+
+
+    {
+        while(k<=Xmax && k<=j)
+        {printf("X: %d\n",k);
+            debutchargement=clock();
+            L=elitistes(j,i,k);
+            finchargement=clock();
+            if(L<l)
+            {l=L; m=j; x=k; mc=i; }
+            printf("\t\t Lmin: %lf  M: %d MAX_CYCLE: %d X: %d temps: %f \n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+            k=k+Xpas;
+        }
+
+
+
+    }k=Xmin;
+    }
+}
+}
+
+else
+{for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
+{printf("\n\nMAX_CYCLE: %d \n\n",i);
+    for(j=Mmin;j<=Mmax;j=j+Mpas)
+    {printf("\nM: %d\n\n",j);
+    {
+            debutchargement=clock();
+            L=algo_general(j,i);
+            finchargement=clock();
+            if(L<l)
+            {l=L; m=j; mc=i; }
+            printf("\t\t Lmin: %lf  M: %d MAX_CYCLE: %d temps: %f\n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+    }k=Xmin;
+    }
+}
+
+}
+
+
+printf("\n\n\nchemin min trouvee dans cette serie de mesures %lf pour M: %d MAX_CYCLE: %d X: %d ",l,m,mc,x);
 }
