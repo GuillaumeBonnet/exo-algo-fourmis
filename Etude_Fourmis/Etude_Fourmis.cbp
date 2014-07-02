@@ -5,6 +5,7 @@
 		<Option title="Etude_Fourmis" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="Etude_Fourmis\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Etude_Fourmis" prefix_auto="1" extension_auto="1" />
@@ -31,6 +32,50 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../Quatar194.txt" />
+		<Unit filename="../berlin52.txt" />
+		<Unit filename="../djibouti38.txt" />
+		<Unit filename="../fonctionsPrincipales.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fonctionsPrincipales.h" />
+		<Unit filename="../fonctionsPrincipales_test.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fonctions_pour_les_statistiques.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fonctions_pour_les_statistiques.h" />
+		<Unit filename="../graphe11.txt" />
+		<Unit filename="../graphe12.txt" />
+		<Unit filename="../graphe13.txt" />
+		<Unit filename="../graphe14.txt" />
+		<Unit filename="../kroA100.txt" />
+		<Unit filename="../listeArc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeArc.h" />
+		<Unit filename="../listeArcP.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeArcP.h" />
+		<Unit filename="../listeSommet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeSommet.h" />
+		<Unit filename="../listeSommetP.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../listeSommetP.h" />
+		<Unit filename="../projet2014.pdf" />
+		<Unit filename="../readGraph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../readGraph.h">
+			<Option virtualFolder="Etude_Fourmis/" />
+		</Unit>
+		<Unit filename="../structure.h" />
+		<Unit filename="Donnees.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -23,7 +23,8 @@
 #define Xmin 2
 #define Xmax 10
 #define Xpas 1
-#define MODE 1
+#define MODE 0
+#define REPET 1
 
 /*=========constantes - fin====*/
 
@@ -194,57 +195,70 @@ free_listeArcP(cheminMin);
 }
 
 main()
-{int i,j; int k=Xmin; double l=1000; int m,mc; int x=0;
+{int i,j,n; int k=Xmin; double l=1000; int m,mc; int x=0; float t=1000;
 double L;
-
-clock_t debutchargement, finchargement ;
-
-
-if(MODE==1)
-{
-for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
-{printf("\n\nMAX_CYCLE: %d \n\n",i);
-    for(j=Mmin;j<=Mmax;j=j+Mpas)
-    {printf("\nM: %d\n\n",j);
-
-
-    {
-        while(k<=Xmax && k<=j)
-        {printf("X: %d\n",k);
-            debutchargement=clock();
-            L=elitistes(j,i,k);
-            finchargement=clock();
-            if(L<l)
-            {l=L; m=j; x=k; mc=i; }
-            printf("\t\t Lmin: %lf  M: %d MAX_CYCLE: %d X: %d temps: %f \n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
-            k=k+Xpas;
-        }
-
-
-
-    }k=Xmin;
-    }
-}
-}
-
+char nom_donnees[100]="Donnees.txt";
+FILE* f;
+if ( (f=fopen("donnees.txt","w")) ==NULL)
+    printf("erreur d'ouverture du fichier");
 else
-{for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
-{printf("\n\nMAX_CYCLE: %d \n\n",i);
-    for(j=Mmin;j<=Mmax;j=j+Mpas)
-    {printf("\nM: %d\n\n",j);
+{   clock_t debutchargement, finchargement ;
+
+    fprintf(f,"\t Lmin \t\t M \t  MAX_CYCLE \t X \t temps\n");
+
+    for(n=0;n<REPET;n++)
     {
-            debutchargement=clock();
-            L=algo_general(j,i);
-            finchargement=clock();
-            if(L<l)
-            {l=L; m=j; mc=i; }
-            printf("\t\t Lmin: %lf  M: %d MAX_CYCLE: %d temps: %f\n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
-    }k=Xmin;
+    if(MODE==1)
+        {
+        for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
+        {printf("\n\nMAX_CYCLE: %d \n\n",i);
+            for(j=Mmin;j<=Mmax;j=j+Mpas)
+            {printf("\nM: %d\n\n",j);
+
+
+            {
+                while(k<=Xmax && k<=j)
+                {printf("X: %d\n",k);
+                    debutchargement=clock();
+                    L=elitistes(j,i,k);
+                    finchargement=clock();
+                    if(L<l)
+                    {l=L; m=j; x=k; mc=i; }
+
+                    fprintf(f,"\t %lf;\t %d;\t %d;\t\t %d;\t %f; \n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+                    k=k+Xpas;
+                }
+
+
+
+            }k=Xmin;
+            }
+        }
     }
+
+    else
+    {for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
+    {printf("\n\nMAX_CYCLE: %d \n\n",i);
+        for(j=Mmin;j<=Mmax;j=j+Mpas)
+        {printf("\nM: %d\n\n",j);
+        {
+                debutchargement=clock();
+                L=algo_general(j,i);
+                finchargement=clock();
+                if(L<l)
+                {l=L; m=j; mc=i; }
+
+                fprintf(f,"\t %lf;\t %d;\t %d;\t\t %d;\t %f; \n", L,j,i,j,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+        }k=Xmin;
+        }
+    }
+
+    }
+
+    }
+    fprintf(f,"\n\n\nchemin min trouve dans cette serie de mesures %lf pour M: %d MAX_CYCLE: %d X: %d ",l,m,mc,x);
+    if ( fclose( f ) != 0 ) printf( "Une erreur s’est produite à la fermeture" ) ;
 }
 
-}
 
-
-printf("\n\n\nchemin min trouvee dans cette serie de mesures %lf pour M: %d MAX_CYCLE: %d X: %d ",l,m,mc,x);
 }
