@@ -19,12 +19,12 @@
 #define Mpas 1
 #define MAX_CYCLEmin  10
 #define MAX_CYCLEmax  20
-#define MAX_CYCLEpas  2
+#define MAX_CYCLEpas  1
 #define Xmin 2
 #define Xmax 10
 #define Xpas 1
-#define MODE 0
-#define REPET 1
+#define MODE 1
+#define REPET 4
 
 /*=========constantes - fin====*/
 
@@ -215,8 +215,6 @@ else
             for(j=Mmin;j<=Mmax;j=j+Mpas)
             {printf("\nM: %d\n\n",j);
 
-
-            {
                 while(k<=Xmax && k<=j)
                 {printf("X: %d\n",k);
                     debutchargement=clock();
@@ -231,8 +229,9 @@ else
 
 
 
-            }k=Xmin;
+            k=Xmin;
             }
+
         }
     }
 
@@ -241,7 +240,7 @@ else
     {printf("\n\nMAX_CYCLE: %d \n\n",i);
         for(j=Mmin;j<=Mmax;j=j+Mpas)
         {printf("\nM: %d\n\n",j);
-        {
+
                 debutchargement=clock();
                 L=algo_general(j,i);
                 finchargement=clock();
@@ -249,8 +248,9 @@ else
                 {l=L; m=j; mc=i; }
 
                 fprintf(f,"\t %lf;\t %d;\t %d;\t\t %d;\t %f; \n", L,j,i,j,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
-        }k=Xmin;
+        k=Xmin;
         }
+
     }
 
     }
