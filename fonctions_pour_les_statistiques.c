@@ -207,7 +207,7 @@ else
     fprintf(f,"\t Lmin \t\t M \t  MAX_CYCLE \t X \t temps\n");
 
     for(n=0;n<REPET;n++)
-    {
+    {fprintf(f,"\nrepetition %d\n",n+1 );
     if(MODE==1)
         {
         for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
