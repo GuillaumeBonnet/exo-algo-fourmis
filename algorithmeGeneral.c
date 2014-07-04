@@ -23,11 +23,9 @@ int main(int argc, char *argv[])
 {
 
 
-
-
-	char nomFichier[100]="graphe13.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp;
-	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
+	remplirTable(argv[1], &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
+
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
 	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
     double L=0;//Constante pour stocker le chemin de la fourmi courante (afin de ne pas le recalculer a chaque fois)
