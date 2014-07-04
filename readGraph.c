@@ -64,7 +64,7 @@ void remplirTable(char nomFichier[], Sommet** table, int* nbVille,double EPS)
 		tmpArc.sdep=sarr; tmpArc.sarr=sdep; tmpArc.d=d; tmpArc.to=EPS;
 		((*table)+sarr)->ListeVoisin=ajout_teteArc(tmpArc, ((*table)+sarr)->ListeVoisin);
 	}
-	close(fichier);
+	fclose(fichier);
 	return;
 }
 

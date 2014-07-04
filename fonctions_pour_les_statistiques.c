@@ -15,16 +15,16 @@
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
 #define Mmin 2
-#define Mmax 10
+#define Mmax 60
 #define Mpas 1
 #define MAX_CYCLEmin  10
-#define MAX_CYCLEmax  20
+#define MAX_CYCLEmax  200
 #define MAX_CYCLEpas  1
 #define Xmin 2
-#define Xmax 10
+#define Xmax 60
 #define Xpas 1
 #define MODE 1
-#define REPET 4
+#define REPET 50
 
 /*=========constantes - fin====*/
 
@@ -117,7 +117,7 @@ double elitistes(int M, int MAX_CYCLE, int X)
 
 
 
-	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
+	char nomFichier[100]="Quatar194.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
@@ -199,7 +199,7 @@ main()
 double L;
 char nom_donnees[100]="Donnees.txt";
 FILE* f;
-if ( (f=fopen("donnees.txt","w")) ==NULL)
+if ( (f=fopen("Donnees.txt","w")) ==NULL)
     printf("erreur d'ouverture du fichier");
 else
 {   clock_t debutchargement, finchargement ;
@@ -227,13 +227,11 @@ else
                     k=k+Xpas;
                 }
 
-
-
             k=Xmin;
             }
 
         }
-    }
+        }
 
     else
     {for(i=MAX_CYCLEmin;i<=MAX_CYCLEmax; i=i+MAX_CYCLEpas)
@@ -248,9 +246,7 @@ else
                 {l=L; m=j; mc=i; }
 
                 fprintf(f,"\t %lf;\t %d;\t %d;\t\t %d;\t %f; \n", L,j,i,j,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
-        k=Xmin;
         }
-
     }
 
     }

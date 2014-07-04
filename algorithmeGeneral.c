@@ -10,13 +10,13 @@
 
 
 /*=========constantes=======*/
-#define M 10 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
-#define RHO 0.5 //coef d'Ã©vaporation des phÃ©romones
-#define ALPHA 1 //Coefficient rÃ©gulant l'importance des phÃ©romones pour le choix d'une ville
-#define BETA 2 //Coefficient rÃ©gulant l'importance de la visibilitÃ© pour le choix d'une ville
-#define EPS 0.00001 //Valeur initiale non nulle de phÃ©romones sur les arcs
-#define Q 1 //Constante servant Ã  calculer la quantitÃ© de phÃ©romones Ã  dÃ©poser pour chaque fourmi
-#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisÃ©s.
+#define M 3 //nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
+#define RHO 0.5 //coef d'évaporation des phéromones
+#define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
+#define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
+#define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
+#define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
+#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
 /*=========constantes - fin====*/
 
 int main(int argc, char *argv[])
@@ -25,15 +25,15 @@ int main(int argc, char *argv[])
 
 
 
-	char nomFichier[100]="graphe14.txt"; //Ã  remplacer par argv[1] Ã  la fin
-	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;
+	char nomFichier[100]="graphe13.txt"; //à remplacer par argv[1] à la fin
+	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
-	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrÃ©e initialisÃ©e Ã  une grande valeur
+	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
     double L=0;//Constante pour stocker le chemin de la fourmi courante (afin de ne pas le recalculer a chaque fois)
 
 
-
+printf("nbVilles %d\n",nbVille);
 	int iCycle=0;
 	for(iCycle = 0;iCycle<MAX_CYCLE;iCycle++)
 	{
@@ -45,33 +45,36 @@ int main(int argc, char *argv[])
 		{
 			ListeSommetP tabu=NULL; //liste de pointeurs sur  des villes parcourues par la fourmi courrante
 
-			//rajouter la ville de dÃ©part de la fourmi tabu
+			//rajouter la ville de départ de la fourmi tabu
 			tabu = ajout_teteSommetP(&tabVille[ (tabFourmi[iFourmi].iVilleDep) ], tabu);
-			//tant que le circuit n'est pas bouclÃ©
+			//tant que le circuit n'est pas bouclé
 
 			do
 			{
 				int villeSuiv=-1;
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille,ALPHA,BETA,tabFourmi[iFourmi].iVilleDep);
 				if (villeSuiv==-1)printf("allocation");
-				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
+				if(villeSuiv!=-42)
+				{tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
 				tabFourmi[iFourmi].iVilleCour = villeSuiv;
+                }
+                else vp=0;
+			}while(vp!=0 && ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
 
-			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
-
-               tabu=ajout_teteSommetP(&(tabVille[(tabFourmi[iFourmi]).iVilleDep]), tabu);//On rajoute la ville de dÃ©part pour faire un parcours fermÃ©
+               tabu=ajout_teteSommetP(&(tabVille[(tabFourmi[iFourmi]).iVilleDep]), tabu);//On rajoute la ville de départ pour faire un parcours fermé
 
 			tabFourmi[iFourmi].solution = parcours_fourmi(tabFourmi[iFourmi], tabu);
 
             free_listeSommetP(tabu);
 
 			 L=Lchemin(tabFourmi[iFourmi].solution);
-			if(L<Lmin)
+			if(L<Lmin&&vp!=0)
 			{
 				free_listeArcP(cheminMin);
 				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
 				Lmin=L;
 			}
+
 
 		}//boucle fourmis
 
@@ -89,7 +92,7 @@ int main(int argc, char *argv[])
 	visualiser_listeArcP(cheminMin);
 	printf("\n\n\n\tchemin le plus court: %lf \n \n \n", Lmin);
 
-	//penser Ã  tout free
+	//penser à tout free
 
 	for(iVille=0;iVille<nbVille;iVille++)
 	{free_listeArc(tabVille[iVille].ListeVoisin);

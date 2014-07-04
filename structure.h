@@ -1,16 +1,6 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
-
-/*=========constantes=======*/
-
-
-
-
-
-
-
-/*=========constantes - fin====*/
 //====types relatifs aux Arcs
 	typedef struct Arc
 	{
