@@ -37,7 +37,7 @@ double algo_general(int M, int MAX_CYCLE )
 {
 
 	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
-	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;
+	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp=1;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
 	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
@@ -65,10 +65,11 @@ double algo_general(int M, int MAX_CYCLE )
 				int villeSuiv=-1;
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille,ALPHA,BETA,tabFourmi[iFourmi].iVilleDep);
 				if (villeSuiv==-1)printf("allocation");
-				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
-				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-
-			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
+				if(villeSuiv!=-42)
+				{tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
+				tabFourmi[iFourmi].iVilleCour = villeSuiv;}
+                else vp=0;
+			}while(vp!=0 && ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
 
                tabu=ajout_teteSommetP(&(tabVille[(tabFourmi[iFourmi]).iVilleDep]), tabu);//On rajoute la ville de départ pour faire un parcours fermé
 
@@ -77,7 +78,7 @@ double algo_general(int M, int MAX_CYCLE )
             free_listeSommetP(tabu);
 
 			 L=Lchemin(tabFourmi[iFourmi].solution);
-			if(L<Lmin)
+			if(L<Lmin&&vp!=0)
 			{
 				free_listeArcP(cheminMin);
 				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
@@ -118,7 +119,7 @@ double elitistes(int M, int MAX_CYCLE, int X)
 
 
 	char nomFichier[100]="Quatar194.txt"; //à remplacer par argv[1] à la fin
-	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;
+	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;int vp=1;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
 	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
@@ -148,10 +149,11 @@ double elitistes(int M, int MAX_CYCLE, int X)
 				int villeSuiv=-1;
 				villeSuiv = ville_next(tabu, nbVille, tabVille[ (tabFourmi[iFourmi]).iVilleCour ],tabVille, ALPHA,BETA,tabFourmi[iFourmi].iVilleDep);
 				if (villeSuiv==-1)printf("allocation");
-				tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
-				tabFourmi[iFourmi].iVilleCour = villeSuiv;
-
-			}while(ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
+				if(villeSuiv!=-42)
+				{tabu = ajout_teteSommetP(&tabVille[villeSuiv], tabu);
+				tabFourmi[iFourmi].iVilleCour = villeSuiv;}
+                else vp=0;
+			}while(vp!=0 && ville_parcourue(tabu,(tabFourmi[iFourmi]).iVilleCour,nbVille)!=0);
 
                tabu=ajout_teteSommetP(&(tabVille[(tabFourmi[iFourmi]).iVilleDep]), tabu);//On rajoute la ville de départ pour faire un parcours fermé
 
@@ -160,7 +162,7 @@ double elitistes(int M, int MAX_CYCLE, int X)
             free_listeSommetP(tabu);
 
             Ltab[iFourmi]=Lchemin(tabFourmi[iFourmi].solution);
-			if(Ltab[iFourmi]<Lmin)
+			if(Ltab[iFourmi]<Lmin&&vp!=0)
 			{
 			    free_listeArcP(cheminMin);
 				cheminMin=copieArcP(tabFourmi[iFourmi].solution);
@@ -223,7 +225,7 @@ else
                     if(L<l)
                     {l=L; m=j; x=k; mc=i; }
 
-                    fprintf(f,"\t %lf;\t %d;\t %d;\t\t %d;\t %f; \n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+                    fprintf(f,"%lf;%d;%d;%d;%f;\n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
                     k=k+Xpas;
                 }
 

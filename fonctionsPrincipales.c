@@ -326,7 +326,7 @@ if (t==NULL) return (-1);
 
 		q=q->suiv;
 	}
-    if (somme==0)return(-42);//s'il manque des villes mais toutes les villes voisins du sommet actuel sont parcourrues on ne prend pas en copte le parcours
+    if (somme==0){free(t);return(-42)};//s'il manque des villes mais toutes les villes voisins du sommet actuel sont parcourrues on ne prend pas en copte le parcours
 
 	i=0;
 	for(i=0;i<n;i++)
@@ -340,8 +340,8 @@ if (t==NULL) return (-1);
         }
 		t[i]=t[i]/somme;    /* enfin on divise tout par la somme des pondérations*/
 
-        if(tirage==1 && t[i]==1)return(i);
-        if(t[i]>tirage)return(i);
+        if(tirage==1 && t[i]==1) {free(t);return(i);}
+        if(t[i]>tirage) {free(t); return(i);}
 
 	}
 
