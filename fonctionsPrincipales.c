@@ -326,7 +326,7 @@ if (t==NULL) return (-1);
 
 		q=q->suiv;
 	}
-    if (somme==0){free(t);return(-42)};//s'il manque des villes mais toutes les villes voisins du sommet actuel sont parcourrues on ne prend pas en copte le parcours
+    if (somme==0){free(t);return(-42);}//s'il manque des villes mais toutes les villes voisins du sommet actuel sont parcourrues on ne prend pas en copte le parcours
 
 	i=0;
 	for(i=0;i<n;i++)
