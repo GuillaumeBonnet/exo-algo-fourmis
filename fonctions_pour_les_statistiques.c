@@ -15,14 +15,14 @@
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
 #define Mmin 2
-#define Mmax 60
-#define Mpas 1
+#define Mmax 30
+#define Mpas 2
 #define MAX_CYCLEmin  10
 #define MAX_CYCLEmax  200
-#define MAX_CYCLEpas  1
+#define MAX_CYCLEpas  10
 #define Xmin 2
 #define Xmax 60
-#define Xpas 1
+#define Xpas 2
 #define MODE 1
 #define REPET 50
 
@@ -36,7 +36,7 @@
 double algo_general(int M, int MAX_CYCLE )
 {
 
-	char nomFichier[100]="graphe14.txt"; //à remplacer par argv[1] à la fin
+	char nomFichier[100]="Quatar194.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp=1;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
@@ -197,7 +197,7 @@ free_listeArcP(cheminMin);
 }
 
 main()
-{int i,j,n; int k=Xmin; double l=1000; int m,mc; int x=0; float t=1000;
+{int i,j,n; int k=Xmin; double l=100000; int m,mc; int x=0; float t=1000;
 double L;
 char nom_donnees[100]="Donnees.txt";
 FILE* f;
@@ -206,7 +206,7 @@ if ( (f=fopen("Donnees.txt","w")) ==NULL)
 else
 {   clock_t debutchargement, finchargement ;
 
-    fprintf(f,"\t Lmin \t\t M \t  MAX_CYCLE \t X \t temps\n");
+    fprintf(f,"\t Lmin \t\t M \t  MAX_CYCLE \t X \t temps \t Lmin actuel\n");
 
     for(n=0;n<REPET;n++)
     {fprintf(f,"\nrepetition %d\n",n+1 );
@@ -225,7 +225,7 @@ else
                     if(L<l)
                     {l=L; m=j; x=k; mc=i; }
 
-                    fprintf(f,"%lf;%d;%d;%d;%f;\n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+                    fprintf(f,"%lf;%d;%d;%d;%f;%lf\n", L,j,i,k,((double)finchargement-debutchargement)/CLOCKS_PER_SEC,l);
                     k=k+Xpas;
                 }
 
@@ -247,7 +247,7 @@ else
                 if(L<l)
                 {l=L; m=j; mc=i; }
 
-                fprintf(f,"\t %lf;\t %d;\t %d;\t\t %d;\t %f; \n", L,j,i,j,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
+                fprintf(f,"%lf;%d;%d;%d;%f;%lf \n", L,j,i,j,((double)finchargement-debutchargement)/CLOCKS_PER_SEC,l);
         }
     }
 
