@@ -135,21 +135,19 @@ ListeArc copieArc(ListeArc l)
 	ListeArc retour=NULL;
 	if(!est_videArc(l))
 	{
-		retour=calloc(1,sizeof(*retour));
+		retour = calloc(1,sizeof(*retour));
+		retour->val=l->val;
 		ip=retour;
-		ip->val=l->val;
 
-		for(im=l;im->suiv!=NULL;im=im->suiv)
+		for(im=l->suiv;im!=NULL;im=im->suiv)
 		{
 			ip->suiv=calloc(1,sizeof(*ip));
-			ip->val=im->val;
 			ip=ip->suiv;
+			ip->val=im->val;			
 		}
-			ip->suiv=calloc(1,sizeof(*ip));
-			ip->val=im->val;
-			ip->suiv=NULL;
 		return retour;
 	}
+	return retour;
 }
 
 

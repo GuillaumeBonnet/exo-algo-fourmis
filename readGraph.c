@@ -82,8 +82,7 @@ Fourmi* initFourmi(int nbFourmi, int nbVille)
 		//rentrer la première ville dans la file ListeSommet solution si on l'utilise
 	}
 
-	// initialisation de rand : srand(time(NULL));
-
+	
 	for(i=fin;i<nbFourmi;i++)
 	{
 		tab[i].iVilleDep = rand()%nbVille;

@@ -40,7 +40,7 @@ ListeSommet ajout_ville(ListeSommet tabu,Sommet* villes, int N );
 ListeSommet depart(Sommet* villes, int n);   /*Validée!*/
     /*elle cree tabu avec une ville au hasard comme premier element*/
 
-ListeArc parcours_fourmi(Fourmi f, ListeSommetP tabu);
+ListeArcP parcours_fourmi(Fourmi f, ListeSommetP tabu);
 /*elle met le parcours de la fourmi dans l'ordre  (la tete de la liste est le premier arc parcouru)*/
 
 

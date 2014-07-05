@@ -52,7 +52,7 @@
 		Sommet val;
 		struct MaillonSommet * suiv;
 
-	} MaillonSommet;
+	}MaillonSommet;
 	typedef MaillonSommet* ListeSommet;
 
 	//liste avec élément pointeurs sur Sommets
