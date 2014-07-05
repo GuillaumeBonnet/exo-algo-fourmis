@@ -15,7 +15,6 @@
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
 #define Mmin 2
-<<<<<<< HEAD
 #define Mmax 30
 #define Mpas 2
 #define MAX_CYCLEmin  10
