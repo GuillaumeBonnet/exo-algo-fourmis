@@ -119,7 +119,7 @@ double elitistes(int M, int MAX_CYCLE, int X)
 
 
 
-	char nomFichier[100]="Quatar194.txt"; //à remplacer par argv[1] à la fin
+	char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;int vp=1;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
@@ -197,7 +197,7 @@ free(tabVille);
 free_listeArcP(cheminMin);
 }
 
-main()
+/*main()
 {int i,j,n; int k=Xmin; double l=100000; int m,mc; int x=0; float t=1000;
 double L;
 char nom_donnees[100]="Donnees.txt";
@@ -259,5 +259,14 @@ else
     if ( fclose( f ) != 0 ) printf( "Une erreur s’est produite à la fermeture" ) ;
 }
 
+
+}*/
+
+main()
+{clock_t debutchargement, finchargement ; double L;
+            debutchargement=clock();
+                L=elitistes(400,10000,100);
+                finchargement=clock();
+                printf("Lmin: %lf; t: %f",L,((double)finchargement-debutchargement)/CLOCKS_PER_SEC);
 
 }
