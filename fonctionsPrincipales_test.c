@@ -146,7 +146,7 @@ printf("s1= %s s2=%s \n",s1,s2);
 }
 */
 //proba
-/*
+
 main()
 {char nom_fichier[100]="graphe11.txt";
 int nbvilles=0; int i=0; int N;
@@ -156,7 +156,7 @@ remplirTable(nom_fichier,&t,&nbvilles,0.00001);
 printf("%d",nbvilles);
 ListeSommetP tabu=creer_listeSommetP();
 
-
+tabu=ajout_teteSommetP(&t[1], tabu);
 tabu=ajout_teteSommetP(&t[0], tabu);
 tabu=ajout_teteSommetP(&t[3], tabu);
 
@@ -164,18 +164,10 @@ double* pro=repartition(*(tabu->val),tabu,t,nbvilles,1,2);
 affichedouble(pro,nbvilles);
 
 for(i=0;i<10;i++)
-{
-
-
-N=ville_next(tabu,nbvilles,t[3],t,1,2,5);
-
-printf("prochaine ville: %d \n",N);
-
+{N=ville_next(tabu,nbvilles,t[3],t,1,2,5);
+printf("prochaine ville: %d \n",N);}
 }
 
-
-}
-*/
 
 
 //parcours fourmi

@@ -31,9 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../algorithmeGeneral.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="../fonctionsPrincipales.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -64,6 +61,7 @@
 		</Unit>
 		<Unit filename="../readGraph.h" />
 		<Unit filename="../structure.h" />
+		<Unit filename="Quatar194.txt" />
 		<Unit filename="graphe12.txt" />
 		<Unit filename="graphe13.txt" />
 		<Unit filename="graphe14.txt" />
