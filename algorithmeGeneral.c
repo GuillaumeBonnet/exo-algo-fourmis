@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "structure.h"
-#include "readGraph.h"
+#include "initialisation.h"
 #include "fonctionsPrincipales.h"
 #include "listeSommetP.h"
 #include "math.h"
@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp;
 	remplirTable(argv[1], &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
+	if(tabVille==NULL) return NULL;
 
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court
 	double Lmin=Lchemin(cheminMin); //longueur la plus petite rencontrée initialisée à une grande valeur
@@ -37,7 +38,7 @@ printf("nbVilles %d\n",nbVille);
 	{
 		Fourmi* tabFourmi=NULL;
 		tabFourmi = initFourmi(M, nbVille);//initialiser M fourmi sur les nbVille
-
+		if(tabFourmi==NULL) return NULL;
 	   	int iFourmi=0;
 		for(iFourmi=0;iFourmi<M; iFourmi++)   /*pour chaque fourmi*/
 		{

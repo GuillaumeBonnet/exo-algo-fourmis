@@ -7,22 +7,22 @@ LFLAGS=-L$(DIRSDL)/lib -lm -lSDLmain -lSDL#poste guillaume#
 
 all : algorithmeGeneral afficheGraph creerGraphe fonctions_pour_les_statistiques
 
-algorithmeGeneral : algorithmeGeneral.o listeSommetP.o listeArcP.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
+algorithmeGeneral : algorithmeGeneral.o listeSommetP.o listeArcP.o fonctionsPrincipales.o initialisation.o listeArc.o listeSommet.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-afficheGraph : afficheGraph.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o listeArcP.o listeSommetP.o
+afficheGraph : afficheGraph.o fonctionsPrincipales.o initialisation.o listeArc.o listeSommet.o listeArcP.o listeSommetP.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-creerGraphe : creerGraphe.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o listeArcP.o listeSommetP.o
+creerGraphe : creerGraphe.o fonctionsPrincipales.o initialisation.o listeArc.o listeSommet.o listeArcP.o listeSommetP.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<
 
-fonctions_pour_les_statistiques : fonctions_pour_les_statistiques.o listeSommetP.o listeArcP.o fonctionsPrincipales.o readGraph.o listeArc.o listeSommet.o
+fonctions_pour_les_statistiques : fonctions_pour_les_statistiques.o listeSommetP.o listeArcP.o fonctionsPrincipales.o initialisation.o listeArc.o listeSommet.o
 	gcc -o $@  $^ $(LFLAGS)
 %.o: %.c
 	gcc $(CFLAGS) $<

@@ -3,7 +3,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_draw.h"
 #include "structure.h"
-#include "readGraph.h"
+#include "initailisation.h"
 #include "fonctionsPrincipales.h"
 #include "listeSommetP.h"
 #include "math.h"
