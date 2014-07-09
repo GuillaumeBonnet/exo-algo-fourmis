@@ -14,7 +14,7 @@
 #define RHO 0.5 //coef d'évaporation des phéromones
 #define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
-#define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
+#define EPS 0.0001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
 #define MAX_CYCLE 100 //Constante, nombre maximum de cycles autorisés.
 /*=========constantes - fin====*/
@@ -22,9 +22,9 @@
 int main(int argc, char *argv[])
 {
 	/* initialisation de rand : */srand(time(NULL));
-
+char nomFichier[100]="Quatar194.txt";
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0; int vp;
-	remplirTable(argv[1], &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
+	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	if(tabVille==NULL) return NULL;
 
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court

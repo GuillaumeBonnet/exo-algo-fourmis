@@ -1,4 +1,7 @@
-#include "nitialisation.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "structure.h"
+#include "initialisation.h"
 #include "fonctionsPrincipales.h"
 #include "listeSommetP.h"
 #include "math.h"
@@ -6,16 +9,15 @@
 
 
 
-
 /*=========constantes=======*/
-#define M 18//nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
+#define M 10//nombre total de fourmis de l'algorithme PS : faire en sorte que m=2*n.
 #define RHO 0.5 //coef d'évaporation des phéromones
 #define ALPHA 1 //Coefficient régulant l'importance des phéromones pour le choix d'une ville
 #define BETA 2 //Coefficient régulant l'importance de la visibilité pour le choix d'une ville
 #define EPS 0.00001 //Valeur initiale non nulle de phéromones sur les arcs
 #define Q 1 //Constante servant à calculer la quantité de phéromones à déposer pour chaque fourmi
-#define MAX_CYCLE 100 //Constante, nombre maximum de cycles autorisés.
-#define X 10      // Nb de fourmis intelligentes a considérer
+#define MAX_CYCLE 10 //Constante, nombre maximum de cycles autorisés.
+#define X 5      // Nb de fourmis intelligentes a considérer
 /*=========constantes - fin====*/
 
 int main(int argc, char *argv[])
@@ -23,7 +25,7 @@ int main(int argc, char *argv[])
 
 
 
-	char nomFichier[100]="berlin52.txt"; //à remplacer par argv[1] à la fin
+	char nomFichier[100]="graphe11.txt"; //à remplacer par argv[1] à la fin
 	Sommet* tabVille = NULL; int nbVille = 0; int iVille=0; int iFourmi=0;int vp=1;
 	remplirTable(nomFichier, &tabVille, &nbVille,EPS); //on remplit la table qui contient tous les Sommets et Arcs depuis le fichier
 	ListeArcP cheminMin=NULL; //Liste de pointeurs sur les Arcs du chemin le plus court

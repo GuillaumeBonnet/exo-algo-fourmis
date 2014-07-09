@@ -147,7 +147,7 @@ printf("s1= %s s2=%s \n",s1,s2);
 */
 //proba
 
-main()
+/*main()
 {char nom_fichier[100]="graphe11.txt";
 int nbvilles=0; int i=0; int N;
 Sommet* t=NULL;
@@ -167,7 +167,7 @@ for(i=0;i<10;i++)
 {N=ville_next(tabu,nbvilles,t[3],t,1,2,5);
 printf("prochaine ville: %d \n",N);}
 }
-
+*/
 
 
 //parcours fourmi
